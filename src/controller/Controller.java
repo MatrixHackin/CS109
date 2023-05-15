@@ -47,9 +47,14 @@ public class Controller implements GameListener {
         else
             boardView.statusLabel.setText("Turn " + (board.steps.size() / 2 + 1) + ": RED");
     }
-
     public void checkWin() {
-        //判断棋子全吃完了，或者到老巢了//
+        if(board.blueDead.size()==8){
+            winner=Player.RED;
+        }
+        else if(board.redDead.size()==8){
+            winner=Player.BLUE;
+        }
+        //走到老巢的我还没写//
     }
 
     public void winView() {
@@ -186,6 +191,7 @@ public class Controller implements GameListener {
             }
         }
     }
+
 
 }
 
