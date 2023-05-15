@@ -23,7 +23,7 @@ public class Controller implements GameListener {
     public boolean isPlayback;
     public boolean skip;
 
-    public JLabel timeLabel;
+ //   public JLabel timeLabel;
     public static Timer timer;
 
     public Controller(BoardView boardView, Board board) {
@@ -31,7 +31,7 @@ public class Controller implements GameListener {
         this.board = board;
         this.currentPlayer = Player.BLUE;
         this.winner = null;
-        timeLabel = boardView.timeLabel;
+     //   timeLabel = boardView.timeLabel;
         isPlayback = false;
         skip = false;
 
@@ -49,6 +49,13 @@ public class Controller implements GameListener {
     }
 
     public void checkWin() {
+        if(board.blueDead.size()==8){
+            winner=Player.RED;
+        }
+        else if(board.redDead.size()==8){
+            winner=Player.BLUE;
+        }
+        //走到老巢的我还没写//
         //判断棋子全吃完了，或者到老巢了//
     }
 
@@ -116,8 +123,8 @@ public class Controller implements GameListener {
     }
 
     public void setCanStepFalse() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 7; j++) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 9; j++) {
                 boardView.gridViews[i][j].canStep = false;
             }
         }
@@ -150,7 +157,7 @@ public class Controller implements GameListener {
         currentPlayer = Player.BLUE;
         selectedPoint = null;
         setCanStepFalse();
-        boardView.statusLabel.setText("Turn 1: BLUE");
+      //  boardView.statusLabel.setText("Turn 1: BLUE");
         board.steps = new ArrayList<>();
         boardView.repaint();
         boardView.revalidate();

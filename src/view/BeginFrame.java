@@ -72,7 +72,7 @@ public class BeginFrame extends JFrame {
             Controller.timer.start();
         }*/
         gameFrame.repaint();
-        gameFrame.timeLabel.setVisible(true);
+        //gameFrame.timeLabel.setVisible(true);
         gameFrame.getBoardView().controller.reset();
         button.addActionListener((e) -> {
             this.setVisible(false);

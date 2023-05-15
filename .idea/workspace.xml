@@ -4,29 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="稳定1.0">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="Test0.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/BoardPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/BoardPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Chess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/PlayerColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/BeginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BeginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CellType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CellType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CellView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CellView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/chessView/AnimalView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/chessView/AnimalView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/chessView/CatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/chessView/CatView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/chessView/DogView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/chessView/DogView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/chessView/ElephantView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/chessView/ElephantView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/chessView/LeopardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/chessView/LeopardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/chessView/LionView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/chessView/LionView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/chessView/RatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/chessView/RatView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/chessView/TigerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/chessView/TigerView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/chessView/WolfView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/chessView/WolfView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +33,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/0JAVACOMMUNITY/0Javawork/Jungle"
+    "last_opened_file_path": "D:/0JAVACOMMUNITY/0Javawork/Project1"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -112,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684031402888</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Test0.1">
+      <created>1684040423405</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1684040423405</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -130,6 +119,7 @@
     <MESSAGE value="Test1" />
     <MESSAGE value="第一个没有放棋子的稳定版本" />
     <MESSAGE value="稳定1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="稳定1.0" />
+    <MESSAGE value="Test0.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test0.1" />
   </component>
 </project>
