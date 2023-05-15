@@ -7,7 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class HomeButton extends JButton {
-    public HomeButton(String name, int x, int y, JFrame frame) {
+    public HomeButton(String name, int x, int y) {
         this.setText(name);
         this.setLocation(x,y);
         this.setFont(new Font("Arial", Font.BOLD, 20));

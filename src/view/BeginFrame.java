@@ -2,6 +2,7 @@ package view;
 
 import controller.Controller;
 import model.Board;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,9 +12,10 @@ public class BeginFrame extends JFrame {
     SettingFrame settingFrame;
     InstructionFrame instructionFrame;
     JLabel titleLabel1 = new JLabel("JUNGLE  CHESS");
-    JButton button;
+    JButton button ;
     JButton settingButton;
     JButton instructionButton;
+    JButton loginButton;
 
     public BeginFrame() {
         setTitle("Jungle");
@@ -28,22 +30,23 @@ public class BeginFrame extends JFrame {
         this.gameFrame = gameFrame;
         gameFrame.beginFrame = this;
 
-        SettingFrame settingFrame = new SettingFrame();
-        this.settingFrame = settingFrame;
-        settingFrame.beginFrame = this;
+        SettingFrame settingFrame=new SettingFrame();
+        this.settingFrame=settingFrame;
+        settingFrame.beginFrame=this;
 
-        InstructionFrame instructionFrame = new InstructionFrame();
-        this.instructionFrame = instructionFrame;
-        instructionFrame.beginFrame = this;
+        InstructionFrame instructionFrame=new InstructionFrame();
+        this.instructionFrame=instructionFrame;
+        instructionFrame.beginFrame=this;
 
-        //   this.loginFrame = loginFrame;
-        //  loginFrame.beginFrame = this;
-        //  this.settingFrame = settingFrame;
-        // settingFrame.beginFrame = this;
+        LoginFrame loginFrame=new LoginFrame();
+        this.loginFrame = loginFrame;
+        loginFrame.beginFrame = this;
+
 
         addTitleLabel1();
         addBeginButton();
         addSettingButton();
+        addLoginButton();
         addInstructionButton();
 
         Image image = new ImageIcon("resource/background.gif").getImage();
@@ -63,17 +66,29 @@ public class BeginFrame extends JFrame {
         titleLabel1.setForeground(new Color(139, 69, 19));
         add(titleLabel1);
     }
+    private void addLoginButton(){
+        this.loginButton=new HomeButton("Login",100,250);
+        loginButton.addActionListener((e) ->{
+                    this.setVisible(false);
+                    loginFrame.setVisible(true);
+        });
+        add(loginButton);
+    }
 
     private void addBeginButton() {
-        this.button = new HomeButton("Begin", 100, 150, gameFrame);
-        /*Timer.time = 45;
-        if (Controller.timer == null) {
-            Controller.timer = new Timer(gameFrame.getBoardView().controller);
-            Controller.timer.start();
-        }*/
-        gameFrame.repaint();
-        //gameFrame.timeLabel.setVisible(true);
-        gameFrame.getBoardView().controller.reset();
+        this.button= new HomeButton("Begin",100,150);
+           /* Timer.time = 45;
+            if (Controller.timer == null){
+                Controller.timer = new Timer(gameFrame.getBoardView().controller);
+                Controller.timer.start();
+            }*/
+
+            // gameFrame.statusLabel.setLocation(770, 81);
+            // gameFrame.repaint();
+            //gameFrame.timeLabel.setVisible(true);
+            //   gameFrame.getBoardView().controller.reset();
+            //  gameFrame.getBoardView().controller.AIPlaying = false;
+            //   gameFrame.getBoardView().controller.AIDiff = Difficulty.NONE;
         button.addActionListener((e) -> {
             this.setVisible(false);
             gameFrame.setVisible(true);
@@ -81,18 +96,16 @@ public class BeginFrame extends JFrame {
         add(button);
 
     }
-
     private void addSettingButton() {
-        this.settingButton = new HomeButton("Settings", 400, 150, settingFrame);
+        this.settingButton = new HomeButton("Settings", 400, 150);
         settingButton.addActionListener((e) -> {
             this.setVisible(false);
             settingFrame.setVisible(true);
         });
         add(settingButton);
     }
-
-    public void addInstructionButton() {
-        this.instructionButton = new HomeButton("Instructions", 700, 150, instructionFrame);
+    public void addInstructionButton(){
+        this.instructionButton=new HomeButton("Instructions",700,150);
         instructionButton.addActionListener((e) -> {
             this.setVisible(false);
             instructionFrame.setVisible(true);

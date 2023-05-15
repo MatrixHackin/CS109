@@ -26,7 +26,7 @@ public class SettingFrame extends JFrame {
     }
 
     private void addBackButton(){
-        JButton backButton=new HomeButton("Back",100,200,beginFrame);
+        JButton backButton=new HomeButton("Back",100,200);
         backButton.addActionListener((e) -> {
             this.setVisible(false);
             beginFrame.setVisible(true);
