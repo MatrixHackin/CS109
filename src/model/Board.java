@@ -66,6 +66,7 @@ public class Board {
 
     }
 
+
     public boolean canEat(BoardPoint src, BoardPoint dest) {
 
         Chess attacker = getChessAt(src);
