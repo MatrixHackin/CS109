@@ -32,7 +32,7 @@ public class Board {
         redDead = new ArrayList<>();
 
         initGrid();
-        initPieces();
+        initChesses();
     }
 
     public void initGrid() {
@@ -43,7 +43,7 @@ public class Board {
         }
     }
 
-    public void initPieces() {
+    public void initChesses() {
         for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
                 grid[i][j].removeChess();
@@ -150,24 +150,19 @@ public class Board {
     }
 
     public boolean canEat(BoardPoint src, BoardPoint dest) {
+        boolean b=false;
         Chess attacker = getChessAt(src);
-        Chess defender = getChessAt(dest);
-        if(attacker.getPlayer().getColor()!=defender.getPlayer().getColor()){
-            if(canMove(src,dest)){
-                if(attacker.rank>=defender.rank){
-                    return true;
-                }
-                else{
-                    return false;
+        if(getChessAt(dest)!=null) {
+            Chess defender = getChessAt(dest);
+            if (attacker.getPlayer().getColor() != defender.getPlayer().getColor()) {
+                if (canMove(src, dest)) {
+                    if (attacker.rank >= defender.rank) {
+                        b = true;
+                    }
                 }
             }
-            else{
-                return false;
-            }
         }
-        else{
-            return false;
-        }
+        return b;
         //空的判断，只能吃对方的，判断rank，判断可走性（比如河）//
     }
     private void jumpRiver(BoardPoint src,BoardPoint dest){

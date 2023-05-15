@@ -132,8 +132,8 @@ public class Controller implements GameListener {
 
     public ArrayList<BoardPoint> getCanStepPoints(BoardPoint src) {
         ArrayList<BoardPoint> list = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 7; j++) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 9; j++) {
                 BoardPoint dest = new BoardPoint(i, j);
                 if (board.canMove(src, dest)) {
                     boardView.gridViews[i][j].canStep = true;
@@ -151,7 +151,7 @@ public class Controller implements GameListener {
     public void reset() {
         canStepPoints = null;
         board.initGrid();
-        board.initPieces();
+        board.initChesses();
         boardView.removeChessComponent();
         boardView.initiateChessComponent(board);
         currentPlayer = Player.BLUE;

@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="Test0.1">
-      <change afterPath="$PROJECT_DIR$/src/view/RegisterFrame.java" afterDir="false" />
+    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="2.0">
+      <change afterPath="$PROJECT_DIR$/resource/8E4.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/registerframe.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BeginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BeginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HomeButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/InstructionFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/InstructionFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SettingFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SettingFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,20 +34,20 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/0JAVACOMMUNITY/0Javawork/CS109/src/view"
+    "last_opened_file_path": "D:/0JAVACOMMUNITY/0Javawork/CS109/resource"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\0JAVACOMMUNITY\0Javawork\CS109\resource" />
       <recent name="D:\0JAVACOMMUNITY\0Javawork\CS109\src\view" />
       <recent name="D:\0JAVACOMMUNITY\0Javawork\CS109\src\view\chessView" />
       <recent name="D:\0JAVACOMMUNITY\0Javawork\CS109" />
       <recent name="D:\0JAVACOMMUNITY\0Javawork\Project1\src\view" />
-      <recent name="D:\0JAVACOMMUNITY\0Javawork\Project1\src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="view" />
       <recent name="model" />
+      <recent name="view" />
       <recent name="" />
       <recent name="view.chessView" />
     </key>
@@ -123,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684152982621</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="2.0">
+      <created>1684153759325</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1684153759325</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,6 +143,7 @@
     <MESSAGE value="第一个没有放棋子的稳定版本" />
     <MESSAGE value="稳定1.0" />
     <MESSAGE value="Test0.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test0.1" />
+    <MESSAGE value="2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.0" />
   </component>
 </project>
