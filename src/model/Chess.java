@@ -9,7 +9,6 @@ public class Chess {
         this.player = player;
         this.rank = rank;
     }
-
     public void setPlayer(Player player) {
         this.player = player;
     }

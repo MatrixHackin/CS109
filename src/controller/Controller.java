@@ -67,14 +67,16 @@ public class Controller implements GameListener {
     @Override
     public void clickCell(BoardPoint point, CellView component) {
         if (selectedPoint != null) {
-            board.move(selectedPoint, point);
-            setAllCellsCanStepFalse();
-            canStepPoints = null;
-
-            boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
-            changePlayer();
-            boardView.repaint();
-            component.revalidate();
+            if(board.canMove(selectedPoint,point)){
+                board.move(selectedPoint, point);
+                setAllCellsCanStepFalse();
+                canStepPoints = null;
+                boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
+                selectedPoint=null;
+                changePlayer();
+                boardView.repaint();
+                component.revalidate();
+            }
             checkWin();
             if (winner != null) {
                 winView();
