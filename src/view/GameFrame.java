@@ -12,7 +12,7 @@ public class GameFrame extends JFrame {
 
     private BoardView boardView;
     LoginFrame loginFrame;
-    JLabel turnLable;
+    TurnLabel turnLabel=new TurnLabel();
     JLabel timeLabel;
 
     public boolean isDay;
@@ -30,6 +30,7 @@ public class GameFrame extends JFrame {
 
         isDay = true;
         addChessboard();
+        addTurnLable();
 
         Image image = new ImageIcon("resource/map.png").getImage();
         image = image.getScaledInstance(GAMEBG_ROW_SIZE.getNum(), GAMEBG_COL_SIZE.getNum(), Image.SCALE_DEFAULT);
@@ -49,6 +50,11 @@ public class GameFrame extends JFrame {
         add(background);
 
     }
+    private void addTurnLable(){
+        turnLabel.setBounds(930,120,100,100);
+        turnLabel.setForeground(new Color(255,215,0));
+        add(turnLabel);
+    }
 
     public BoardView getBoardView() {
         return boardView;
@@ -59,24 +65,8 @@ public class GameFrame extends JFrame {
     }
 
     private void addChessboard() {
-        boardView = new BoardView(ONE_CHESS_SIZE, turnLable, timeLabel);
+        boardView = new BoardView(ONE_CHESS_SIZE, turnLabel,timeLabel);
         boardView.setLocation(140, 120);
         add(boardView);
-    }
-
-    private void addStatusLabel() {
-        turnLable = new JLabel("Turn 1: BLUE");
-        turnLable.setLocation(HEIGHT - 40, HEIGHT / 10);
-        turnLable.setSize(200, 60);
-        turnLable.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(turnLable);
-    }
-
-    private void addTimeLabel() {
-        timeLabel = new JLabel("Time: 45");
-        timeLabel.setLocation(HEIGHT + 140, HEIGHT / 10);
-        timeLabel.setSize(200, 60);
-        timeLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(timeLabel);
     }
 }

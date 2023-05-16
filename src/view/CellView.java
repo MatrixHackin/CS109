@@ -13,7 +13,7 @@ public class CellView extends JPanel {
     public CellType type;
 
     public CellView(Point location, int size, CellType type) {
-        setLayout(new GridLayout(1, 2));
+        setLayout(new GridLayout(1, 1));
         setLocation(location);
         setSize(size, size);
         this.size = size;

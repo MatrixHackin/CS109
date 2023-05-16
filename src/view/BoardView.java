@@ -23,8 +23,7 @@ public class BoardView extends JPanel {
     private Set<BoardPoint> denCell = new HashSet<>();
 
     public Controller controller;
-
-    public JLabel statusLabel;
+    public TurnLabel turnLabel;
     public JLabel timeLabel;
 
     //BoardView的4种颜色
@@ -35,9 +34,9 @@ public class BoardView extends JPanel {
     public static final Color denColor = new Color(255, 255, 255, 100);
 
     //构造方法
-    public BoardView(int chessSize, JLabel statusLabel, JLabel timeLabel) {
-        this.statusLabel = statusLabel;
+    public BoardView(int chessSize,TurnLabel turnLabel, JLabel timeLabel) {
         this.timeLabel = timeLabel;
+        this.turnLabel=turnLabel;
         CHESS_SIZE = chessSize;
         int width = CHESS_SIZE * 9;
         int height = CHESS_SIZE * 7;
@@ -153,19 +152,19 @@ public class BoardView extends JPanel {
         this.controller = controller;
     }
 
-    public void setChessViewAtGrid(BoardPoint point, AnimalView chess) {
-        getGridViewAt(point).add(chess);
+    public void setChessViewAtCell(BoardPoint point, AnimalView chess) {
+        getCellViewAt(point).add(chess);
     }
 
     public AnimalView removeChessViewAtGrid(BoardPoint point) {
-        AnimalView chess = (AnimalView) getGridViewAt(point).getComponents()[0];
-        getGridViewAt(point).removeAll();
-        getGridViewAt(point).revalidate();
+        AnimalView chess = (AnimalView) getCellViewAt(point).getComponents()[0];
+        getCellViewAt(point).removeAll();
+        getCellViewAt(point).revalidate();
         chess.setSelected(false);
         return chess;
     }
 
-    private CellView getGridViewAt(BoardPoint point) {
+    private CellView getCellViewAt(BoardPoint point) {
         return gridViews[point.getRow()][point.getCol()];
     }
 

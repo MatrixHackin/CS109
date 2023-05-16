@@ -11,6 +11,7 @@ import view.chessView.AnimalView;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import view.GameFrame;
 
 public class Controller implements GameListener {
 
@@ -40,12 +41,12 @@ public class Controller implements GameListener {
         boardView.repaint();
     }
 
-    public void changePlayer() {
+   public void changePlayer() {
         currentPlayer = currentPlayer == Player.BLUE ? Player.RED : Player.BLUE;
         if (currentPlayer == Player.BLUE)
-            boardView.statusLabel.setText("Turn " + (board.steps.size() / 2 + 1) + ": BLUE");
+            boardView.turnLabel.setBounds(930,120,100,100);
         else
-            boardView.statusLabel.setText("Turn " + (board.steps.size() / 2 + 1) + ": RED");
+            boardView.turnLabel.setBounds(35,120,100,100);
     }
 
     public void checkWin() {
@@ -67,10 +68,10 @@ public class Controller implements GameListener {
     public void clickCell(BoardPoint point, CellView component) {
         if (selectedPoint != null) {
             board.move(selectedPoint, point);
-            setCanStepFalse();
+            setAllCellsCanStepFalse();
             canStepPoints = null;
-            selectedPoint = null;
-            boardView.setChessViewAtGrid(point, boardView.removeChessViewAtGrid(selectedPoint));
+
+            boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
             changePlayer();
             boardView.repaint();
             component.revalidate();
@@ -96,7 +97,7 @@ public class Controller implements GameListener {
         } else if (selectedPoint.equals(point)) {
             selectedPoint = null;
             canStepPoints = null;
-            setCanStepFalse();
+            setAllCellsCanStepFalse();
             component.setSelected(false);
             component.repaint();
             component.revalidate();
@@ -105,9 +106,9 @@ public class Controller implements GameListener {
         } else if (board.canEat(selectedPoint, point)) {
             board.eat(selectedPoint, point);
             boardView.removeChessViewAtGrid(point);
-            boardView.setChessViewAtGrid(point, boardView.removeChessViewAtGrid(selectedPoint));
+            boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
             selectedPoint = null;
-            setCanStepFalse();
+            setAllCellsCanStepFalse();
             changePlayer();
             boardView.repaint();
             boardView.revalidate();
@@ -121,7 +122,7 @@ public class Controller implements GameListener {
         }
     }
 
-    public void setCanStepFalse() {
+    public void setAllCellsCanStepFalse() {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 9; j++) {
                 boardView.gridViews[i][j].canStep = false;
@@ -145,7 +146,7 @@ public class Controller implements GameListener {
         boardView.initiateChessComponent(board);
         currentPlayer = Player.BLUE;
         selectedPoint = null;
-        setCanStepFalse();
+        setAllCellsCanStepFalse();
       //  boardView.statusLabel.setText("Turn 1: BLUE");
         board.steps = new ArrayList<>();
         boardView.repaint();
@@ -168,14 +169,14 @@ public class Controller implements GameListener {
             boolean isCapture = step.captured != null;
             if (!isCapture) {
                 board.move(src, dest);
-                boardView.setChessViewAtGrid(dest, boardView.removeChessViewAtGrid(src));
+                boardView.setChessViewAtCell(dest, boardView.removeChessViewAtGrid(src));
                 selectedPoint = null;
                 changePlayer();
                 boardView.repaint();
             } else {
                 board.eat(src, dest);
                 boardView.removeChessViewAtGrid(dest);
-                boardView.setChessViewAtGrid(dest, boardView.removeChessViewAtGrid(src));
+                boardView.setChessViewAtCell(dest, boardView.removeChessViewAtGrid(src));
                 changePlayer();
                 boardView.repaint();
                 boardView.revalidate();
