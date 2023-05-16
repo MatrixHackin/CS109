@@ -1,20 +1,16 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class SettingFrame extends MyFrame {
+public class BoardFrame extends MyFrame{
     BeginFrame beginFrame;
-    public SettingFrame()  {
+    public BoardFrame(){
         super(800,600);
 
         addBackButton();
 
         this.setBackground("resource/Instructions.gif");
-
-
     }
-
     private void addBackButton(){
         JButton backButton=new HomeButton("Back",300,500);
         backButton.addActionListener((e) -> {

@@ -6,29 +6,30 @@ import model.Board;
 import javax.swing.*;
 import java.awt.*;
 
-public class BeginFrame extends JFrame {
+public class BeginFrame extends MyFrame{
     GameFrame gameFrame;
     LoginFrame loginFrame;
     SettingFrame settingFrame;
     InstructionFrame instructionFrame;
+    BoardFrame boardFrame;
     JLabel titleLabel1 = new JLabel("JUNGLE  CHESS");
     JButton button ;
     JButton settingButton;
     JButton instructionButton;
     JButton loginButton;
+    JButton boardButton;
 
     public BeginFrame() {
-        setTitle("Jungle");
-        this.setSize(1000, 500);
-
-        setLocationRelativeTo(null); // Center the window.
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
-        setLayout(null);
+        super(1000,500);
 
         GameFrame gameFrame = new GameFrame();
         Controller controller = new Controller(gameFrame.getBoardView(), new Board());
         this.gameFrame = gameFrame;
         gameFrame.beginFrame = this;
+
+        BoardFrame boardFrame=new BoardFrame();
+        this.boardFrame=boardFrame;
+        boardFrame.beginFrame=this;
 
         SettingFrame settingFrame=new SettingFrame();
         this.settingFrame=settingFrame;
@@ -42,21 +43,21 @@ public class BeginFrame extends JFrame {
         this.loginFrame = loginFrame;
         loginFrame.beginFrame = this;
 
-
         addTitleLabel1();
         addBeginButton();
         addSettingButton();
         addLoginButton();
         addInstructionButton();
-
-        Image image = new ImageIcon("resource/background.gif").getImage();
-        image = image.getScaledInstance(1000, 500, Image.SCALE_DEFAULT);
-        ImageIcon icon = new ImageIcon(image);
-        JLabel bg = new JLabel(icon);
-        bg.setSize(1000, 500);
-        bg.setLocation(0, 0);
-        add(bg);
-
+        addBoardButton();
+        this.setBackground("resource/background.gif");
+    }
+    private void addBoardButton(){
+        this.boardButton=new HomeButton("Board",400,250);
+        boardButton.addActionListener((e)->{
+            this.setVisible(false);
+            boardFrame.setVisible(true);
+        });
+        add(boardButton);
     }
 
     private void addTitleLabel1() {

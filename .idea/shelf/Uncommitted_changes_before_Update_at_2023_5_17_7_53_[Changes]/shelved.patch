@@ -1,0 +1,589 @@
+Index: src/view/GameFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\n\r\nimport static model.Constant.GAMEBG_COL_SIZE;\r\nimport static model.Constant.GAMEBG_ROW_SIZE;\r\n\r\npublic class GameFrame extends JFrame {\r\n    public BeginFrame beginFrame;\r\n    private final int ONE_CHESS_SIZE;\r\n\r\n    private BoardView boardView;\r\n    LoginFrame loginFrame;\r\n    TurnLabel turnLabel=new TurnLabel();\r\n    JLabel timeLabel;\r\n\r\n    public boolean isDay;\r\n    JLabel background;\r\n    public final JLabel springBG;\r\n    public final JLabel autumnBG;\r\n\r\n    public GameFrame() {\r\n        setTitle(\"Jungle\");\r\n        this.ONE_CHESS_SIZE = 80;\r\n        this.setSize(GAMEBG_ROW_SIZE.getNum() + 15, GAMEBG_COL_SIZE.getNum() + 30);\r\n        setLocationRelativeTo(null);\r\n        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);\r\n        setLayout(null);\r\n\r\n        isDay = true;\r\n        addChessboard();\r\n        addTurnLable();\r\n\r\n        Image image = new ImageIcon(\"resource/map.png\").getImage();\r\n        image = image.getScaledInstance(GAMEBG_ROW_SIZE.getNum(), GAMEBG_COL_SIZE.getNum(), Image.SCALE_DEFAULT);\r\n        ImageIcon icon = new ImageIcon(image);\r\n        springBG = new JLabel(icon);\r\n        springBG.setSize(GAMEBG_ROW_SIZE.getNum(), GAMEBG_COL_SIZE.getNum());\r\n        springBG.setLocation(0, 0);\r\n\r\n        image = new ImageIcon(\"resource/night.png\").getImage();\r\n        image = image.getScaledInstance(GAMEBG_ROW_SIZE.getNum(), GAMEBG_COL_SIZE.getNum(), Image.SCALE_DEFAULT);\r\n        icon = new ImageIcon(image);\r\n        autumnBG = new JLabel(icon);\r\n        autumnBG.setSize(GAMEBG_ROW_SIZE.getNum(), GAMEBG_COL_SIZE.getNum());\r\n        autumnBG.setLocation(0, 0);\r\n\r\n        background = springBG;\r\n        add(background);\r\n\r\n    }\r\n    private void addTurnLable(){\r\n        turnLabel.setBounds(930,120,100,100);\r\n        turnLabel.setForeground(new Color(255,215,0));\r\n        add(turnLabel);\r\n    }\r\n\r\n    public BoardView getBoardView() {\r\n        return boardView;\r\n    }\r\n\r\n    public void setBoardView(BoardView boardView) {\r\n        this.boardView = boardView;\r\n    }\r\n\r\n    private void addChessboard() {\r\n        boardView = new BoardView(ONE_CHESS_SIZE, turnLabel,timeLabel);\r\n        boardView.setLocation(140, 120);\r\n        add(boardView);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/GameFrame.java b/src/view/GameFrame.java
+--- a/src/view/GameFrame.java	(revision 02f4a1f1473d57dab57df272b60ed25ab92dafe8)
++++ b/src/view/GameFrame.java	(date 1684244688507)
+@@ -6,49 +6,28 @@
+ import static model.Constant.GAMEBG_COL_SIZE;
+ import static model.Constant.GAMEBG_ROW_SIZE;
+ 
+-public class GameFrame extends JFrame {
++public class GameFrame extends MyFrame {
+     public BeginFrame beginFrame;
+     private final int ONE_CHESS_SIZE;
+ 
+     private BoardView boardView;
+-    LoginFrame loginFrame;
++    AIFrame aiFrame;
+     TurnLabel turnLabel=new TurnLabel();
+     JLabel timeLabel;
+ 
+     public boolean isDay;
+-    JLabel background;
+-    public final JLabel springBG;
+-    public final JLabel autumnBG;
++
+ 
+     public GameFrame() {
+-        setTitle("Jungle");
++        super(1000,700);
++
+         this.ONE_CHESS_SIZE = 80;
+-        this.setSize(GAMEBG_ROW_SIZE.getNum() + 15, GAMEBG_COL_SIZE.getNum() + 30);
+-        setLocationRelativeTo(null);
+-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+-        setLayout(null);
+-
+         isDay = true;
++
+         addChessboard();
+         addTurnLable();
+ 
+-        Image image = new ImageIcon("resource/map.png").getImage();
+-        image = image.getScaledInstance(GAMEBG_ROW_SIZE.getNum(), GAMEBG_COL_SIZE.getNum(), Image.SCALE_DEFAULT);
+-        ImageIcon icon = new ImageIcon(image);
+-        springBG = new JLabel(icon);
+-        springBG.setSize(GAMEBG_ROW_SIZE.getNum(), GAMEBG_COL_SIZE.getNum());
+-        springBG.setLocation(0, 0);
+-
+-        image = new ImageIcon("resource/night.png").getImage();
+-        image = image.getScaledInstance(GAMEBG_ROW_SIZE.getNum(), GAMEBG_COL_SIZE.getNum(), Image.SCALE_DEFAULT);
+-        icon = new ImageIcon(image);
+-        autumnBG = new JLabel(icon);
+-        autumnBG.setSize(GAMEBG_ROW_SIZE.getNum(), GAMEBG_COL_SIZE.getNum());
+-        autumnBG.setLocation(0, 0);
+-
+-        background = springBG;
+-        add(background);
+-
++        this.setBackground("resource/map.png");
+     }
+     private void addTurnLable(){
+         turnLabel.setBounds(930,120,100,100);
+Index: src/view/LoginFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport model.User;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\n\r\npublic class LoginFrame extends JFrame {\r\n    boolean isLogin;\r\n    User user;\r\n    BeginFrame beginFrame;\r\n    GameFrame gameFrame;\r\n    JButton backButton;\r\n    JButton registerButton;\r\n    JButton loginButton;\r\n    JButton visitorButton;\r\n    JLabel title;\r\n    ArrayList<User> users;\r\n    JTextField userNameTextField;\r\n    JPasswordField userPasswordTextField;\r\n    RegisterFrame registerFrame;\r\n\r\n    public LoginFrame(){\r\n        this.setSize(494, 675);\r\n\r\n        setLocationRelativeTo(null); // Center the window.\r\n        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了\r\n        setLayout(null);\r\n\r\n        addBackButton();\r\n        addTitle();\r\n        addUserText();\r\n        addPasswordText();\r\n        addLoginButton();\r\n        addVisitorButton();\r\n        addRegisterButton();\r\n\r\n        RegisterFrame registerFrame=new RegisterFrame();\r\n        this.registerFrame=registerFrame;\r\n        registerFrame.loginFrame=this;\r\n\r\n        GameFrame gameFrame=new GameFrame();\r\n        this.gameFrame=gameFrame;\r\n        gameFrame.loginFrame=this;\r\n\r\n        this.users= new ArrayList<>();\r\n\r\n\r\n        Image image = new ImageIcon(\"resource/8E4.gif\").getImage();\r\n        image = image.getScaledInstance(480, 640, Image.SCALE_DEFAULT);\r\n        ImageIcon icon = new ImageIcon(image);\r\n        JLabel bg = new JLabel(icon);\r\n        bg.setSize(480, 640);\r\n        bg.setLocation(0, 0);\r\n        add(bg);\r\n    }\r\n    private void addBackButton(){\r\n        this.backButton=new HomeButton(\"Back\",150,550);\r\n        backButton.addActionListener((e) -> {\r\n            this.setVisible(false);\r\n            beginFrame.setVisible(true);\r\n        });\r\n        add(backButton);\r\n    }\r\n    private void addTitle(){\r\n        this.title=new JLabel(\"LOGIN\");\r\n        title.setFont(new Font(\"Rockwell\",Font.BOLD,100));\r\n        title.setForeground(new Color(128,42,42));\r\n        title.setLocation(75,0);\r\n        title.setSize(500,150);\r\n        add(title);\r\n    }\r\n    private void addUserText(){\r\n        this.userNameTextField=new JTextField();\r\n        JLabel info=new JLabel(\"Name:\");\r\n        info.setSize(120,30);\r\n        info.setLocation(20,150);\r\n        info.setForeground(new Color(255,235,205));\r\n        info.setFont(new Font(\"Arial\",Font.BOLD,30));\r\n        info.setBackground(new Color(56,94,15,100));\r\n        userNameTextField.setText(\"please enter your username\");\r\n        userNameTextField.setBounds(120,150,330,30);\r\n        add(info);\r\n        add(userNameTextField);\r\n    }\r\n    private void addPasswordText(){\r\n        this.userPasswordTextField=new JPasswordField();\r\n        JLabel info=new JLabel(\"PW:\");\r\n        info.setSize(120,30);\r\n        info.setLocation(20,200);\r\n        info.setForeground(new Color(255,235,205));\r\n        info.setFont(new Font(\"Arial\",Font.BOLD,30));\r\n        info.setBackground(new Color(56,94,15,100));\r\n        userPasswordTextField.setBounds(120,200,330,30);\r\n        add(info);\r\n        add(userPasswordTextField);\r\n    }\r\n    private void addLoginButton(){\r\n     this.loginButton=new HomeButton(\"Login\",150,250);\r\n     loginButton.addActionListener((e)->{\r\n        login();\r\n        this.setVisible(false);\r\n        gameFrame.setVisible(true);\r\n     });\r\n     add(loginButton);\r\n    }\r\n    private void addRegisterButton(){\r\n        this.registerButton=new HomeButton(\"Register\",150,350);\r\n        registerButton.addActionListener((e)->{\r\n            this.registerFrame.setVisible(true);\r\n        });\r\n        add(registerButton);\r\n    }\r\n    private void addVisitorButton(){\r\n        this.visitorButton=new HomeButton(\"Visitor\",150,450);\r\n\r\n        add(visitorButton);\r\n    }\r\n    private void login(){\r\n        HashMap<String, String> nameAndPW = new HashMap<>();\r\n        HashMap<String, User> nameAndUser = new HashMap<>();\r\n        if (users.size() != 0){\r\n            for (User user : users) {\r\n                nameAndPW.put(user.getName(), user.getPassword());\r\n            }\r\n            for (User user : users) {\r\n                nameAndUser.put(user.getName(), user);\r\n            }\r\n        }\r\n\r\n        String inputName = userNameTextField.getText();\r\n        char[] inputPW1 = userPasswordTextField.getPassword();\r\n        String inputPW = new String(inputPW1);\r\n        if (inputName.equals(\"\")){\r\n            JOptionPane.showMessageDialog(null, \"Please input ID\", \"Error\", JOptionPane.ERROR_MESSAGE);\r\n            return;\r\n        } else if (inputPW1.length == 0){\r\n            JOptionPane.showMessageDialog(null, \"Please input password\", \"Error\", JOptionPane.ERROR_MESSAGE);\r\n            return;\r\n        }\r\n        if (nameAndPW.containsKey(inputName)){  // 包含此用户\r\n            if (inputPW.equals(nameAndPW.get(inputName))){  // 密码正确\r\n                setVisible(false);\r\n                this.isLogin  = true;\r\n                this.user = nameAndUser.get(inputName);\r\n                this.setVisible(false);\r\n            } else {  // 密码错误\r\n                JOptionPane.showMessageDialog(null, \"Wrong password !\", \"Error\", JOptionPane.ERROR_MESSAGE);\r\n            }\r\n        } else {  // 没有此用户\r\n            JOptionPane.showMessageDialog(null, \"No such User\", \"Error\", JOptionPane.ERROR_MESSAGE);\r\n        }\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/LoginFrame.java b/src/view/LoginFrame.java
+--- a/src/view/LoginFrame.java	(revision 02f4a1f1473d57dab57df272b60ed25ab92dafe8)
++++ b/src/view/LoginFrame.java	(date 1684244688512)
+@@ -7,11 +7,11 @@
+ import java.util.ArrayList;
+ import java.util.HashMap;
+ 
+-public class LoginFrame extends JFrame {
++public class LoginFrame extends MyFrame {
+     boolean isLogin;
+     User user;
+     BeginFrame beginFrame;
+-    GameFrame gameFrame;
++    AIFrame aiFrame;
+     JButton backButton;
+     JButton registerButton;
+     JButton loginButton;
+@@ -23,11 +23,7 @@
+     RegisterFrame registerFrame;
+ 
+     public LoginFrame(){
+-        this.setSize(494, 675);
+-
+-        setLocationRelativeTo(null); // Center the window.
+-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+-        setLayout(null);
++        super(480,640);
+ 
+         addBackButton();
+         addTitle();
+@@ -41,20 +37,13 @@
+         this.registerFrame=registerFrame;
+         registerFrame.loginFrame=this;
+ 
+-        GameFrame gameFrame=new GameFrame();
+-        this.gameFrame=gameFrame;
+-        gameFrame.loginFrame=this;
++        AIFrame aiFrame=new AIFrame();
++        this.aiFrame=aiFrame;
++        aiFrame.loginFrame=this;
+ 
+         this.users= new ArrayList<>();
+ 
+-
+-        Image image = new ImageIcon("resource/8E4.gif").getImage();
+-        image = image.getScaledInstance(480, 640, Image.SCALE_DEFAULT);
+-        ImageIcon icon = new ImageIcon(image);
+-        JLabel bg = new JLabel(icon);
+-        bg.setSize(480, 640);
+-        bg.setLocation(0, 0);
+-        add(bg);
++        this.setBackground("resource/8E4.gif");
+     }
+     private void addBackButton(){
+         this.backButton=new HomeButton("Back",150,550);
+@@ -101,8 +90,10 @@
+      this.loginButton=new HomeButton("Login",150,250);
+      loginButton.addActionListener((e)->{
+         login();
+-        this.setVisible(false);
+-        gameFrame.setVisible(true);
++        if(isLogin){
++            this.setVisible(false);
++            aiFrame.setVisible(true);
++        }
+      });
+      add(loginButton);
+     }
+Index: src/view/SettingFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\n\r\npublic class SettingFrame extends JFrame {\r\n    BeginFrame beginFrame;\r\n    public SettingFrame()  {\r\n        this.setSize(800, 600);\r\n\r\n        setLocationRelativeTo(null); // Center the window.\r\n        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了\r\n        setLayout(null);\r\n\r\n        addBackButton();\r\n\r\n        Image image = new ImageIcon(\"resource/Instructions.gif\").getImage();\r\n        image = image.getScaledInstance(800, 600, Image.SCALE_DEFAULT);\r\n        ImageIcon icon = new ImageIcon(image);\r\n        JLabel bg = new JLabel(icon);\r\n        bg.setSize(800, 600);\r\n        bg.setLocation(0, 0);\r\n        add(bg);\r\n\r\n\r\n    }\r\n\r\n    private void addBackButton(){\r\n        JButton backButton=new HomeButton(\"Back\",100,200);\r\n        backButton.addActionListener((e) -> {\r\n            this.setVisible(false);\r\n            beginFrame.setVisible(true);\r\n        });\r\n        add(backButton);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/SettingFrame.java b/src/view/SettingFrame.java
+--- a/src/view/SettingFrame.java	(revision 02f4a1f1473d57dab57df272b60ed25ab92dafe8)
++++ b/src/view/SettingFrame.java	(date 1684243599558)
+@@ -3,30 +3,20 @@
+ import javax.swing.*;
+ import java.awt.*;
+ 
+-public class SettingFrame extends JFrame {
++public class SettingFrame extends MyFrame {
+     BeginFrame beginFrame;
+     public SettingFrame()  {
+-        this.setSize(800, 600);
+-
+-        setLocationRelativeTo(null); // Center the window.
+-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+-        setLayout(null);
++        super(800,600);
+ 
+         addBackButton();
+ 
+-        Image image = new ImageIcon("resource/Instructions.gif").getImage();
+-        image = image.getScaledInstance(800, 600, Image.SCALE_DEFAULT);
+-        ImageIcon icon = new ImageIcon(image);
+-        JLabel bg = new JLabel(icon);
+-        bg.setSize(800, 600);
+-        bg.setLocation(0, 0);
+-        add(bg);
++        this.setBackground("resource/Instructions.gif");
+ 
+ 
+     }
+ 
+     private void addBackButton(){
+-        JButton backButton=new HomeButton("Back",100,200);
++        JButton backButton=new HomeButton("Back",300,500);
+         backButton.addActionListener((e) -> {
+             this.setVisible(false);
+             beginFrame.setVisible(true);
+Index: src/view/RegisterFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport model.User;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.io.FileWriter;\r\nimport java.io.IOException;\r\n\r\npublic class RegisterFrame extends JFrame {\r\n    JTextField userNameTextField;\r\n    JPasswordField userPasswordTextField;\r\n    JLabel title;\r\n    LoginFrame loginFrame;\r\n    JButton backButton;\r\n    JButton registerButton;\r\n    public RegisterFrame(){\r\n        this.setSize(512, 315);\r\n        setLocationRelativeTo(null); // Center the window.\r\n        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了\r\n        setLayout(null);\r\n\r\n        addUserText();\r\n        addPasswordText();\r\n        addTitle();\r\n        addBackButton();\r\n        addRegisterButton();\r\n\r\n        Image image = new ImageIcon(\"resource/registerframe.gif\").getImage();\r\n        image = image.getScaledInstance(498, 280, Image.SCALE_DEFAULT);\r\n        ImageIcon icon = new ImageIcon(image);\r\n        JLabel bg = new JLabel(icon);\r\n        bg.setSize(498, 280);\r\n        bg.setLocation(0, 0);\r\n        add(bg);\r\n    }\r\n    private void addRegisterButton(){\r\n        this.registerButton=new HomeButton(\"Register\",40,200);\r\n        registerButton.addActionListener((e)->{\r\n            String inputName = userNameTextField.getText();\r\n            char[] pw1 = userPasswordTextField.getPassword();\r\n            String inputPW = new String(pw1);\r\n            if (inputName.equals(\"\")){\r\n                JOptionPane.showMessageDialog(null, \"Please input ID\", \"\", JOptionPane.ERROR_MESSAGE);\r\n            } else if (pw1.length == 0){\r\n                JOptionPane.showMessageDialog(null, \"Please input password\", \"\", JOptionPane.ERROR_MESSAGE);\r\n            } else {\r\n                boolean b = true;\r\n                for (int i = 0; i < loginFrame.users.size(); i++) {\r\n                    if (inputName.equals(loginFrame.users.get(i).getName())){\r\n                        JOptionPane.showMessageDialog(null, \"Account has already exist.\", \"\", JOptionPane.ERROR_MESSAGE);\r\n                        b = false;\r\n                        break;\r\n                    }\r\n                }\r\n\r\n                if (b){\r\n                    FileWriter fileWriter = null;\r\n                    try {\r\n                        fileWriter = new FileWriter(\"user\\\\users\",true);\r\n                    } catch (IOException ex) {\r\n                        throw new RuntimeException(ex);\r\n                    }\r\n                    try {\r\n                        fileWriter.write(inputName+\" \"+inputPW+\" 0\\n\");\r\n                    } catch (IOException ex) {\r\n                        throw new RuntimeException(ex);\r\n                    }\r\n                    try {\r\n                        fileWriter.close();\r\n                    } catch (IOException ex) {\r\n                        throw new RuntimeException(ex);\r\n                    }\r\n                    JOptionPane.showMessageDialog(null, \"Register succeed!\", \"\", JOptionPane.INFORMATION_MESSAGE);\r\n                    loginFrame.users.add(new User(inputName, inputPW, 0));\r\n                    setVisible(false);\r\n                }\r\n            }\r\n\r\n        });\r\n        add(registerButton);\r\n    }\r\n    private void addBackButton(){\r\n        this.backButton=new HomeButton(\"Back\",260,200);\r\n        backButton.addActionListener((e) -> {\r\n            this.setVisible(false);\r\n        });\r\n        add(backButton);\r\n    }\r\n    private void addUserText(){\r\n        this.userNameTextField=new JTextField();\r\n        JLabel info=new JLabel(\"Name:\");\r\n        info.setSize(120,30);\r\n        info.setLocation(20,100);\r\n        info.setForeground(new Color(255,235,205));\r\n        info.setFont(new Font(\"Arial\",Font.BOLD,30));\r\n        info.setBackground(new Color(56,94,15,100));\r\n        userNameTextField.setText(\"please enter your username\");\r\n        userNameTextField.setBounds(120,100,330,30);\r\n        add(info);\r\n        add(userNameTextField);\r\n    }\r\n    private void addPasswordText(){\r\n        this.userPasswordTextField=new JPasswordField();\r\n        JLabel info=new JLabel(\"PW:\");\r\n        info.setSize(120,30);\r\n        info.setLocation(20,150);\r\n        info.setForeground(new Color(255,235,205));\r\n        info.setFont(new Font(\"Arial\",Font.BOLD,30));\r\n        info.setBackground(new Color(56,94,15,100));\r\n        userPasswordTextField.setBounds(120,150,330,30);\r\n        add(info);\r\n        add(userPasswordTextField);\r\n    }\r\n    private void addTitle(){\r\n        this.title=new JLabel(\"REGISTER\");\r\n        title.setFont(new Font(\"Rockwell\",Font.BOLD,50));\r\n        title.setForeground(new Color(128,42,42));\r\n        title.setLocation(120,20);\r\n        title.setSize(500,50);\r\n        add(title);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/RegisterFrame.java b/src/view/RegisterFrame.java
+--- a/src/view/RegisterFrame.java	(revision 02f4a1f1473d57dab57df272b60ed25ab92dafe8)
++++ b/src/view/RegisterFrame.java	(date 1684243488323)
+@@ -7,18 +7,16 @@
+ import java.io.FileWriter;
+ import java.io.IOException;
+ 
+-public class RegisterFrame extends JFrame {
++public class RegisterFrame extends MyFrame {
+     JTextField userNameTextField;
+     JPasswordField userPasswordTextField;
+     JLabel title;
+     LoginFrame loginFrame;
+     JButton backButton;
+     JButton registerButton;
+-    public RegisterFrame(){
+-        this.setSize(512, 315);
+-        setLocationRelativeTo(null); // Center the window.
+-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+-        setLayout(null);
++
++    public RegisterFrame() {
++        super(498, 280);
+ 
+         addUserText();
+         addPasswordText();
+@@ -26,43 +24,38 @@
+         addBackButton();
+         addRegisterButton();
+ 
+-        Image image = new ImageIcon("resource/registerframe.gif").getImage();
+-        image = image.getScaledInstance(498, 280, Image.SCALE_DEFAULT);
+-        ImageIcon icon = new ImageIcon(image);
+-        JLabel bg = new JLabel(icon);
+-        bg.setSize(498, 280);
+-        bg.setLocation(0, 0);
+-        add(bg);
++        this.setBackground("resource/registerframe.gif");
+     }
+-    private void addRegisterButton(){
+-        this.registerButton=new HomeButton("Register",40,200);
+-        registerButton.addActionListener((e)->{
++
++    private void addRegisterButton() {
++        this.registerButton = new HomeButton("Register", 40, 200);
++        registerButton.addActionListener((e) -> {
+             String inputName = userNameTextField.getText();
+             char[] pw1 = userPasswordTextField.getPassword();
+             String inputPW = new String(pw1);
+-            if (inputName.equals("")){
++            if (inputName.equals("")) {
+                 JOptionPane.showMessageDialog(null, "Please input ID", "", JOptionPane.ERROR_MESSAGE);
+-            } else if (pw1.length == 0){
++            } else if (pw1.length == 0) {
+                 JOptionPane.showMessageDialog(null, "Please input password", "", JOptionPane.ERROR_MESSAGE);
+             } else {
+                 boolean b = true;
+                 for (int i = 0; i < loginFrame.users.size(); i++) {
+-                    if (inputName.equals(loginFrame.users.get(i).getName())){
++                    if (inputName.equals(loginFrame.users.get(i).getName())) {
+                         JOptionPane.showMessageDialog(null, "Account has already exist.", "", JOptionPane.ERROR_MESSAGE);
+                         b = false;
+                         break;
+                     }
+                 }
+ 
+-                if (b){
++                if (b) {
+                     FileWriter fileWriter = null;
+                     try {
+-                        fileWriter = new FileWriter("user\\users",true);
++                        fileWriter = new FileWriter("user/users", true);
+                     } catch (IOException ex) {
+                         throw new RuntimeException(ex);
+                     }
+                     try {
+-                        fileWriter.write(inputName+" "+inputPW+" 0\n");
++                        fileWriter.write(inputName + " " + inputPW + " 0\n");
+                     } catch (IOException ex) {
+                         throw new RuntimeException(ex);
+                     }
+@@ -80,44 +73,48 @@
+         });
+         add(registerButton);
+     }
+-    private void addBackButton(){
+-        this.backButton=new HomeButton("Back",260,200);
++
++    private void addBackButton() {
++        this.backButton = new HomeButton("Back", 260, 200);
+         backButton.addActionListener((e) -> {
+             this.setVisible(false);
+         });
+         add(backButton);
+     }
+-    private void addUserText(){
+-        this.userNameTextField=new JTextField();
+-        JLabel info=new JLabel("Name:");
+-        info.setSize(120,30);
+-        info.setLocation(20,100);
+-        info.setForeground(new Color(255,235,205));
+-        info.setFont(new Font("Arial",Font.BOLD,30));
+-        info.setBackground(new Color(56,94,15,100));
++
++    private void addUserText() {
++        this.userNameTextField = new JTextField();
++        JLabel info = new JLabel("Name:");
++        info.setSize(120, 30);
++        info.setLocation(20, 100);
++        info.setForeground(new Color(255, 235, 205));
++        info.setFont(new Font("Arial", Font.BOLD, 30));
++        info.setBackground(new Color(56, 94, 15, 100));
+         userNameTextField.setText("please enter your username");
+-        userNameTextField.setBounds(120,100,330,30);
++        userNameTextField.setBounds(120, 100, 330, 30);
+         add(info);
+         add(userNameTextField);
+     }
+-    private void addPasswordText(){
+-        this.userPasswordTextField=new JPasswordField();
+-        JLabel info=new JLabel("PW:");
+-        info.setSize(120,30);
+-        info.setLocation(20,150);
+-        info.setForeground(new Color(255,235,205));
+-        info.setFont(new Font("Arial",Font.BOLD,30));
+-        info.setBackground(new Color(56,94,15,100));
+-        userPasswordTextField.setBounds(120,150,330,30);
++
++    private void addPasswordText() {
++        this.userPasswordTextField = new JPasswordField();
++        JLabel info = new JLabel("PW:");
++        info.setSize(120, 30);
++        info.setLocation(20, 150);
++        info.setForeground(new Color(255, 235, 205));
++        info.setFont(new Font("Arial", Font.BOLD, 30));
++        info.setBackground(new Color(56, 94, 15, 100));
++        userPasswordTextField.setBounds(120, 150, 330, 30);
+         add(info);
+         add(userPasswordTextField);
+     }
+-    private void addTitle(){
+-        this.title=new JLabel("REGISTER");
+-        title.setFont(new Font("Rockwell",Font.BOLD,50));
+-        title.setForeground(new Color(128,42,42));
+-        title.setLocation(120,20);
+-        title.setSize(500,50);
++
++    private void addTitle() {
++        this.title = new JLabel("REGISTER");
++        title.setFont(new Font("Rockwell", Font.BOLD, 50));
++        title.setForeground(new Color(128, 42, 42));
++        title.setLocation(120, 20);
++        title.setSize(500, 50);
+         add(title);
+     }
+ 
+Index: src/view/BeginFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport controller.Controller;\r\nimport model.Board;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\n\r\npublic class BeginFrame extends JFrame {\r\n    GameFrame gameFrame;\r\n    LoginFrame loginFrame;\r\n    SettingFrame settingFrame;\r\n    InstructionFrame instructionFrame;\r\n    JLabel titleLabel1 = new JLabel(\"JUNGLE  CHESS\");\r\n    JButton button ;\r\n    JButton settingButton;\r\n    JButton instructionButton;\r\n    JButton loginButton;\r\n\r\n    public BeginFrame() {\r\n        setTitle(\"Jungle\");\r\n        this.setSize(1000, 500);\r\n\r\n        setLocationRelativeTo(null); // Center the window.\r\n        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了\r\n        setLayout(null);\r\n\r\n        GameFrame gameFrame = new GameFrame();\r\n        Controller controller = new Controller(gameFrame.getBoardView(), new Board());\r\n        this.gameFrame = gameFrame;\r\n        gameFrame.beginFrame = this;\r\n\r\n        SettingFrame settingFrame=new SettingFrame();\r\n        this.settingFrame=settingFrame;\r\n        settingFrame.beginFrame=this;\r\n\r\n        InstructionFrame instructionFrame=new InstructionFrame();\r\n        this.instructionFrame=instructionFrame;\r\n        instructionFrame.beginFrame=this;\r\n\r\n        LoginFrame loginFrame=new LoginFrame();\r\n        this.loginFrame = loginFrame;\r\n        loginFrame.beginFrame = this;\r\n\r\n\r\n        addTitleLabel1();\r\n        addBeginButton();\r\n        addSettingButton();\r\n        addLoginButton();\r\n        addInstructionButton();\r\n\r\n        Image image = new ImageIcon(\"resource/background.gif\").getImage();\r\n        image = image.getScaledInstance(1000, 500, Image.SCALE_DEFAULT);\r\n        ImageIcon icon = new ImageIcon(image);\r\n        JLabel bg = new JLabel(icon);\r\n        bg.setSize(1000, 500);\r\n        bg.setLocation(0, 0);\r\n        add(bg);\r\n\r\n    }\r\n\r\n    private void addTitleLabel1() {\r\n        titleLabel1.setLocation(100, HEIGHT / 10);\r\n        titleLabel1.setSize(1000, 100);\r\n        titleLabel1.setFont(new Font(\"Rockwell\", Font.BOLD, 100));\r\n        titleLabel1.setForeground(new Color(139, 69, 19));\r\n        add(titleLabel1);\r\n    }\r\n    private void addLoginButton(){\r\n        this.loginButton=new HomeButton(\"Login\",100,250);\r\n        loginButton.addActionListener((e) ->{\r\n                    this.setVisible(false);\r\n                    loginFrame.setVisible(true);\r\n        });\r\n        add(loginButton);\r\n    }\r\n\r\n    private void addBeginButton() {\r\n        this.button= new HomeButton(\"Begin\",100,150);\r\n           /* Timer.time = 45;\r\n            if (Controller.timer == null){\r\n                Controller.timer = new Timer(gameFrame.getBoardView().controller);\r\n                Controller.timer.start();\r\n            }*/\r\n\r\n            // gameFrame.statusLabel.setLocation(770, 81);\r\n            // gameFrame.repaint();\r\n            //gameFrame.timeLabel.setVisible(true);\r\n            //   gameFrame.getBoardView().controller.reset();\r\n            //  gameFrame.getBoardView().controller.AIPlaying = false;\r\n            //   gameFrame.getBoardView().controller.AIDiff = Difficulty.NONE;\r\n        button.addActionListener((e) -> {\r\n            this.setVisible(false);\r\n            gameFrame.setVisible(true);\r\n        });\r\n        add(button);\r\n\r\n    }\r\n    private void addSettingButton() {\r\n        this.settingButton = new HomeButton(\"Settings\", 400, 150);\r\n        settingButton.addActionListener((e) -> {\r\n            this.setVisible(false);\r\n            settingFrame.setVisible(true);\r\n        });\r\n        add(settingButton);\r\n    }\r\n    public void addInstructionButton(){\r\n        this.instructionButton=new HomeButton(\"Instructions\",700,150);\r\n        instructionButton.addActionListener((e) -> {\r\n            this.setVisible(false);\r\n            instructionFrame.setVisible(true);\r\n        });\r\n        add(instructionButton);\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/BeginFrame.java b/src/view/BeginFrame.java
+--- a/src/view/BeginFrame.java	(revision 02f4a1f1473d57dab57df272b60ed25ab92dafe8)
++++ b/src/view/BeginFrame.java	(date 1684243527279)
+@@ -6,30 +6,31 @@
+ import javax.swing.*;
+ import java.awt.*;
+ 
+-public class BeginFrame extends JFrame {
++public class BeginFrame extends MyFrame{
+     GameFrame gameFrame;
+     LoginFrame loginFrame;
+     SettingFrame settingFrame;
+     InstructionFrame instructionFrame;
++    BoardFrame boardFrame;
+     JLabel titleLabel1 = new JLabel("JUNGLE  CHESS");
+     JButton button ;
+     JButton settingButton;
+     JButton instructionButton;
+     JButton loginButton;
++    JButton boardButton;
+ 
+     public BeginFrame() {
+-        setTitle("Jungle");
+-        this.setSize(1000, 500);
+-
+-        setLocationRelativeTo(null); // Center the window.
+-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+-        setLayout(null);
++        super(1000,500);
+ 
+         GameFrame gameFrame = new GameFrame();
+         Controller controller = new Controller(gameFrame.getBoardView(), new Board());
+         this.gameFrame = gameFrame;
+         gameFrame.beginFrame = this;
+ 
++        BoardFrame boardFrame=new BoardFrame();
++        this.boardFrame=boardFrame;
++        boardFrame.beginFrame=this;
++
+         SettingFrame settingFrame=new SettingFrame();
+         this.settingFrame=settingFrame;
+         settingFrame.beginFrame=this;
+@@ -42,21 +43,21 @@
+         this.loginFrame = loginFrame;
+         loginFrame.beginFrame = this;
+ 
+-
+         addTitleLabel1();
+         addBeginButton();
+         addSettingButton();
+         addLoginButton();
+         addInstructionButton();
+-
+-        Image image = new ImageIcon("resource/background.gif").getImage();
+-        image = image.getScaledInstance(1000, 500, Image.SCALE_DEFAULT);
+-        ImageIcon icon = new ImageIcon(image);
+-        JLabel bg = new JLabel(icon);
+-        bg.setSize(1000, 500);
+-        bg.setLocation(0, 0);
+-        add(bg);
+-
++        addBoardButton();
++        this.setBackground("resource/background.gif");
++    }
++    private void addBoardButton(){
++        this.boardButton=new HomeButton("Board",400,250);
++        boardButton.addActionListener((e)->{
++            this.setVisible(false);
++            boardFrame.setVisible(true);
++        });
++        add(boardButton);
+     }
+ 
+     private void addTitleLabel1() {
+Index: src/view/InstructionFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\n\r\npublic class InstructionFrame extends JFrame {\r\n    JFrame beginFrame;\r\n    JButton backButton;\r\n    JLabel ruleTitle;\r\n    JScrollPane instructionText;\r\n    public InstructionFrame(){\r\n        setTitle(\"Jungle\");\r\n        this.setSize(814, 637);\r\n\r\n        setLocationRelativeTo(null); // Center the window.\r\n        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了\r\n        setLayout(null);\r\n\r\n        addBackButton();\r\n        addInstructionText();\r\n        addRuleTitle();\r\n\r\n        Image image = new ImageIcon(\"resource/Instructions.gif\").getImage();\r\n        image = image.getScaledInstance(800, 600, Image.SCALE_DEFAULT);\r\n        ImageIcon icon = new ImageIcon(image);\r\n        JLabel bg = new JLabel(icon);\r\n        bg.setSize(800, 600);\r\n        bg.setLocation(0, 0);\r\n        add(bg);\r\n    }\r\n    private void addBackButton(){\r\n        this.backButton=new HomeButton(\"Back\",300,500);\r\n        backButton.addActionListener((e) -> {\r\n            this.setVisible(false);\r\n            beginFrame.setVisible(true);\r\n        });\r\n        add(backButton);\r\n    }\r\n    private void addInstructionText(){\r\n        JTextArea textArea=new JTextArea();\r\n        textArea.setEditable(false);\r\n        textArea.setOpaque(false);\r\n        textArea.setLineWrap(true);\r\n        textArea.setLineWrap(true);\r\n        textArea.setFont(new Font(\"Arial\",Font.BOLD,30));\r\n        textArea.setForeground(new Color(255,235,205));\r\n        textArea.setText(\"Rules\\n\" +\r\n                \"1. Game Initialization: At the beginning, all 16 pieces are put into the chessboard as the initial\" +\r\n                \"state. The initial state is shown in Figure 6.\\n\" +\r\n                \"2. Game Progress: The player with blue moves first. Two players take the turn alternatively until \" +\r\n                \"the game is finished. When a player takes turn, he/she can select one of his pieces and do \" +\r\n                \"one of the following:\\n\" +\r\n                \"\\uF06C Moving one square horizontally or vertically. For lion, tiger and rat, they also have special \" +\r\n                \"movements related to the river squares, which have been introduced previously.\\n\" +\r\n                \"\\uF06C Capturing an opposing piece. In all captures, the captured pieces is removed from the board \" +\r\n                \"and the square is occupied by the capturing piece. A piece can capture any enemy piece \" +\r\n                \"following the rules introduced in \\\"Pieces\\\".\\n\" +\r\n                \"3. Game Termination: A player loses the game if one of the following happens:\\n\" +\r\n                \"\\uF06C The den is entered by his/her opponents.\\n\" +\r\n                \"\\uF06C All of his/her pieces are captured and he/her is unable to do any movement.\");\r\n\r\n        this.instructionText=new JScrollPane(textArea);\r\n        instructionText.setSize(714,350);\r\n        instructionText.setLocation(50,100);\r\n        instructionText.setBackground(new Color(56,94,15,200));\r\n        instructionText.getViewport().setOpaque(false);\r\n        add(instructionText);\r\n    }\r\n    private void addRuleTitle(){\r\n        this.ruleTitle=new JLabel(\"Rule\");\r\n        ruleTitle.setForeground(new Color(46,139,42));\r\n        ruleTitle.setFont(new Font(\"Rockwell\",Font.BOLD,100));\r\n        ruleTitle.setLocation(275,0);\r\n        ruleTitle.setSize(300,100);\r\n        add(ruleTitle);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/InstructionFrame.java b/src/view/InstructionFrame.java
+--- a/src/view/InstructionFrame.java	(revision 02f4a1f1473d57dab57df272b60ed25ab92dafe8)
++++ b/src/view/InstructionFrame.java	(date 1684241660799)
+@@ -3,30 +3,19 @@
+ import javax.swing.*;
+ import java.awt.*;
+ 
+-public class InstructionFrame extends JFrame {
++public class InstructionFrame extends MyFrame {
+     JFrame beginFrame;
+     JButton backButton;
+     JLabel ruleTitle;
+     JScrollPane instructionText;
+     public InstructionFrame(){
+-        setTitle("Jungle");
+-        this.setSize(814, 637);
+-
+-        setLocationRelativeTo(null); // Center the window.
+-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
+-        setLayout(null);
++        super(800,600);
+ 
+         addBackButton();
+         addInstructionText();
+         addRuleTitle();
+ 
+-        Image image = new ImageIcon("resource/Instructions.gif").getImage();
+-        image = image.getScaledInstance(800, 600, Image.SCALE_DEFAULT);
+-        ImageIcon icon = new ImageIcon(image);
+-        JLabel bg = new JLabel(icon);
+-        bg.setSize(800, 600);
+-        bg.setLocation(0, 0);
+-        add(bg);
++        this.setBackground("resource/Instructions.gif");
+     }
+     private void addBackButton(){
+         this.backButton=new HomeButton("Back",300,500);
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//import model.BackgroundMusic;\r\nimport model.BGM;\r\nimport view.BeginFrame;\r\n\r\nimport javax.swing.*;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        SwingUtilities.invokeLater(() -> {\r\n            BeginFrame beginFrame = new BeginFrame();\r\n            beginFrame.setVisible(true);\r\n            new BGM().playMusic(\"resource/BGM.wav\");\r\n        });\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 02f4a1f1473d57dab57df272b60ed25ab92dafe8)
++++ b/src/Main.java	(date 1684241338547)
+@@ -1,6 +1,7 @@
+ //import model.BackgroundMusic;
+ import model.BGM;
+ import view.BeginFrame;
++import view.MyFrame;
+ 
+ import javax.swing.*;
+ 
+Index: src/view/MyFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javax.swing.*;\r\n\r\npublic class MyFrame extends JFrame {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/MyFrame.java b/src/view/MyFrame.java
+--- a/src/view/MyFrame.java	(revision 02f4a1f1473d57dab57df272b60ed25ab92dafe8)
++++ b/src/view/MyFrame.java	(date 1684242325722)
+@@ -1,6 +1,28 @@
+ package view;
+ 
+ import javax.swing.*;
++import java.awt.*;
+ 
+ public class MyFrame extends JFrame {
++    int backgroundWidth;
++    int backgroundHeight;
++    public MyFrame(int backgroundWidth,int backgroundHeight) {
++        this.backgroundWidth=backgroundWidth;
++        this.backgroundHeight=backgroundHeight;
++        setTitle("Jungle");
++        this.setSize(backgroundWidth + 15, backgroundHeight + 36);
++        setLocationRelativeTo(null);
++        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
++        setLayout(null);
++
++    }
++    public void setBackground(String backgroundPath) {
++        Image image = new ImageIcon(backgroundPath).getImage();
++        image = image.getScaledInstance(backgroundWidth, backgroundHeight, Image.SCALE_DEFAULT);
++        ImageIcon icon = new ImageIcon(image);
++        JLabel bg = new JLabel(icon);
++        bg.setSize(backgroundWidth, backgroundHeight);
++        bg.setLocation(0, 0);
++        add(bg);
++    }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"e93436ec-d404-4df7-bde5-cda3dcb5f90d\" name=\"Changes\" comment=\"2.0\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/controller/Controller.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/controller/Controller.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/view/BoardView.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/view/BoardView.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/view/CellView.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/view/CellView.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/view/GameFrame.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/view/GameFrame.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"RESET_MODE\" value=\"HARD\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2PSQB1ZCcKNuSJPZJAp7o95qQHb\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"last_opened_file_path\": \"D:/0JAVACOMMUNITY/0Javawork/Jungle\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\0JAVACOMMUNITY\\0Javawork\\CS109\\resource\" />\r\n      <recent name=\"D:\\0JAVACOMMUNITY\\0Javawork\\CS109\\src\\view\" />\r\n      <recent name=\"D:\\0JAVACOMMUNITY\\0Javawork\\CS109\\src\\view\\chessView\" />\r\n      <recent name=\"D:\\0JAVACOMMUNITY\\0Javawork\\CS109\" />\r\n      <recent name=\"D:\\0JAVACOMMUNITY\\0Javawork\\Project1\\src\\view\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"model\" />\r\n      <recent name=\"view\" />\r\n      <recent name=\"\" />\r\n      <recent name=\"view.chessView\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"Project1\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"e93436ec-d404-4df7-bde5-cda3dcb5f90d\" name=\"Changes\" comment=\"\" />\r\n      <created>1683447865168</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1683447865168</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Test1\">\r\n      <created>1683949135727</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683949135727</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"第一个没有放棋子的稳定版本\">\r\n      <created>1684031348336</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684031348336</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"稳定1.0\">\r\n      <created>1684031402888</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684031402888</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Test0.1\">\r\n      <created>1684040423405</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684040423405</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Test0.1\">\r\n      <created>1684152861499</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684152861499</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Test0.1\">\r\n      <created>1684152982621</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684152982621</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"2.0\">\r\n      <created>1684153759325</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684153759325</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Test1\" />\r\n    <MESSAGE value=\"第一个没有放棋子的稳定版本\" />\r\n    <MESSAGE value=\"稳定1.0\" />\r\n    <MESSAGE value=\"Test0.1\" />\r\n    <MESSAGE value=\"2.0\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"2.0\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 02f4a1f1473d57dab57df272b60ed25ab92dafe8)
++++ b/.idea/workspace.xml	(date 1684244510724)
+@@ -4,12 +4,16 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="2.0">
++    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="重新做了turnLabel，能走出第一步了">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/view/CellView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CellView.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/BeginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BeginFrame.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/InstructionFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/InstructionFrame.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginFrame.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MyFrame.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/RegisterFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/RegisterFrame.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/SettingFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SettingFrame.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -131,7 +135,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1684153759325</updated>
+     </task>
+-    <option name="localTasksCounter" value="8" />
++    <task id="LOCAL-00008" summary="重新做了turnLabel，能走出第一步了">
++      <created>1684229285956</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1684229285956</updated>
++    </task>
++    <option name="localTasksCounter" value="9" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -151,6 +162,7 @@
+     <MESSAGE value="稳定1.0" />
+     <MESSAGE value="Test0.1" />
+     <MESSAGE value="2.0" />
+-    <option name="LAST_COMMIT_MESSAGE" value="2.0" />
++    <MESSAGE value="重新做了turnLabel，能走出第一步了" />
++    <option name="LAST_COMMIT_MESSAGE" value="重新做了turnLabel，能走出第一步了" />
+   </component>
+ </project>
+\ No newline at end of file

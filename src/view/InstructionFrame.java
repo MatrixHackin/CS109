@@ -3,30 +3,19 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class InstructionFrame extends JFrame {
+public class InstructionFrame extends MyFrame {
     JFrame beginFrame;
     JButton backButton;
     JLabel ruleTitle;
     JScrollPane instructionText;
     public InstructionFrame(){
-        setTitle("Jungle");
-        this.setSize(814, 637);
-
-        setLocationRelativeTo(null); // Center the window.
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
-        setLayout(null);
+        super(800,600);
 
         addBackButton();
         addInstructionText();
         addRuleTitle();
 
-        Image image = new ImageIcon("resource/Instructions.gif").getImage();
-        image = image.getScaledInstance(800, 600, Image.SCALE_DEFAULT);
-        ImageIcon icon = new ImageIcon(image);
-        JLabel bg = new JLabel(icon);
-        bg.setSize(800, 600);
-        bg.setLocation(0, 0);
-        add(bg);
+        this.setBackground("resource/Instructions.gif");
     }
     private void addBackButton(){
         this.backButton=new HomeButton("Back",300,500);

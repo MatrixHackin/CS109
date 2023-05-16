@@ -7,11 +7,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class LoginFrame extends JFrame {
+public class LoginFrame extends MyFrame {
     boolean isLogin;
     User user;
     BeginFrame beginFrame;
-    GameFrame gameFrame;
+    AIFrame aiFrame;
     JButton backButton;
     JButton registerButton;
     JButton loginButton;
@@ -23,11 +23,7 @@ public class LoginFrame extends JFrame {
     RegisterFrame registerFrame;
 
     public LoginFrame(){
-        this.setSize(494, 675);
-
-        setLocationRelativeTo(null); // Center the window.
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
-        setLayout(null);
+        super(480,640);
 
         addBackButton();
         addTitle();
@@ -41,20 +37,13 @@ public class LoginFrame extends JFrame {
         this.registerFrame=registerFrame;
         registerFrame.loginFrame=this;
 
-        GameFrame gameFrame=new GameFrame();
-        this.gameFrame=gameFrame;
-        gameFrame.loginFrame=this;
+        AIFrame aiFrame=new AIFrame();
+        this.aiFrame=aiFrame;
+        aiFrame.loginFrame=this;
 
         this.users= new ArrayList<>();
 
-
-        Image image = new ImageIcon("resource/8E4.gif").getImage();
-        image = image.getScaledInstance(480, 640, Image.SCALE_DEFAULT);
-        ImageIcon icon = new ImageIcon(image);
-        JLabel bg = new JLabel(icon);
-        bg.setSize(480, 640);
-        bg.setLocation(0, 0);
-        add(bg);
+        this.setBackground("resource/8E4.gif");
     }
     private void addBackButton(){
         this.backButton=new HomeButton("Back",150,550);
@@ -101,8 +90,10 @@ public class LoginFrame extends JFrame {
      this.loginButton=new HomeButton("Login",150,250);
      loginButton.addActionListener((e)->{
         login();
-        this.setVisible(false);
-        gameFrame.setVisible(true);
+        if(isLogin){
+            this.setVisible(false);
+            aiFrame.setVisible(true);
+        }
      });
      add(loginButton);
     }

@@ -1,6 +1,7 @@
 //import model.BackgroundMusic;
 import model.BGM;
 import view.BeginFrame;
+import view.MyFrame;
 
 import javax.swing.*;
 
