@@ -6,9 +6,7 @@ import java.io.Serializable;
 public class Cell implements Serializable {
     // the position for chess
     public Chess chess;
-    public Chess getChess() {
-        return chess;
-    }
+    public Chess getChess() {return chess;}
 
     public void setChess(Chess chess) {
         this.chess = chess;

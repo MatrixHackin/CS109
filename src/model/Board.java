@@ -32,7 +32,7 @@ public class Board {
         redDead = new ArrayList<>();
 
         initGrid();
-        initChesses();
+        initPieces();
     }
 
     public void initGrid() {
@@ -43,29 +43,29 @@ public class Board {
         }
     }
 
-    public void initChesses() {
+    public void initPieces() {
         for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
                 grid[i][j].removeChess();
             }
-            grid[0][0].setChess(RedLion);
-            grid[1][1].setChess(RedDog);
-            grid[2][2].setChess(RedLeopard);
-            grid[0][2].setChess(RedRat);
-            grid[4][2].setChess(RedWolf);
-            grid[5][1].setChess(RedCat);
-            grid[6][0].setChess(RedTiger);
-            grid[6][2].setChess(RedElephant);
-
-            grid[0][6].setChess(BlueElephant);
-            grid[0][8].setChess(BlueTiger);
-            grid[1][7].setChess(BlueCat);
-            grid[2][6].setChess(BlueWolf);
-            grid[4][6].setChess(BlueLeopard);
-            grid[5][7].setChess(BlueDog);
-            grid[6][6].setChess(BlueRat);
-            grid[6][8].setChess(BlueLion);
         }
+        grid[0][0].setChess(RedLion);
+        grid[1][1].setChess(RedDog);
+        grid[2][2].setChess(RedLeopard);
+        grid[0][2].setChess(RedRat);
+        grid[4][2].setChess(RedWolf);
+        grid[5][1].setChess(RedCat);
+        grid[6][0].setChess(RedTiger);
+        grid[6][2].setChess(RedElephant);
+
+        grid[0][6].setChess(BlueElephant);
+        grid[0][8].setChess(BlueTiger);
+        grid[1][7].setChess(BlueCat);
+        grid[2][6].setChess(BlueWolf);
+        grid[4][6].setChess(BlueLeopard);
+        grid[5][7].setChess(BlueDog);
+        grid[6][6].setChess(BlueRat);
+        grid[6][8].setChess(BlueLion);
     }
 
     public Cell[][] getGrid() {
@@ -98,28 +98,185 @@ public class Board {
     }
 
     public boolean canMove(BoardPoint src, BoardPoint dest) {
-        if(getChessAt(src)!=null)//我还在想怎么调用Controller里的被选中的棋子，这部分我之后再改改//
-        {
-            if(((dest.getRow()-src.getRow())^2+(dest.getCol()-src.getCol())^2)==1){
-                if(isRiver(dest)){
-                    if(grid[src.getRow()][src.getCol()].chess==RedRat||grid[src.getRow()][src.getCol()].chess==BlueRat){
-                        return true;
-                    }
-                    else{
-                        return false;
-                    }
-                }
-                else{
-                    return true;
-                }
-            }
-            else{
-                return false;
-            }
+        if(getCanmovepoints(src).contains(dest)){
+            return true;
         }
         else{
             return false;
         }
+    }
+    public void move(BoardPoint src, BoardPoint dest) {
+        if(canMove(src,dest)){
+            setChess(dest,getChessAt(src));
+            removeChess(src);
+            //Steps之后再写//
+        }
+    }
+    public ArrayList<BoardPoint> getCanmovepoints(BoardPoint src){
+        ArrayList<BoardPoint> list=new ArrayList<BoardPoint>();
+        if(getChessAt(src)==RedRat||getChessAt(src)==BlueRat){//鼠鼠的Move判断//
+           if(src.getRow()!=0){
+               BoardPoint dest=new BoardPoint(src.getRow()-1,src.getCol());
+               if(grid[src.getRow()-1][src.getCol()].chess!=null){
+                    if(grid[src.getRow()-1][src.getCol()].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+               }
+               else{
+                   list.add(dest);
+               }
+           }
+            if(src.getRow()!=6){
+                BoardPoint dest=new BoardPoint(src.getRow()+1,src.getCol());
+                if(grid[src.getRow()+1][src.getCol()].chess!=null){
+                    if(grid[src.getRow()+1][src.getCol()].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else{
+                    list.add(dest);
+                }
+            }
+            if(src.getCol()!=0){
+                BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()-1);
+                if(grid[src.getRow()][src.getCol()-1].chess!=null){
+                    if(grid[src.getRow()][src.getCol()-1].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else{
+                    list.add(dest);
+                }
+            }
+            if(src.getRow()!=8){
+                BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()+1);
+                if(grid[src.getRow()][src.getCol()+1].chess!=null){
+                    if(grid[src.getRow()][src.getCol()+1].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else{
+                    list.add(dest);
+                }
+            }
+        }
+        else if(getChessAt(src)==RedTiger||getChessAt(src)==RedLion||getChessAt(src)==BlueTiger||getChessAt(src)==BlueLion){//狮子老虎的Move判断//
+            if(src.getRow()!=0){
+                BoardPoint dest=new BoardPoint(src.getRow()-1,src.getCol());
+                if(grid[src.getRow()-1][src.getCol()].chess!=null){
+                    if(grid[src.getRow()-1][src.getCol()].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else if(isRiver(dest)){
+                    if(grid[src.getRow()-1][src.getCol()].chess!=null||grid[src.getRow()-2][src.getCol()].chess!=null){}
+                    else{
+                        BoardPoint overRiver=new BoardPoint(src.getRow()-3,src.getCol());
+                    }
+                }
+                else{
+                    list.add(dest);
+                }
+            }
+            if(src.getRow()!=6){
+                BoardPoint dest=new BoardPoint(src.getRow()+1,src.getCol());
+                if(grid[src.getRow()+1][src.getCol()].chess!=null){
+                    if(grid[src.getRow()+1][src.getCol()].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else if(isRiver(dest)){
+                    if(grid[src.getRow()+1][src.getCol()].chess!=null||grid[src.getRow()+2][src.getCol()].chess!=null){}
+                    else{
+                        BoardPoint overRiver=new BoardPoint(src.getRow()+3,src.getCol());
+                    }
+                }
+                else{
+                    list.add(dest);
+                }
+            }
+            if(src.getCol()!=0){
+                BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()-1);
+                if(grid[src.getRow()][src.getCol()-1].chess!=null){
+                    if(grid[src.getRow()][src.getCol()-1].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else if(isRiver(dest)){
+                    if(grid[src.getRow()][src.getCol()-1].chess!=null||grid[src.getRow()][src.getCol()-2].chess!=null||grid[src.getRow()][src.getCol()-3].chess!=null){}
+                    else{
+                        BoardPoint overRiver=new BoardPoint(src.getRow(),src.getCol()-4);
+                    }
+                }
+                else{
+                    list.add(dest);
+                }
+            }
+            if(src.getCol()!=8){
+                BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()+1);
+                if(grid[src.getRow()][src.getCol()+1].chess!=null){
+                    if(grid[src.getRow()][src.getCol()+1].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else if(isRiver(dest)){
+                    if(grid[src.getRow()][src.getCol()+1].chess!=null||grid[src.getRow()][src.getCol()+2].chess!=null||grid[src.getRow()][src.getCol()+3].chess!=null){}
+                    else{
+                        BoardPoint overRiver=new BoardPoint(src.getRow(),src.getCol()+4);
+                    }
+                }
+                else{
+                    list.add(dest);
+                }
+            }
+        }
+        else{//其他动物的Move判断//
+            if(src.getRow()!=0){
+                BoardPoint dest=new BoardPoint(src.getRow()-1,src.getCol());
+                if(grid[src.getRow()-1][src.getCol()].chess!=null){
+                    if(grid[src.getRow()-1][src.getCol()].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else if(!isRiver(dest)){
+                    list.add(dest);
+                }
+            }
+            if(src.getRow()!=6){
+                BoardPoint dest=new BoardPoint(src.getRow()+1,src.getCol());
+                if(grid[src.getRow()+1][src.getCol()].chess!=null){
+                    if(grid[src.getRow()+1][src.getCol()].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else if(!isRiver(dest)){
+                    list.add(dest);
+                }
+            }
+            if(src.getCol()!=0){
+                BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()-1);
+                if(grid[src.getRow()][src.getCol()-1].chess!=null){
+                    if(grid[src.getRow()][src.getCol()-1].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else if(!isRiver(dest)){
+                    list.add(dest);
+                }
+            }
+            if(src.getCol()!=8){
+                BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()+1);
+                if(grid[src.getRow()][src.getCol()+1].chess!=null){
+                    if(grid[src.getRow()][src.getCol()+1].chess.rank<=getChessAt(src).rank){
+                        list.add(dest);
+                    }
+                }
+                else if(!isRiver(dest)){
+                    list.add(dest);
+                }
+            }
+        }
+        return list;
     }
 
     private boolean canJumpRiver(BoardPoint src, BoardPoint dest) {
@@ -150,19 +307,29 @@ public class Board {
     }
 
     public boolean canEat(BoardPoint src, BoardPoint dest) {
-        boolean b=false;
         Chess attacker = getChessAt(src);
-        if(getChessAt(dest)!=null) {
+        if(getChessAt(dest)!=null){
             Chess defender = getChessAt(dest);
-            if (attacker.getPlayer().getColor() != defender.getPlayer().getColor()) {
-                if (canMove(src, dest)) {
-                    if (attacker.rank >= defender.rank) {
-                        b = true;
+            if(attacker.getPlayer().getColor()!=defender.getPlayer().getColor()){
+                if(canMove(src,dest)){
+                    if(attacker.rank>=defender.rank){
+                        return true;
+                    }
+                    else{
+                        return false;
                     }
                 }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return false;
             }
         }
-        return b;
+        else{
+            return false;
+        }
         //空的判断，只能吃对方的，判断rank，判断可走性（比如河）//
     }
     private void jumpRiver(BoardPoint src,BoardPoint dest){
@@ -174,10 +341,8 @@ public class Board {
             //这边加进step的部分写的可能有点问题，之后再看看//
         }
     }
-
-
     private boolean isRiver(BoardPoint point) {
-        if(((point.getRow()==3||point.getRow()==4||point.getRow()==5)&&(point.getCol()==1||point.getCol()==2||point.getCol()==4||point.getCol()==5))){
+        if(((point.getRow()==1||point.getRow()==2||point.getRow()==4||point.getRow()==5)&&(point.getCol()==3||point.getCol()==4||point.getCol()==5))){
             return true;
         }
         else{
@@ -193,16 +358,6 @@ public class Board {
             return false;
         }
     }
-
-    public void move(BoardPoint src, BoardPoint dest) {
-        if(canMove(src,dest)){
-            setChess(dest,getChessAt(src));
-            removeChess(src);
-            Step step=new Step(src,dest,getChessPlayer(src));
-            steps.add(step);
-        }
-    }
-
     public void eat(BoardPoint src, BoardPoint dest) {
         Chess attacker = removeChess(src);
         Chess defender = removeChess(dest);
@@ -214,8 +369,7 @@ public class Board {
             else{
                 redDead.add(defender);
             }
-            Step step=new Step(src,dest,getChessPlayer(src),defender);
-            steps.add(step);
+          //Steps//
         }
         //判断能不能吃，吃，记录死了的棋子放在list里面，记录step//
     }

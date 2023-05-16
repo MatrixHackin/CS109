@@ -65,7 +65,7 @@ public class Controller implements GameListener {
 
     @Override
     public void clickCell(BoardPoint point, CellView component) {
-        if (selectedPoint != null && board.canMove(selectedPoint, point)) {
+        if (selectedPoint != null) {
             board.move(selectedPoint, point);
             setCanStepFalse();
             canStepPoints = null;
@@ -81,7 +81,6 @@ public class Controller implements GameListener {
             }
         }
     }
-
     @Override
     public void clickChess(BoardPoint point, AnimalView component) {
         if (selectedPoint == null) {
@@ -130,28 +129,18 @@ public class Controller implements GameListener {
         }
     }
 
-    public ArrayList<BoardPoint> getCanStepPoints(BoardPoint src) {
+    public ArrayList<BoardPoint> getCanStepPoints(BoardPoint src){
         ArrayList<BoardPoint> list = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 9; j++) {
-                BoardPoint dest = new BoardPoint(i, j);
-                if (board.canMove(src, dest)) {
-                    boardView.gridViews[i][j].canStep = true;
-                    list.add(dest);
-                }
-                if (board.canEat(src, dest)) {
-                    boardView.gridViews[i][j].canStep = true;
-                    list.add(dest);
-                }
-            }
+        for(int i = 0; i<board.getCanmovepoints(src).size(); i++){
+            boardView.gridViews[board.getCanmovepoints(src).get(i).getRow()][board.getCanmovepoints(src).get(i).getCol()].canStep = true;
+            list.add(board.getCanmovepoints(src).get(i));
         }
         return list;
     }
-
     public void reset() {
         canStepPoints = null;
         board.initGrid();
-        board.initChesses();
+        board.initPieces();
         boardView.removeChessComponent();
         boardView.initiateChessComponent(board);
         currentPlayer = Player.BLUE;
