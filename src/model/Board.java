@@ -106,8 +106,15 @@ public class Board {
         return judge;
     }
     public void move(BoardPoint src, BoardPoint dest) {
+        if(isOpponentTrap(dest,getChessPlayer(src))){
             setChess(dest, getChessAt(src));
             removeChess(src);
+            getChessAt(dest).setRank(0);
+        }
+        else{
+            setChess(dest, getChessAt(src));
+            removeChess(src);
+        }
             //Steps之后再写//
     }
     public ArrayList<BoardPoint> getCanmovepoints(BoardPoint src){
@@ -117,25 +124,37 @@ public class Board {
            if(src.getRow()!=0){
                BoardPoint dest=new BoardPoint(src.getRow()-1,src.getCol());
                if(grid[src.getRow()-1][src.getCol()].chess!=null){
-                   if(getChessPlayer(dest)!=getChessPlayer(src)){
-                       if(grid[src.getRow()-1][src.getCol()].chess.rank<=getChessAt(src).rank){
-                           list.add(dest);
+                   if(!isRiver(src)){
+                       if(getChessPlayer(dest)!=getChessPlayer(src)){
+                           if(grid[src.getRow()-1][src.getCol()].chess.rank<=getChessAt(src).rank){
+                               list.add(dest);
+                           }
+                           else if(grid[src.getRow()-1][src.getCol()].chess.rank==8){
+                               list.add(dest);
+                           }
                        }
                    }
                }
-               else{
+               else if(isOwnDens(dest,getChessPlayer(src))){}
+               else {
                    list.add(dest);
                }
            }
             if(src.getRow()!=6){
                 BoardPoint dest=new BoardPoint(src.getRow()+1,src.getCol());
                 if(grid[src.getRow()+1][src.getCol()].chess!=null){
-                    if(getChessPlayer(dest)!=getChessPlayer(src)){
-                        if(grid[src.getRow()+1][src.getCol()].chess.rank<=getChessAt(src).rank){
-                            list.add(dest);
+                    if(!isRiver(src)){
+                        if(getChessPlayer(dest)!=getChessPlayer(src)){
+                            if(grid[src.getRow()+1][src.getCol()].chess.rank<=getChessAt(src).rank){
+                                list.add(dest);
+                            }
+                            else if(grid[src.getRow()+1][src.getCol()].chess.rank==8){
+                                list.add(dest);
+                            }
                         }
                     }
                 }
+                else if(isOwnDens(dest,getChessPlayer(src))){}
                 else{
                     list.add(dest);
                 }
@@ -143,12 +162,18 @@ public class Board {
             if(src.getCol()!=0){
                 BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()-1);
                 if(grid[src.getRow()][src.getCol()-1].chess!=null){
-                    if(getChessPlayer(dest)!=getChessPlayer(src)){
-                        if(grid[src.getRow()][src.getCol()-1].chess.rank<=getChessAt(src).rank){
-                            list.add(dest);
+                    if(!isRiver(src)){
+                        if(getChessPlayer(dest)!=getChessPlayer(src)){
+                            if(grid[src.getRow()][src.getCol()-1].chess.rank<=getChessAt(src).rank){
+                                list.add(dest);
+                            }
+                            else if(grid[src.getRow()][src.getCol()-1].chess.rank==8){
+                                list.add(dest);
+                            }
                         }
                     }
                 }
+                else if(isOwnDens(dest,getChessPlayer(src))){}
                 else{
                     list.add(dest);
                 }
@@ -156,13 +181,19 @@ public class Board {
             if(src.getRow()!=8){
                 BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()+1);
                 if(grid[src.getRow()][src.getCol()+1].chess!=null){
-                    if(getChessPlayer(dest)!=getChessPlayer(src)){
-                        if(grid[src.getRow()][src.getCol()+1].chess.rank<=getChessAt(src).rank){
-                            list.add(dest);
+                    if(!isRiver(src)){
+                        if(getChessPlayer(dest)!=getChessPlayer(src)){
+                            if(grid[src.getRow()][src.getCol()+1].chess.rank<=getChessAt(src).rank){
+                                list.add(dest);
+                            }
+                            else if(grid[src.getRow()][src.getCol()+1].chess.rank==8){
+                                list.add(dest);
+                            }
                         }
                     }
                 }
-                else{
+                else if(isOwnDens(dest,getChessPlayer(src))){}
+                else {
                     list.add(dest);
                 }
             }
@@ -180,11 +211,13 @@ public class Board {
                 }
                 else if(isRiver(dest)){
                     if(grid[src.getRow()-1][src.getCol()].chess!=null||grid[src.getRow()-2][src.getCol()].chess!=null){}
+                    else if(grid[src.getRow()-3][src.getCol()].chess!=null&&grid[src.getRow()-3][src.getCol()].chess.rank>getChessAt(src).rank){}
                     else{
                         BoardPoint overRiver=new BoardPoint(src.getRow()-3,src.getCol());
                         list.add(overRiver);
                     }
                 }
+                else if(isOwnDens(dest,getChessPlayer(src))){}
                 else{
                     list.add(dest);
                 }
@@ -200,11 +233,13 @@ public class Board {
                 }
                 else if(isRiver(dest)){
                     if(grid[src.getRow()+1][src.getCol()].chess!=null||grid[src.getRow()+2][src.getCol()].chess!=null){}
+                    else if(grid[src.getRow()+3][src.getCol()].chess!=null&&grid[src.getRow()+3][src.getCol()].chess.rank>getChessAt(src).rank){}
                     else{
                         BoardPoint overRiver=new BoardPoint(src.getRow()+3,src.getCol());
                         list.add(overRiver);
                     }
                 }
+                else if(isOwnDens(dest,getChessPlayer(src))){}
                 else{
                     list.add(dest);
                 }
@@ -220,11 +255,13 @@ public class Board {
                 }
                 else if(isRiver(dest)){
                     if(grid[src.getRow()][src.getCol()-1].chess!=null||grid[src.getRow()][src.getCol()-2].chess!=null||grid[src.getRow()][src.getCol()-3].chess!=null){}
+                    else if(grid[src.getRow()][src.getCol()-4].chess!=null&&grid[src.getRow()][src.getCol()-4].chess.rank>getChessAt(src).rank){}
                     else{
                         BoardPoint overRiver=new BoardPoint(src.getRow(),src.getCol()-4);
                         list.add(overRiver);
                     }
                 }
+                else if(isOwnDens(dest,getChessPlayer(src))){}
                 else{
                     list.add(dest);
                 }
@@ -240,11 +277,13 @@ public class Board {
                 }
                 else if(isRiver(dest)){
                     if(grid[src.getRow()][src.getCol()+1].chess!=null||grid[src.getRow()][src.getCol()+2].chess!=null||grid[src.getRow()][src.getCol()+3].chess!=null){}
+                    else if(grid[src.getRow()][src.getCol()+4].chess!=null&&grid[src.getRow()][src.getCol()+4].chess.rank>getChessAt(src).rank){}
                     else{
                         BoardPoint overRiver=new BoardPoint(src.getRow(),src.getCol()+4);
                         list.add(overRiver);
                     }
                 }
+                else if(isOwnDens(dest,getChessPlayer(src))){}
                 else{
                     list.add(dest);
                 }
@@ -256,11 +295,15 @@ public class Board {
                 BoardPoint dest=new BoardPoint(src.getRow()-1,src.getCol());
                 if(grid[src.getRow()-1][src.getCol()].chess!=null){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
-                        if(grid[src.getRow()-1][src.getCol()].chess.rank<=getChessAt(src).rank){
-                            list.add(dest);
+                        if(grid[src.getRow()-1][src.getCol()].chess.rank==1&&getChessAt(src).rank==8){}
+                        else {
+                            if (grid[src.getRow() - 1][src.getCol()].chess.rank <= getChessAt(src).rank) {
+                                list.add(dest);
+                            }
                         }
                     }
                 }
+                else if(isOwnDens(dest,getChessPlayer(src))){}
                 else if(!isRiver(dest)){
                     list.add(dest);
                 }
@@ -269,11 +312,15 @@ public class Board {
                 BoardPoint dest=new BoardPoint(src.getRow()+1,src.getCol());
                 if(grid[src.getRow()+1][src.getCol()].chess!=null){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
-                        if(grid[src.getRow()+1][src.getCol()].chess.rank<=getChessAt(src).rank){
-                            list.add(dest);
+                        if(grid[src.getRow()+1][src.getCol()].chess.rank==1&&getChessAt(src).rank==8){}
+                        else {
+                            if (grid[src.getRow()+1][src.getCol()].chess.rank <= getChessAt(src).rank) {
+                                list.add(dest);
+                            }
                         }
                     }
                 }
+                else if(isOwnDens(dest,getChessPlayer(src))){}
                 else if(!isRiver(dest)){
                     list.add(dest);
                 }
@@ -282,11 +329,15 @@ public class Board {
                 BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()-1);
                 if(grid[src.getRow()][src.getCol()-1].chess!=null){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
-                        if(grid[src.getRow()][src.getCol()-1].chess.rank<=getChessAt(src).rank){
-                            list.add(dest);
+                        if(grid[src.getRow()][src.getCol()-1].chess.rank==1&&getChessAt(src).rank==8){}
+                        else {
+                            if (grid[src.getRow()][src.getCol()-1].chess.rank <= getChessAt(src).rank) {
+                                list.add(dest);
+                            }
                         }
                     }
                 }
+                else if(isOwnDens(dest,getChessPlayer(src))){}
                 else if(!isRiver(dest)){
                     list.add(dest);
                 }
@@ -295,11 +346,15 @@ public class Board {
                 BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()+1);
                 if(grid[src.getRow()][src.getCol()+1].chess!=null){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
-                        if(grid[src.getRow()][src.getCol()+1].chess.rank<=getChessAt(src).rank){
-                            list.add(dest);
+                        if(grid[src.getRow()][src.getCol()+1].chess.rank==1&&getChessAt(src).rank==8){}
+                        else {
+                            if (grid[src.getRow()][src.getCol()+1].chess.rank <= getChessAt(src).rank) {
+                                list.add(dest);
+                            }
                         }
                     }
                 }
+                else if(isOwnDens(dest,getChessPlayer(src))){}
                 else if(!isRiver(dest)){
                     list.add(dest);
                 }
@@ -314,6 +369,9 @@ public class Board {
             if(attacker.getPlayer().getColor()!=defender.getPlayer().getColor()){
                 if(canMove(src,dest)){
                     if(attacker.rank>=defender.rank){
+                        return true;
+                    }
+                    else if(attacker.rank==1&&defender.rank==8){
                         return true;
                     }
                     else{
@@ -341,15 +399,6 @@ public class Board {
             return false;
         }
     }
-
-    private boolean isOwnDens(BoardPoint point, Player color) {
-        if((color==Player.BLUE&&point.getRow()==8&&point.getCol()==3)||(color==Player.RED&&point.getRow()==0&&point.getCol()==3)){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
     public void eat(BoardPoint src, BoardPoint dest) {
         Chess attacker = getChessAt(src);
         Chess defender = getChessAt(dest);
@@ -367,9 +416,16 @@ public class Board {
         }
         //判断能不能吃，吃，记录死了的棋子放在list里面，记录step//
     }
-
-    private boolean isOpponentDens(BoardPoint point, Player color) {
-        if((color==Player.RED&&point.getRow()==8&&point.getCol()==3)||(color==Player.BLUE&&point.getRow()==0&&point.getCol()==3)){
+    public boolean isOwnDens(BoardPoint point, Player color) {
+        if((color==Player.BLUE&&point.getRow()==3&&point.getCol()==8)||(color==Player.RED&&point.getRow()==3&&point.getCol()==0)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean isOpponentDens(BoardPoint point, Player color) {
+        if((color==Player.RED&&point.getRow()==3&&point.getCol()==8)||(color==Player.BLUE&&point.getRow()==3&&point.getCol()==0)){
             return true;
         }
         else{
@@ -378,10 +434,10 @@ public class Board {
     }
 
     private boolean isOpponentTrap(BoardPoint point, Player color) {
-        if(color==Player.RED&&((point.getRow()==8&&(point.getCol()==2||point.getCol()==4))||(point.getRow()==7&&point.getCol()==3))){
+        if(color==Player.BLUE&&((point.getCol()==0&&(point.getRow()==2||point.getRow()==4))||(point.getRow()==3&&point.getCol()==1))){
             return true;
         }
-        else if(color==Player.BLUE&&((point.getRow()==0&&(point.getCol()==2||point.getCol()==4))||(point.getRow()==1&&point.getCol()==3))){
+        else if(color==Player.RED&&((point.getCol()==8&&(point.getRow()==2||point.getRow()==4))||(point.getCol()==7&&point.getRow()==3))){
             return true;
         }
         else{

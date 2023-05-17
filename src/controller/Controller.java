@@ -49,14 +49,16 @@ public class Controller implements GameListener {
             boardView.turnLabel.setBounds(35,120,100,100);
     }
 
-    public void checkWin() {
+    public void checkWin(BoardPoint point) {
         if(board.blueDead.size()==8){
             winner=Player.RED;
         }
         else if(board.redDead.size()==8){
             winner=Player.BLUE;
         }
-        //走到老巢的我还没写//
+        else if(board.isOpponentDens(point,currentPlayer)){
+            winner=currentPlayer;
+        }
         //判断棋子全吃完了，或者到老巢了//
     }
 
@@ -73,11 +75,11 @@ public class Controller implements GameListener {
                 canStepPoints = null;
                 boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
                 selectedPoint=null;
+                checkWin(point);
                 changePlayer();
                 boardView.repaint();
                 component.revalidate();
             }
-            checkWin();
             if (winner != null) {
                 winView();
                 reset();
@@ -111,12 +113,11 @@ public class Controller implements GameListener {
             boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
             selectedPoint = null;
             setAllCellsCanStepFalse();
+            checkWin(point);
             changePlayer();
             boardView.repaint();
             boardView.revalidate();
             component.revalidate();
-
-            checkWin();
             if (winner != null) {
                 winView();
                 reset();
