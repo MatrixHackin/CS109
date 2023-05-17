@@ -1,5 +1,7 @@
 package view;
 
+import model.Board;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,6 +13,11 @@ public class GameFrame extends MyFrame {
     private final int ONE_CHESS_SIZE;
 
     private BoardView boardView;
+    JButton homeButton;
+    JButton changeThemeButton;
+    JButton regretButton;
+    JButton musicButton;
+    JButton resetButton;
     AIFrame aiFrame;
     TurnLabel turnLabel=new TurnLabel();
     JLabel timeLabel;
@@ -26,8 +33,60 @@ public class GameFrame extends MyFrame {
 
         addChessboard();
         addTurnLable();
+        addHomeButton();
+        addRegretButton();
+        addMusicButton();
+        addResetButton();
+        addChangeThemeButton();
 
         this.setBackground("resource/map.png");
+    }
+    private void addChangeThemeButton(){
+        this.changeThemeButton=new GameButton("resource/icon/changeTheme.png");
+        changeThemeButton.setLocation(930,350);
+        changeThemeButton.addActionListener((e)->{
+            if(isDay){
+                this.setBackground("resource/night.png");
+                this.isDay=false;
+                this.repaint();
+                this.validate();
+            }
+            else {
+                this.setBackground("resource/map.png");
+                this.validate();
+            }
+        });
+        add(changeThemeButton);
+    }
+    private void addResetButton(){
+        this.resetButton=new GameButton("resource/icon/reset.png");
+        resetButton.setLocation(930,420);
+        resetButton.addActionListener((e)->{
+
+        });
+        add(resetButton);
+    }
+    private void addMusicButton(){
+        this.musicButton=new GameButton("resource/icon/sound-full-icon.png");
+        musicButton.setLocation(930,490);
+        musicButton.addActionListener((e)->{
+
+        });
+        add(musicButton);
+    }
+    private void addRegretButton(){
+        this.regretButton=new GameButton("resource/icon/round-line-left-arrow-icon.png");
+        regretButton.setLocation(930,560);
+        add(regretButton);
+    }
+    private void addHomeButton(){
+        this.homeButton=new GameButton("resource/icon/home-button-icon.png");
+        homeButton.setLocation(930,630);
+        homeButton.addActionListener((e)->{
+            this.setVisible(false);
+            beginFrame.setVisible(true);
+        });
+        add(homeButton);
     }
     private void addTurnLable(){
         turnLabel.setBounds(930,120,100,100);

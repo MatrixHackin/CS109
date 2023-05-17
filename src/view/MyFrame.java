@@ -16,6 +16,7 @@ public class MyFrame extends JFrame {
         setLayout(null);
 
     }
+
     public void setBackground(String backgroundPath) {
         Image image = new ImageIcon(backgroundPath).getImage();
         image = image.getScaledInstance(backgroundWidth, backgroundHeight, Image.SCALE_DEFAULT);
