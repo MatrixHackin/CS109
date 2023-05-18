@@ -6,6 +6,7 @@ import java.awt.*;
 public class MyFrame extends JFrame {
     int backgroundWidth;
     int backgroundHeight;
+    JLabel background;
     public MyFrame(int backgroundWidth,int backgroundHeight) {
         this.backgroundWidth=backgroundWidth;
         this.backgroundHeight=backgroundHeight;
@@ -21,9 +22,12 @@ public class MyFrame extends JFrame {
         Image image = new ImageIcon(backgroundPath).getImage();
         image = image.getScaledInstance(backgroundWidth, backgroundHeight, Image.SCALE_DEFAULT);
         ImageIcon icon = new ImageIcon(image);
-        JLabel bg = new JLabel(icon);
-        bg.setSize(backgroundWidth, backgroundHeight);
-        bg.setLocation(0, 0);
-        add(bg);
+        this.background = new JLabel(icon);
+        background.setSize(backgroundWidth, backgroundHeight);
+        background.setLocation(0, 0);
+        add(background);
+    }
+    public void removeBackground(){
+        remove(background);
     }
 }

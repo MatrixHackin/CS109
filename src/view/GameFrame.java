@@ -21,10 +21,10 @@ public class GameFrame extends MyFrame {
     AIFrame aiFrame;
     TurnLabel turnLabel=new TurnLabel();
     JLabel timeLabel;
-
+    JLabel background;
+    JLabel dayBG;
+    JLabel nightBG;
     public boolean isDay;
-
-
     public GameFrame() {
         super(1000,700);
 
@@ -39,22 +39,38 @@ public class GameFrame extends MyFrame {
         addResetButton();
         addChangeThemeButton();
 
-        this.setBackground("resource/map.png");
+        Image image = new ImageIcon("resource/map.png").getImage();
+        image = image.getScaledInstance(1000, 700, Image.SCALE_DEFAULT);
+        ImageIcon icon = new ImageIcon(image);
+        this.dayBG = new JLabel(icon);
+        this.dayBG.setSize(1000,700);
+        this.dayBG.setLocation(0,0);
+
+        Image image1 = new ImageIcon("resource/night.png").getImage();
+        image1 = image1.getScaledInstance(1000, 700, Image.SCALE_DEFAULT);
+        ImageIcon icon1 = new ImageIcon(image1);
+        this.nightBG = new JLabel(icon1);
+        this.nightBG.setSize(1000,700);
+        this.nightBG.setLocation(0,0);
+
+        add(dayBG);
     }
     private void addChangeThemeButton(){
         this.changeThemeButton=new GameButton("resource/icon/changeTheme.png");
         changeThemeButton.setLocation(930,350);
         changeThemeButton.addActionListener((e)->{
             if(isDay){
-                this.setBackground("resource/night.png");
+                this.remove(dayBG);
                 this.isDay=false;
-                this.repaint();
-                this.validate();
+                add(nightBG);
             }
             else {
-                this.setBackground("resource/map.png");
-                this.validate();
+                this.remove(nightBG);
+                this.isDay=true;
+                add(dayBG);
             }
+            repaint();
+            revalidate();
         });
         add(changeThemeButton);
     }

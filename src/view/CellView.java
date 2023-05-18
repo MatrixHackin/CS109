@@ -24,11 +24,7 @@ public class CellView extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponents(g);
-        if (type == CellType.GRASS) g.setColor(BoardView.Grass);
-        else if (type == CellType.RIVER) g.setColor(BoardView.River);
-        else if (type == CellType.TRAP) g.setColor(BoardView.trapColor);
-        else if (type == CellType.DEN) g.setColor(BoardView.denColor);
-        else g.setColor(background);
+        g.setColor(new Color(0,0,0,0));
         g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);
 
         if (canStep) { // Highlights the model if selected.

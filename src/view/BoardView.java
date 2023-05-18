@@ -25,15 +25,6 @@ public class BoardView extends JPanel {
     public Controller controller;
     public TurnLabel turnLabel;
     public JLabel timeLabel;
-
-    //BoardView的4种颜色
-    public static final Color Grass = new Color(96, 194, 73, 100);
-    public static final Color River = new Color(161, 227, 226, 100);
-
-    public static final Color trapColor = new Color(163, 166, 164, 100);
-    public static final Color denColor = new Color(255, 255, 255, 100);
-
-    //构造方法
     public BoardView(int chessSize,TurnLabel turnLabel, JLabel timeLabel) {
         this.timeLabel = timeLabel;
         this.turnLabel=turnLabel;
@@ -41,8 +32,8 @@ public class BoardView extends JPanel {
         int width = CHESS_SIZE * 9;
         int height = CHESS_SIZE * 7;
         this.setOpaque(false);
-        enableEvents(AWTEvent.MOUSE_EVENT_MASK);// Allow mouse events to occur
-        setLayout(null); // Use absolute layout.
+        enableEvents(AWTEvent.MOUSE_EVENT_MASK);
+        setLayout(null);
         setSize(width, height);
         initiateGridComponents();
 
@@ -214,11 +205,4 @@ public class BoardView extends JPanel {
             }
         }
     }
-/*
-   public void changeTheme(boolean isDay){
-
-            }
-        repaint();
-        revalidate();
-    }*/
 }
