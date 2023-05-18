@@ -34,6 +34,7 @@ public class AIFrame extends MyFrame{
             this.gameFrame = gameFrame;
             gameFrame.aiFrame = this;
             this.setVisible(false);
+            gameFrame.getBoardView().controller.AI=true;
             gameFrame.setVisible(true);
         });
         add(beginButton);
@@ -46,4 +47,5 @@ public class AIFrame extends MyFrame{
         });
         add(backButton);
     }
+
 }

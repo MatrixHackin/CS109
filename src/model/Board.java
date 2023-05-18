@@ -111,6 +111,11 @@ public class Board {
             removeChess(src);
             getChessAt(dest).setRank(0);
         }
+        else if(isOpponentTrap(src,getChessPlayer(src))&&!isOpponentTrap(dest,getChessPlayer(src))){
+            getChessAt(src).setRank(getChessAt(src).getFinalRank());
+            setChess(dest, getChessAt(src));
+            removeChess(src);
+        }
         else{
             setChess(dest, getChessAt(src));
             removeChess(src);
@@ -403,14 +408,28 @@ public class Board {
         Chess attacker = getChessAt(src);
         Chess defender = getChessAt(dest);
         if(canEat(src,dest)){
-            removeChess(src);
-            removeChess(dest);
-            setChess(dest, attacker);
-            if(defender.getPlayer()==Player.BLUE) {
-                blueDead.add(defender);
+            if(getChessAt(dest)!=null&&isOpponentTrap(dest,getChessPlayer(dest))){
+                getChessAt(dest).setRank(getChessAt(dest).getFinalRank());
+                removeChess(src);
+                removeChess(dest);
+                setChess(dest, attacker);
+                if(defender.getPlayer()==Player.BLUE) {
+                    blueDead.add(defender);
+                }
+                else{
+                    redDead.add(defender);
+                }
             }
             else{
-                redDead.add(defender);
+                removeChess(src);
+                removeChess(dest);
+                setChess(dest, attacker);
+                if(defender.getPlayer()==Player.BLUE) {
+                    blueDead.add(defender);
+                }
+                else{
+                    redDead.add(defender);
+                }
             }
           //Steps//
         }
@@ -444,4 +463,46 @@ public class Board {
             return false;
         }
     }
+    public BoardPoint getChessPoint(Chess chess){
+        BoardPoint ChessPoint = null;
+        for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
+            for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
+                BoardPoint point=new BoardPoint(i,j);
+                if(getChessAt(point)==chess){
+                    ChessPoint=point;
+                }
+            }
+        }
+        return ChessPoint;
+    }
+
+    public Chess getAIChess(int rank){
+        Chess AIChess=null;
+        if(rank==1&&getChessPoint(RedRat)!=null&&getCanmovepoints(getChessPoint(RedRat))!=null){
+            AIChess=RedRat;
+        }
+        if(rank==2&&getChessPoint(RedCat)!=null&&getCanmovepoints(getChessPoint(RedCat))!=null){
+            AIChess=RedCat;
+        }
+        if(rank==3&&getChessPoint(RedDog)!=null&&getCanmovepoints(getChessPoint(RedDog))!=null){
+            AIChess=RedDog;
+        }
+        if(rank==4&&getChessPoint(RedWolf)!=null&&getCanmovepoints(getChessPoint(RedWolf))!=null){
+            AIChess=RedWolf;
+        }
+        if(rank==5&&getChessPoint(RedLeopard)!=null&&getCanmovepoints(getChessPoint(RedLeopard))!=null){
+            AIChess=RedLeopard;
+        }
+        if(rank==6&&getChessPoint(RedLion)!=null&&getCanmovepoints(getChessPoint(RedLion))!=null){
+            AIChess=RedLion;
+        }
+        if(rank==7&&getChessPoint(RedTiger)!=null&&getCanmovepoints(getChessPoint(RedTiger))!=null){
+            AIChess=RedTiger;
+        }
+        if(rank==8&&getChessPoint(RedElephant)!=null&&getCanmovepoints(getChessPoint(RedElephant))!=null){
+            AIChess=RedElephant;
+        }
+        return AIChess;
+    }
+
 }

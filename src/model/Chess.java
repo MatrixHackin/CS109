@@ -4,10 +4,12 @@ package model;
 public class Chess {
     private Player player;
     public int rank;
+    private int FinalRank;
 
     public Chess(Player player, int rank) {
         this.player = player;
         this.rank = rank;
+        this.FinalRank=rank;
     }
     public void setPlayer(Player player) {
         this.player = player;
@@ -24,4 +26,6 @@ public class Chess {
     public Player getPlayer() {
         return player;
     }
+    public int getFinalRank(){return FinalRank;}
+
 }

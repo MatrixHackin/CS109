@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="优化了游戏界面，新增了更换主题功能">
+    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="Version3">
+      <change afterPath="$PROJECT_DIR$/src/model/AI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_17_19_25__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_17_19_25__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BeginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BeginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BoardFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ScoreBoardFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Chess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AIFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AIFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/RegisterFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/RegisterFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/users" beforeDir="false" afterPath="$PROJECT_DIR$/user/users" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +35,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2PSQB1ZCcKNuSJPZJAp7o95qQHb" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -44,7 +47,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/0JAVACOMMUNITY/0Javawork/Jungle"
+    "last_opened_file_path": "C:/Users/惠普/IdeaProjects/practice1"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -134,21 +137,7 @@
       <option name="project" value="LOCAL" />
       <updated>1684153759325</updated>
     </task>
-    <task id="LOCAL-00008" summary="优化了frame和登录界面">
-      <created>1684281396475</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1684281396475</updated>
-    </task>
-    <task id="LOCAL-00009" summary="优化了游戏界面，新增了更换主题功能">
-      <created>1684370714273</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1684370714273</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -168,8 +157,6 @@
     <MESSAGE value="稳定1.0" />
     <MESSAGE value="Test0.1" />
     <MESSAGE value="2.0" />
-    <MESSAGE value="优化了frame和登录界面" />
-    <MESSAGE value="优化了游戏界面，新增了更换主题功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化了游戏界面，新增了更换主题功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.0" />
   </component>
 </project>
