@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Objects;
 
 public class RegisterFrame extends MyFrame {
     JTextField userNameTextField;
@@ -33,21 +34,11 @@ public class RegisterFrame extends MyFrame {
             String inputName = userNameTextField.getText();
             char[] pw1 = userPasswordTextField.getPassword();
             String inputPW = new String(pw1);
-            if (inputName.equals("")) {
-                JOptionPane.showMessageDialog(null, "Please input ID", "", JOptionPane.ERROR_MESSAGE);
-            } else if (pw1.length == 0) {
-                JOptionPane.showMessageDialog(null, "Please input password", "", JOptionPane.ERROR_MESSAGE);
-            } else {
-                boolean b = true;
-                for (int i = 0; i < loginFrame.users.size(); i++) {
-                    if (inputName.equals(loginFrame.users.get(i).getName())) {
-                        JOptionPane.showMessageDialog(null, "Account has already exist.", "", JOptionPane.ERROR_MESSAGE);
-                        b = false;
-                        break;
-                    }
-                }
-
-                if (b) {
+            for (User user : loginFrame.users) {
+                if (Objects.equals(inputName, user.getName())) {
+                    JOptionPane.showMessageDialog(null, "User has already exist.", "user error", JOptionPane.ERROR_MESSAGE);
+                    break;
+                } else {
                     FileWriter fileWriter = null;
                     try {
                         fileWriter = new FileWriter("user/users", true);
@@ -64,12 +55,11 @@ public class RegisterFrame extends MyFrame {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-                    JOptionPane.showMessageDialog(null, "Register succeed!", "", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Register succeed!", "Jungle", JOptionPane.INFORMATION_MESSAGE);
                     loginFrame.users.add(new User(inputName, inputPW, 0));
-                    setVisible(false);
+                    this.setVisible(false);
                 }
             }
-
         });
         add(registerButton);
     }

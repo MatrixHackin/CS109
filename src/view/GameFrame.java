@@ -5,9 +5,6 @@ import model.Board;
 import javax.swing.*;
 import java.awt.*;
 
-import static model.Constant.GAMEBG_COL_SIZE;
-import static model.Constant.GAMEBG_ROW_SIZE;
-
 public class GameFrame extends MyFrame {
     public BeginFrame beginFrame;
     private final int ONE_CHESS_SIZE;

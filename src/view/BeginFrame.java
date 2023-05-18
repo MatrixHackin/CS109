@@ -5,13 +5,14 @@ import model.Board;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class BeginFrame extends MyFrame{
     GameFrame gameFrame;
     LoginFrame loginFrame;
     SettingFrame settingFrame;
     InstructionFrame instructionFrame;
-    BoardFrame boardFrame;
+    ScoreBoardFrame scoreBoardFrame;
     JLabel titleLabel1 = new JLabel("JUNGLE  CHESS");
     JButton button ;
     JButton settingButton;
@@ -19,7 +20,7 @@ public class BeginFrame extends MyFrame{
     JButton loginButton;
     JButton boardButton;
 
-    public BeginFrame() {
+    public BeginFrame() throws FileNotFoundException {
         super(1000,500);
 
         GameFrame gameFrame = new GameFrame();
@@ -27,9 +28,9 @@ public class BeginFrame extends MyFrame{
         this.gameFrame = gameFrame;
         gameFrame.beginFrame = this;
 
-        BoardFrame boardFrame=new BoardFrame();
-        this.boardFrame=boardFrame;
-        boardFrame.beginFrame=this;
+        ScoreBoardFrame scoreBoardFrame =new ScoreBoardFrame();
+        this.scoreBoardFrame = scoreBoardFrame;
+        scoreBoardFrame.beginFrame=this;
 
         SettingFrame settingFrame=new SettingFrame();
         this.settingFrame=settingFrame;
@@ -55,7 +56,7 @@ public class BeginFrame extends MyFrame{
         this.boardButton=new HomeButton("Board",400,250);
         boardButton.addActionListener((e)->{
             this.setVisible(false);
-            boardFrame.setVisible(true);
+            scoreBoardFrame.setVisible(true);
         });
         add(boardButton);
     }

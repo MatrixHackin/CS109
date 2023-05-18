@@ -4,8 +4,11 @@ import model.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class LoginFrame extends MyFrame {
     boolean isLogin;
@@ -22,8 +25,24 @@ public class LoginFrame extends MyFrame {
     JPasswordField userPasswordTextField;
     RegisterFrame registerFrame;
 
-    public LoginFrame(){
+    public LoginFrame() throws FileNotFoundException {
         super(480,640);
+
+        //读取用户信息
+        this.users= new ArrayList<>();
+        File file=new File("user/users");
+        Scanner scanner=new Scanner(file);
+        while (scanner.hasNextLine()){
+            String line= scanner.nextLine();
+            String[] parts =line.split(" ");
+            String name=parts[0];
+            String password=parts[1];
+            String score=parts[2];
+            int scores=Integer.parseInt(score);
+            User user1=new User(name,password,scores);
+            users.add(user1);
+        }
+        scanner.close();
 
         addBackButton();
         addTitle();
@@ -40,8 +59,6 @@ public class LoginFrame extends MyFrame {
         AIFrame aiFrame=new AIFrame();
         this.aiFrame=aiFrame;
         aiFrame.loginFrame=this;
-
-        this.users= new ArrayList<>();
 
         this.setBackground("resource/8E4.gif");
     }
