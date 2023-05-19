@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="优化了游戏界面，新增了更换主题功能">
+    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="完成了注册登录和分数展示的功能">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_15_20_18__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_15_20_18__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_15_20_57__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_15_20_57__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_16_14_27__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_16_14_27__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_17_19_25__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_17_19_25__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_17_7_53__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_5_17_7_53__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BeginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BeginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BoardFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ScoreBoardFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/RegisterFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/RegisterFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SettingFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SettingFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +44,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/0JAVACOMMUNITY/0Javawork/Jungle"
+    "last_opened_file_path": "D:/0JAVACOMMUNITY/0Javawork/CS109"
   }
 }]]></component>
   <component name="RecentsManager">

@@ -1,5 +1,6 @@
 package view;
 
+import model.BGM;
 import model.Board;
 
 import javax.swing.*;
@@ -22,11 +23,13 @@ public class GameFrame extends MyFrame {
     JLabel dayBG;
     JLabel nightBG;
     public boolean isDay;
+    public boolean musicOn;
     public GameFrame() {
         super(1000,700);
 
         this.ONE_CHESS_SIZE = 80;
         isDay = true;
+        musicOn=true;
 
         addChessboard();
         addTurnLable();
@@ -83,6 +86,21 @@ public class GameFrame extends MyFrame {
         this.musicButton=new GameButton("resource/icon/sound-full-icon.png");
         musicButton.setLocation(930,490);
         musicButton.addActionListener((e)->{
+            Image image = new ImageIcon("resource/icon/sound-off-icon.png").getImage();
+            image = image.getScaledInstance( 40,40, Image.SCALE_DEFAULT);
+            ImageIcon icon = new ImageIcon(image);
+            Image image1 = new ImageIcon("resource/icon/sound-full-icon.png").getImage();
+            image1 = image1.getScaledInstance( 40,40, Image.SCALE_DEFAULT);
+            ImageIcon icon1 = new ImageIcon(image1);
+            if(musicOn){
+                musicButton.setIcon(icon);
+                musicOn=false;
+            }
+            else {
+                musicButton.setIcon(icon1);
+                musicOn=true;
+            }
+
 
         });
         add(musicButton);
