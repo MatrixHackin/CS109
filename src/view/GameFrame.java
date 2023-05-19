@@ -16,7 +16,7 @@ public class GameFrame extends MyFrame {
     JButton regretButton;
     JButton musicButton;
     JButton resetButton;
-    AIFrame aiFrame;
+    AIFrame aiFrame=new AIFrame();
     TurnLabel turnLabel=new TurnLabel();
     JLabel timeLabel;
     JLabel background;

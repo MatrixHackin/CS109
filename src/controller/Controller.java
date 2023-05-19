@@ -1,10 +1,9 @@
 package controller;
+import java.util.Random;
 
-import model.Step;
+import model.*;
 import listener.GameListener;
-import model.Board;
-import model.BoardPoint;
-import model.Player;
+import view.AIFrame;
 import view.BoardView;
 import view.CellView;
 import view.chessView.AnimalView;
@@ -23,6 +22,8 @@ public class Controller implements GameListener {
     public BoardPoint selectedPoint;//选中的点高亮
     public boolean isPlayback;
     public boolean skip;
+    public boolean AI=false;
+    public AI AIplayer=new AI();
 
  //   public JLabel timeLabel;
     public static Timer timer;
@@ -76,7 +77,13 @@ public class Controller implements GameListener {
                 boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
                 selectedPoint=null;
                 checkWin(point);
-                changePlayer();
+                if(winner!=null){}
+                else{
+                    changePlayer();
+                }
+                if(AI){
+
+                }
                 boardView.repaint();
                 component.revalidate();
             }
@@ -107,6 +114,7 @@ public class Controller implements GameListener {
             component.revalidate();
             boardView.repaint();
             boardView.revalidate();
+            //放下棋子
         } else if (board.canEat(selectedPoint, point)) {
             board.eat(selectedPoint, point);
             boardView.removeChessViewAtGrid(point);
@@ -114,7 +122,10 @@ public class Controller implements GameListener {
             selectedPoint = null;
             setAllCellsCanStepFalse();
             checkWin(point);
-            changePlayer();
+            if(winner!=null){}
+            else{
+                changePlayer();
+            }
             boardView.repaint();
             boardView.revalidate();
             component.revalidate();
@@ -124,7 +135,6 @@ public class Controller implements GameListener {
             }
         }
     }
-
     public void setAllCellsCanStepFalse() {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 9; j++) {
@@ -132,7 +142,6 @@ public class Controller implements GameListener {
             }
         }
     }
-
     public ArrayList<BoardPoint> getCanStepPoints(BoardPoint src){
         ArrayList<BoardPoint> list = new ArrayList<>();
         for(int i = 0; i<board.getCanmovepoints(src).size(); i++){
@@ -148,6 +157,7 @@ public class Controller implements GameListener {
         boardView.removeChessComponent();
         boardView.initiateChessComponent(board);
         currentPlayer = Player.BLUE;
+        boardView.turnLabel.setBounds(930,120,100,100);
         selectedPoint = null;
         setAllCellsCanStepFalse();
       //  boardView.statusLabel.setText("Turn 1: BLUE");
@@ -186,7 +196,6 @@ public class Controller implements GameListener {
             }
         }
     }
-
 }
 
 
