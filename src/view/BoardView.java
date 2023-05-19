@@ -148,7 +148,7 @@ public class BoardView extends JPanel {
     }
 
     public AnimalView removeChessViewAtGrid(BoardPoint point) {
-        AnimalView chess = (AnimalView) getCellViewAt(point).getComponents()[0];
+        AnimalView chess =(AnimalView) getCellViewAt(point).getComponents()[0];
         getCellViewAt(point).removeAll();
         getCellViewAt(point).revalidate();
         chess.setSelected(false);
