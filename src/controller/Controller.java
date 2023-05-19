@@ -82,11 +82,20 @@ public class Controller implements GameListener {
                     changePlayer();
                 }
                 if(AI){
-
+                    changePlayer();
+                    AIplayer.EasyAI(board);
+                    if(!AIplayer.LastAction){
+                        boardView.setChessViewAtCell(AIplayer.dest,boardView.removeChessViewAtGrid(AIplayer.src));
+                    }
+                    else{
+                        boardView.removeChessViewAtGrid(AIplayer.dest);
+                        boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));
+                    }
                 }
                 boardView.repaint();
                 component.revalidate();
             }
+            checkWin(point);
             if (winner != null) {
                 winView();
                 reset();
@@ -125,6 +134,17 @@ public class Controller implements GameListener {
             if(winner!=null){}
             else{
                 changePlayer();
+            }
+            if(AI){
+                changePlayer();
+                AIplayer.EasyAI(board);
+                if(!AIplayer.LastAction){
+                    boardView.setChessViewAtCell(AIplayer.dest,boardView.removeChessViewAtGrid(AIplayer.src));
+                }
+                else{
+                    boardView.removeChessViewAtGrid(AIplayer.dest);
+                    boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));
+                }
             }
             boardView.repaint();
             boardView.revalidate();

@@ -6,40 +6,63 @@ public class AI {
     private Player AIplayer=Player.RED;
     public BoardPoint src;
     public BoardPoint dest;
-    public Board EasyAI(Board board){
+    public boolean LastAction=false;
+    public void EasyAI(Board board){
         Random random=new Random();
         int chooseChess=random.nextInt(1,8);
-        int chooseStep= random.nextInt(1,4);
-        while(board.getAIChess(chooseChess)==null){
-            if(board.getAIChess(chooseChess)!=null){
-                break;
-            }
+        int chooseStep= random.nextInt(0,3);
+        while(board.getAIChess(chooseChess)==null||board.getCanmovepoints(board.getChessPoint(board.getAIChess(chooseChess))).size()<=chooseStep){
+            System.out.println(233);
             chooseChess=random.nextInt(1,8);
+            chooseStep=random.nextInt(0,3);
         }
-        BoardPoint upPoint=new BoardPoint(board.getChessPoint(board.getAIChess(chooseChess)).getRow()+1,board.getChessPoint(board.getAIChess(chooseChess)).getCol());
-        BoardPoint downPoint=new BoardPoint(board.getChessPoint(board.getAIChess(chooseChess)).getRow()-1,board.getChessPoint(board.getAIChess(chooseChess)).getCol());
-        BoardPoint leftPoint=new BoardPoint(board.getChessPoint(board.getAIChess(chooseChess)).getRow(),board.getChessPoint(board.getAIChess(chooseChess)).getCol()-1);
-        BoardPoint rightPoint=new BoardPoint(board.getChessPoint(board.getAIChess(chooseChess)).getRow(),board.getChessPoint(board.getAIChess(chooseChess)).getCol()+1);
-        if(chooseStep==1&&board.canMove(board.getChessPoint(board.getAIChess(chooseChess)),upPoint)){
+        if(chooseStep==0&&board.canMove(board.getChessPoint(board.getAIChess(chooseChess)),board.getCanmovepoints(board.getChessPoint(board.getAIChess(chooseChess))).get(0))){
             src=board.getChessPoint(board.getAIChess(chooseChess));
-            dest=upPoint;
-            board.move(board.getChessPoint(board.getAIChess(chooseChess)),upPoint);
+            dest=board.getCanmovepoints(board.getChessPoint(board.getAIChess(chooseChess))).get(0);
+            if(board.canEat(src,dest)){
+                board.eat(src,dest);
+                LastAction=true;
+            }
+            else{
+                board.move(src,dest);
+                LastAction=false;
+            }
         }
-        else if(chooseStep==2&&board.canMove(board.getChessPoint(board.getAIChess(chooseChess)),downPoint)){
+        else if(chooseStep==1&&board.canMove(board.getChessPoint(board.getAIChess(chooseChess)),board.getCanmovepoints(board.getChessPoint(board.getAIChess(chooseChess))).get(1))){
             src=board.getChessPoint(board.getAIChess(chooseChess));
-            dest=downPoint;
-            board.move(board.getChessPoint(board.getAIChess(chooseChess)),downPoint);
+            dest=board.getCanmovepoints(board.getChessPoint(board.getAIChess(chooseChess))).get(1);
+            if(board.canEat(src,dest)){
+                board.eat(src,dest);
+                LastAction=true;
+            }
+            else{
+                board.move(src,dest);
+                LastAction=false;
+            }
         }
-        else if(chooseStep==3&&board.canMove(board.getChessPoint(board.getAIChess(chooseChess)),leftPoint)){
+        else if(chooseStep==2&&board.canMove(board.getChessPoint(board.getAIChess(chooseChess)),board.getCanmovepoints(board.getChessPoint(board.getAIChess(chooseChess))).get(2))){
             src=board.getChessPoint(board.getAIChess(chooseChess));
-            dest=leftPoint;
-            board.move(board.getChessPoint(board.getAIChess(chooseChess)),leftPoint);
+            dest=board.getCanmovepoints(board.getChessPoint(board.getAIChess(chooseChess))).get(2);
+            if(board.canEat(src,dest)){
+                board.eat(src,dest);
+                LastAction=true;
+            }
+            else{
+                board.move(src,dest);
+                LastAction=false;
+            }
         }
-        else if(chooseStep==4&&board.canMove(board.getChessPoint(board.getAIChess(chooseChess)),rightPoint)){
+        else if(chooseStep==3&&board.canMove(board.getChessPoint(board.getAIChess(chooseChess)),board.getCanmovepoints(board.getChessPoint(board.getAIChess(chooseChess))).get(3))){
             src=board.getChessPoint(board.getAIChess(chooseChess));
-            dest=rightPoint;
-            board.move(board.getChessPoint(board.getAIChess(chooseChess)),rightPoint);
+            dest=board.getCanmovepoints(board.getChessPoint(board.getAIChess(chooseChess))).get(3);
+            if(board.canEat(src,dest)){
+                board.eat(src,dest);
+                LastAction=true;
+            }
+            else{
+                board.move(src,dest);
+                LastAction=false;
+            }
         }
-        return board;
     }
 }

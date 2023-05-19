@@ -183,7 +183,7 @@ public class Board {
                     list.add(dest);
                 }
             }
-            if(src.getRow()!=8){
+            if(src.getCol()!=8){
                 BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()+1);
                 if(grid[src.getRow()][src.getCol()+1].chess!=null){
                     if(!isRiver(src)){
@@ -216,7 +216,7 @@ public class Board {
                 }
                 else if(isRiver(dest)){
                     if(grid[src.getRow()-1][src.getCol()].chess!=null||grid[src.getRow()-2][src.getCol()].chess!=null){}
-                    else if(grid[src.getRow()-3][src.getCol()].chess!=null&&grid[src.getRow()-3][src.getCol()].chess.rank>getChessAt(src).rank){}
+                    else if(grid[src.getRow()-3][src.getCol()].chess!=null&&(grid[src.getRow()-3][src.getCol()].chess.rank>getChessAt(src).rank||grid[src.getRow()-3][src.getCol()].chess.getPlayer()==getChessPlayer(src))){}
                     else{
                         BoardPoint overRiver=new BoardPoint(src.getRow()-3,src.getCol());
                         list.add(overRiver);
@@ -238,7 +238,7 @@ public class Board {
                 }
                 else if(isRiver(dest)){
                     if(grid[src.getRow()+1][src.getCol()].chess!=null||grid[src.getRow()+2][src.getCol()].chess!=null){}
-                    else if(grid[src.getRow()+3][src.getCol()].chess!=null&&grid[src.getRow()+3][src.getCol()].chess.rank>getChessAt(src).rank){}
+                    else if(grid[src.getRow()+3][src.getCol()].chess!=null&&(grid[src.getRow()+3][src.getCol()].chess.rank>getChessAt(src).rank||grid[src.getRow()+3][src.getCol()].chess.getPlayer()==getChessPlayer(src))){}
                     else{
                         BoardPoint overRiver=new BoardPoint(src.getRow()+3,src.getCol());
                         list.add(overRiver);
@@ -260,7 +260,7 @@ public class Board {
                 }
                 else if(isRiver(dest)){
                     if(grid[src.getRow()][src.getCol()-1].chess!=null||grid[src.getRow()][src.getCol()-2].chess!=null||grid[src.getRow()][src.getCol()-3].chess!=null){}
-                    else if(grid[src.getRow()][src.getCol()-4].chess!=null&&grid[src.getRow()][src.getCol()-4].chess.rank>getChessAt(src).rank){}
+                    else if(grid[src.getRow()][src.getCol()-4].chess!=null&&(grid[src.getRow()][src.getCol()-4].chess.rank>getChessAt(src).rank||grid[src.getRow()][src.getCol()-4].chess.getPlayer()==getChessPlayer(src))){}
                     else{
                         BoardPoint overRiver=new BoardPoint(src.getRow(),src.getCol()-4);
                         list.add(overRiver);
@@ -282,7 +282,7 @@ public class Board {
                 }
                 else if(isRiver(dest)){
                     if(grid[src.getRow()][src.getCol()+1].chess!=null||grid[src.getRow()][src.getCol()+2].chess!=null||grid[src.getRow()][src.getCol()+3].chess!=null){}
-                    else if(grid[src.getRow()][src.getCol()+4].chess!=null&&grid[src.getRow()][src.getCol()+4].chess.rank>getChessAt(src).rank){}
+                    else if(grid[src.getRow()][src.getCol()+4].chess!=null&&(grid[src.getRow()][src.getCol()+4].chess.rank>getChessAt(src).rank||grid[src.getRow()][src.getCol()+4].chess.getPlayer()==getChessPlayer(src))){}
                     else{
                         BoardPoint overRiver=new BoardPoint(src.getRow(),src.getCol()+4);
                         list.add(overRiver);
@@ -493,11 +493,11 @@ public class Board {
         if(rank==5&&getChessPoint(RedLeopard)!=null&&getCanmovepoints(getChessPoint(RedLeopard))!=null){
             AIChess=RedLeopard;
         }
-        if(rank==6&&getChessPoint(RedLion)!=null&&getCanmovepoints(getChessPoint(RedLion))!=null){
-            AIChess=RedLion;
-        }
-        if(rank==7&&getChessPoint(RedTiger)!=null&&getCanmovepoints(getChessPoint(RedTiger))!=null){
+        if(rank==6&&getChessPoint(RedTiger)!=null&&getCanmovepoints(getChessPoint(RedTiger))!=null){
             AIChess=RedTiger;
+        }
+        if(rank==7&&getChessPoint(RedLion)!=null&&getCanmovepoints(getChessPoint(RedLion))!=null){
+            AIChess=RedLion;
         }
         if(rank==8&&getChessPoint(RedElephant)!=null&&getCanmovepoints(getChessPoint(RedElephant))!=null){
             AIChess=RedElephant;
