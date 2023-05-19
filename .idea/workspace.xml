@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="Version6&#10;修改了新bug&#10;加入了AI，但具体功能还没实现">
+    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="完成了注册登录和分数展示的功能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/AI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/AI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/listener/GameListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/listener/GameListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +31,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2PSQB1ZCcKNuSJPZJAp7o95qQHb" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="false" id="Update" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -43,8 +41,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/惠普/IdeaProjects/practice1",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+    "last_opened_file_path": "D:/0JAVACOMMUNITY/0Javawork/Jungle"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -134,14 +131,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684153759325</updated>
     </task>
-    <task id="LOCAL-00008" summary="Version6&#10;修改了新bug&#10;加入了AI，但具体功能还没实现">
-      <created>1684425077340</created>
+    <task id="LOCAL-00008" summary="优化了frame和登录界面">
+      <created>1684281396475</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1684425077340</updated>
+      <updated>1684281396475</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="优化了游戏界面，新增了更换主题功能">
+      <created>1684370714273</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1684370714273</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -161,7 +165,8 @@
     <MESSAGE value="稳定1.0" />
     <MESSAGE value="Test0.1" />
     <MESSAGE value="2.0" />
-    <MESSAGE value="Version6&#10;修改了新bug&#10;加入了AI，但具体功能还没实现" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version6&#10;修改了新bug&#10;加入了AI，但具体功能还没实现" />
+    <MESSAGE value="优化了frame和登录界面" />
+    <MESSAGE value="优化了游戏界面，新增了更换主题功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化了游戏界面，新增了更换主题功能" />
   </component>
 </project>

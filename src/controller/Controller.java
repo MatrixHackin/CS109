@@ -1,16 +1,13 @@
 package controller;
-import java.util.Random;
 
 import model.*;
 import listener.GameListener;
-import view.AIFrame;
 import view.BoardView;
 import view.CellView;
 import view.chessView.AnimalView;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import view.GameFrame;
 
 public class Controller implements GameListener {
 
@@ -114,15 +111,15 @@ public class Controller implements GameListener {
                 boardView.repaint();
                 boardView.revalidate();
             }
-        } else if (selectedPoint.equals(point)) {
+        } else if (selectedPoint.getCol()== point.getCol()&&selectedPoint.getRow()== point.getRow()) {
             selectedPoint = null;
             canStepPoints = null;
             setAllCellsCanStepFalse();
             component.setSelected(false);
-            component.repaint();
-            component.revalidate();
             boardView.repaint();
             boardView.revalidate();
+            component.repaint();
+            component.revalidate();
             //放下棋子
         } else if (board.canEat(selectedPoint, point)) {
             board.eat(selectedPoint, point);
@@ -174,7 +171,7 @@ public class Controller implements GameListener {
         canStepPoints = null;
         board.initGrid();
         board.initPieces();
-        boardView.removeChessComponent();
+        boardView.removeAllChess();
         boardView.initiateChessComponent(board);
         currentPlayer = Player.BLUE;
         boardView.turnLabel.setBounds(930,120,100,100);
