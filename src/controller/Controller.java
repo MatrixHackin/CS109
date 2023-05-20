@@ -22,7 +22,7 @@ public class Controller implements GameListener {
     public boolean AI=false;
     public AI AIplayer=new AI();
     public AnimalView eaten;
-    public ArrayList<Board> steps=new ArrayList<>();
+    public ArrayList<Board> steps;
 
  //   public JLabel timeLabel;
     public static Timer timer;
@@ -35,6 +35,7 @@ public class Controller implements GameListener {
      //   timeLabel = boardView.timeLabel;
         isPlayback = false;
         skip = false;
+        this.steps=new ArrayList<>();
 
         boardView.setController(this);
         boardView.initiateChessComponent(board);
@@ -186,7 +187,7 @@ public class Controller implements GameListener {
         selectedPoint = null;
         setAllCellsCanStepFalse();
       //  boardView.statusLabel.setText("Turn 1: BLUE");
-        board.steps = new ArrayList<>();
+        steps.clear();
         boardView.repaint();
         boardView.revalidate();
         winner = null;

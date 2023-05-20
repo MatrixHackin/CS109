@@ -211,7 +211,7 @@ public class Board {
             //狮子老虎的Move判断//
             if(src.getRow()!=0){
                 BoardPoint dest=new BoardPoint(src.getRow()-1,src.getCol());
-                if(grid[src.getRow()-1][src.getCol()].chess!=null){
+                if(grid[src.getRow()-1][src.getCol()].chess!=null&&!isRiver(dest)){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
                         if(grid[src.getRow()-1][src.getCol()].chess.rank<=getChessAt(src).rank){
                             list.add(dest);
@@ -233,7 +233,7 @@ public class Board {
             }
             if(src.getRow()!=6){
                 BoardPoint dest=new BoardPoint(src.getRow()+1,src.getCol());
-                if(grid[src.getRow()+1][src.getCol()].chess!=null){
+                if(grid[src.getRow()+1][src.getCol()].chess!=null&&!isRiver(dest)){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
                         if(grid[src.getRow()+1][src.getCol()].chess.rank<=getChessAt(src).rank){
                             list.add(dest);
@@ -255,7 +255,7 @@ public class Board {
             }
             if(src.getCol()!=0){
                 BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()-1);
-                if(grid[src.getRow()][src.getCol()-1].chess!=null){
+                if(grid[src.getRow()][src.getCol()-1].chess!=null&&!isRiver(dest)){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
                         if(grid[src.getRow()][src.getCol()-1].chess.rank<=getChessAt(src).rank){
                             list.add(dest);
@@ -277,7 +277,7 @@ public class Board {
             }
             if(src.getCol()!=8){
                 BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()+1);
-                if(grid[src.getRow()][src.getCol()+1].chess!=null){
+                if(grid[src.getRow()][src.getCol()+1].chess!=null&&!isRiver(dest)){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
                         if(grid[src.getRow()][src.getCol()+1].chess.rank<=getChessAt(src).rank){
                             list.add(dest);
@@ -302,7 +302,7 @@ public class Board {
             //其他动物的Move判断//
             if(src.getRow()!=0){
                 BoardPoint dest=new BoardPoint(src.getRow()-1,src.getCol());
-                if(grid[src.getRow()-1][src.getCol()].chess!=null){
+                if(grid[src.getRow()-1][src.getCol()].chess!=null&&!isRiver(dest)){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
                         if(grid[src.getRow()-1][src.getCol()].chess.rank==1&&getChessAt(src).rank==8){}
                         else {
@@ -319,7 +319,7 @@ public class Board {
             }
             if(src.getRow()!=6){
                 BoardPoint dest=new BoardPoint(src.getRow()+1,src.getCol());
-                if(grid[src.getRow()+1][src.getCol()].chess!=null){
+                if(grid[src.getRow()+1][src.getCol()].chess!=null&&!isRiver(dest)){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
                         if(grid[src.getRow()+1][src.getCol()].chess.rank==1&&getChessAt(src).rank==8){}
                         else {
@@ -336,7 +336,7 @@ public class Board {
             }
             if(src.getCol()!=0){
                 BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()-1);
-                if(grid[src.getRow()][src.getCol()-1].chess!=null){
+                if(grid[src.getRow()][src.getCol()-1].chess!=null&&!isRiver(dest)){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
                         if(grid[src.getRow()][src.getCol()-1].chess.rank==1&&getChessAt(src).rank==8){}
                         else {
@@ -353,7 +353,7 @@ public class Board {
             }
             if(src.getCol()!=8){
                 BoardPoint dest=new BoardPoint(src.getRow(),src.getCol()+1);
-                if(grid[src.getRow()][src.getCol()+1].chess!=null){
+                if(grid[src.getRow()][src.getCol()+1].chess!=null&&!isRiver(dest)){
                     if(getChessPlayer(dest)!=getChessPlayer(src)){
                         if(grid[src.getRow()][src.getCol()+1].chess.rank==1&&getChessAt(src).rank==8){}
                         else {
@@ -531,6 +531,12 @@ public class Board {
             Chess defender=steps.get(steps.size()-1).eated;
             setChess(steps.get(steps.size()-1).src,attacker);
             setChess(steps.get(steps.size()-1).dest,defender);
+            if(steps.get(steps.size()-1).eated.getPlayer()==Player.BLUE){
+                blueDead.remove(blueDead.size()-1);
+            }
+            else{
+                redDead.remove(redDead.size()-1);
+            }
         }
     }
     public void regret(Boolean AI){
