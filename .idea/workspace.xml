@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="完成了注册登录和分数展示的功能" />
+    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="Version8&#10;修改了新bug&#10;实现了悔棋功能">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684370714273</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Version8&#10;修改了新bug&#10;实现了悔棋功能">
+      <created>1684566038589</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1684566038589</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -163,6 +175,7 @@
     <MESSAGE value="2.0" />
     <MESSAGE value="优化了frame和登录界面" />
     <MESSAGE value="优化了游戏界面，新增了更换主题功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化了游戏界面，新增了更换主题功能" />
+    <MESSAGE value="Version8&#10;修改了新bug&#10;实现了悔棋功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version8&#10;修改了新bug&#10;实现了悔棋功能" />
   </component>
 </project>

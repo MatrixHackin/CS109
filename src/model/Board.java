@@ -533,5 +533,30 @@ public class Board {
             setChess(steps.get(steps.size()-1).dest,defender);
         }
     }
+    public void regret(Boolean AI){
+        if(steps.get(steps.size()-2).ismove){
+            if(isOpponentTrap(steps.get(steps.size()-2).src,getChessPlayer(steps.get(steps.size()-2).dest))){
+                setChess(steps.get(steps.size()-2).src, getChessAt(steps.get(steps.size()-2).dest));
+                removeChess(steps.get(steps.size()-2).dest);
+                getChessAt(steps.get(steps.size()-2).src).setRank(0);
+            }
+            else if(isOpponentTrap(steps.get(steps.size()-2).dest,getChessPlayer(steps.get(steps.size()-2).dest))){
+                getChessAt(steps.get(steps.size()-2).dest).setRank(getChessAt(steps.get(steps.size()-2).dest).getFinalRank());
+                setChess(steps.get(steps.size()-2).src, getChessAt(steps.get(steps.size()-2).dest));
+                removeChess(steps.get(steps.size()-2).dest);
+            }
+            else{
+                setChess(steps.get(steps.size()-2).src, getChessAt(steps.get(steps.size()-2).dest));
+                removeChess(steps.get(steps.size()-2).dest);
+            }
+        }
+        else{
+            removeChess(steps.get(steps.size()-2).dest);
+            Chess attacker=steps.get(steps.size()-2).eater;
+            Chess defender=steps.get(steps.size()-2).eated;
+            setChess(steps.get(steps.size()-2).src,attacker);
+            setChess(steps.get(steps.size()-2).dest,defender);
+        }
+    }
 
 }

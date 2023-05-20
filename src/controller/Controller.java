@@ -21,6 +21,8 @@ public class Controller implements GameListener {
     public boolean skip;
     public boolean AI=false;
     public AI AIplayer=new AI();
+    public AnimalView eaten;
+    public ArrayList<Board> steps=new ArrayList<>();
 
  //   public JLabel timeLabel;
     public static Timer timer;
@@ -73,6 +75,7 @@ public class Controller implements GameListener {
                 canStepPoints = null;
                 boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
                 selectedPoint=null;
+                steps.add(board);
                 checkWin(point);
                 if(winner!=null){}
                 else{
@@ -83,10 +86,12 @@ public class Controller implements GameListener {
                     AIplayer.EasyAI(board);
                     if(!AIplayer.LastAction){
                         boardView.setChessViewAtCell(AIplayer.dest,boardView.removeChessViewAtGrid(AIplayer.src));
+                        steps.add(board);
                     }
                     else{
                         boardView.removeChessViewAtGrid(AIplayer.dest);
                         boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));
+                        steps.add(board);
                     }
                 }
                 boardView.repaint();
@@ -123,10 +128,11 @@ public class Controller implements GameListener {
             //放下棋子
         } else if (board.canEat(selectedPoint, point)) {
             board.eat(selectedPoint, point);
-            boardView.removeChessViewAtGrid(point);
+            eaten=boardView.removeChessViewAtGrid(point);
             boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
             selectedPoint = null;
             setAllCellsCanStepFalse();
+            steps.add(board);
             checkWin(point);
             if(winner!=null){}
             else{
@@ -137,10 +143,12 @@ public class Controller implements GameListener {
                 AIplayer.EasyAI(board);
                 if(!AIplayer.LastAction){
                     boardView.setChessViewAtCell(AIplayer.dest,boardView.removeChessViewAtGrid(AIplayer.src));
+                    steps.add(board);
                 }
                 else{
                     boardView.removeChessViewAtGrid(AIplayer.dest);
                     boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));
+                    steps.add(board);
                 }
             }
             boardView.repaint();
@@ -189,27 +197,40 @@ public class Controller implements GameListener {
     }
 
     public void regretOneStep() {
-        board.steps.remove(board.steps.size() - 1);
-        ArrayList<Step> list = board.steps;
-        reset();
-        for (int i = 0; i < list.size(); i++) {
-            Step step = list.get(i);
-            BoardPoint src = step.src;
-            BoardPoint dest = step.dest;
-            boolean isCapture = step.captured != null;
-            if (!isCapture) {
-                board.move(src, dest);
-                boardView.setChessViewAtCell(dest, boardView.removeChessViewAtGrid(src));
-                selectedPoint = null;
+        if(!AI){
+            if(steps.size()==1){
+                reset();
+            }
+            else{
+                board.regret();
                 changePlayer();
-                boardView.repaint();
-            } else {
-                board.eat(src, dest);
-                boardView.removeChessViewAtGrid(dest);
-                boardView.setChessViewAtCell(dest, boardView.removeChessViewAtGrid(src));
-                changePlayer();
-                boardView.repaint();
-                boardView.revalidate();
+                if(board.steps.get(steps.size()-1).ismove){
+                    boardView.setChessViewAtCell(board.steps.get(board.steps.size()-1).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size()-1).dest));
+                }
+                else{
+                    boardView.setChessViewAtCell(board.steps.get(board.steps.size()-1).src,boardView.removeChessViewAtGrid(board.steps.get(board.steps.size()-1).dest));
+                    boardView.setChessViewAtCell(board.steps.get(board.steps.size()-1).dest,eaten);
+                }
+            }
+        }
+       else{
+            board.regret();
+            changePlayer();
+            if(board.steps.get(steps.size()-1).ismove){
+                boardView.setChessViewAtCell(board.steps.get(board.steps.size()-1).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size()-1).dest));
+            }
+            else{
+                boardView.setChessViewAtCell(board.steps.get(board.steps.size()-1).src,boardView.removeChessViewAtGrid(board.steps.get(board.steps.size()-1).dest));
+                boardView.setChessViewAtCell(board.steps.get(board.steps.size()-1).dest,eaten);
+            }
+           board.regret(AI);
+            changePlayer();
+            if(board.steps.get(steps.size()-2).ismove){
+                boardView.setChessViewAtCell(board.steps.get(board.steps.size()-2).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size()-2).dest));
+            }
+            else{
+                boardView.setChessViewAtCell(board.steps.get(board.steps.size()-2).src,boardView.removeChessViewAtGrid(board.steps.get(board.steps.size()-2).dest));
+                boardView.setChessViewAtCell(board.steps.get(board.steps.size()-2).dest,eaten);
             }
         }
     }
