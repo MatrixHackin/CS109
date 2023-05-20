@@ -76,7 +76,7 @@ public class BoardView extends JPanel {
         }
     }
 
-    public void removeChessComponent() {
+    public void removeAllChess() {
         for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
                 try {

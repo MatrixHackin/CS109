@@ -8,7 +8,6 @@ public interface GameListener {
 
     void clickCell(BoardPoint point, CellView component);
 
-
     void clickChess(BoardPoint point, AnimalView component);
 
 }

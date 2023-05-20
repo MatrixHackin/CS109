@@ -1,6 +1,8 @@
 package view;
 
+import model.BGM;
 import model.Board;
+import model.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,15 +20,16 @@ public class GameFrame extends MyFrame {
     AIFrame aiFrame=new AIFrame();
     TurnLabel turnLabel=new TurnLabel();
     JLabel timeLabel;
-    JLabel background;
     JLabel dayBG;
     JLabel nightBG;
     public boolean isDay;
+    public boolean musicOn;
     public GameFrame() {
         super(1000,700);
 
         this.ONE_CHESS_SIZE = 80;
         isDay = true;
+        musicOn=true;
 
         addChessboard();
         addTurnLable();
@@ -75,7 +78,14 @@ public class GameFrame extends MyFrame {
         this.resetButton=new GameButton("resource/icon/reset.png");
         resetButton.setLocation(930,420);
         resetButton.addActionListener((e)->{
-            boardView.controller.reset();
+            boardView.controller.board.initPieces();
+            boardView.controller.currentPlayer= Player.BLUE;
+            turnLabel.setBounds(930,120,100,100);
+            boardView.removeAllChess();
+            this.turnLabel.revalidate();
+            boardView.initiateChessComponent(boardView.controller.board);
+            boardView.repaint();
+            boardView.revalidate();
         });
         add(resetButton);
     }
@@ -83,6 +93,21 @@ public class GameFrame extends MyFrame {
         this.musicButton=new GameButton("resource/icon/sound-full-icon.png");
         musicButton.setLocation(930,490);
         musicButton.addActionListener((e)->{
+            Image image = new ImageIcon("resource/icon/sound-off-icon.png").getImage();
+            image = image.getScaledInstance( 40,40, Image.SCALE_DEFAULT);
+            ImageIcon icon = new ImageIcon(image);
+            Image image1 = new ImageIcon("resource/icon/sound-full-icon.png").getImage();
+            image1 = image1.getScaledInstance( 40,40, Image.SCALE_DEFAULT);
+            ImageIcon icon1 = new ImageIcon(image1);
+            if(musicOn){
+                musicButton.setIcon(icon);
+                musicOn=false;
+            }
+            else {
+                musicButton.setIcon(icon1);
+                musicOn=true;
+            }
+
 
         });
         add(musicButton);
@@ -90,9 +115,6 @@ public class GameFrame extends MyFrame {
     private void addRegretButton(){
         this.regretButton=new GameButton("resource/icon/round-line-left-arrow-icon.png");
         regretButton.setLocation(930,560);
-        regretButton.addActionListener((e)->{
-            boardView.controller.regretOneStep();
-        });
         add(regretButton);
     }
     private void addHomeButton(){

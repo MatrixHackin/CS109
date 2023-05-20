@@ -1,10 +1,12 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class SettingFrame extends MyFrame {
     BeginFrame beginFrame;
+    JCheckBox checkBox;
     public SettingFrame()  {
         super(800,600);
 
@@ -15,6 +17,7 @@ public class SettingFrame extends MyFrame {
 
     }
 
+
     private void addBackButton(){
         JButton backButton=new HomeButton("Back",300,500);
         backButton.addActionListener((e) -> {
@@ -23,4 +26,5 @@ public class SettingFrame extends MyFrame {
         });
         add(backButton);
     }
+
 }
