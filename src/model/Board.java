@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Board {
     public Cell[][] grid;
-    public ArrayList<Step> steps;
+    public ArrayList<Step> steps=new ArrayList<>();
     public ArrayList<Chess> blueDead;
     public ArrayList<Chess> redDead;
     Chess  BlueRat=new Chess(Player.BLUE,1);
@@ -26,7 +26,6 @@ public class Board {
     Chess  RedElephant=new Chess(Player.RED,8);
     public Board() {
         this.grid = new Cell[7][9];
-        steps = new ArrayList<>();
         blueDead = new ArrayList<>();
         redDead = new ArrayList<>();
 
@@ -107,20 +106,25 @@ public class Board {
     }
     public void move(BoardPoint src, BoardPoint dest) {
         if(isOpponentTrap(dest,getChessPlayer(src))){
+            Step step=new Step(src,dest,getChessAt(src));
+            steps.add(step);
             setChess(dest, getChessAt(src));
             removeChess(src);
             getChessAt(dest).setRank(0);
         }
         else if(isOpponentTrap(src,getChessPlayer(src))&&!isOpponentTrap(dest,getChessPlayer(src))){
+            Step step=new Step(src,dest,getChessAt(src));
+            steps.add(step);
             getChessAt(src).setRank(getChessAt(src).getFinalRank());
             setChess(dest, getChessAt(src));
             removeChess(src);
         }
         else{
+            Step step=new Step(src,dest,getChessAt(src));
+            steps.add(step);
             setChess(dest, getChessAt(src));
             removeChess(src);
         }
-            //Steps之后再写//
     }
     public ArrayList<BoardPoint> getCanmovepoints(BoardPoint src){
         ArrayList<BoardPoint> list=new ArrayList<BoardPoint>();
@@ -394,7 +398,6 @@ public class Board {
         else{
             return false;
         }
-        //空的判断，只能吃对方的，判断rank，判断可走性（比如河）//
     }
     public boolean isRiver(BoardPoint point) {
         if(((point.getRow()==1||point.getRow()==2||point.getRow()==4||point.getRow()==5)&&(point.getCol()==3||point.getCol()==4||point.getCol()==5))){
@@ -431,9 +434,10 @@ public class Board {
                     redDead.add(defender);
                 }
             }
-          //Steps//
+            Step step=new Step(src,dest,defender,attacker);
+            step.ismove=false;
+            steps.add(step);
         }
-        //判断能不能吃，吃，记录死了的棋子放在list里面，记录step//
     }
     public boolean isOwnDens(BoardPoint point, Player color) {
         if((color==Player.BLUE&&point.getRow()==3&&point.getCol()==8)||(color==Player.RED&&point.getRow()==3&&point.getCol()==0)){
@@ -503,6 +507,31 @@ public class Board {
             AIChess=RedElephant;
         }
         return AIChess;
+    }
+    public void regret(){
+        if(steps.get(steps.size()-1).ismove){
+            if(isOpponentTrap(steps.get(steps.size()-1).src,getChessPlayer(steps.get(steps.size()-1).dest))){
+                setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
+                removeChess(steps.get(steps.size()-1).dest);
+                getChessAt(steps.get(steps.size()-1).src).setRank(0);
+            }
+            else if(isOpponentTrap(steps.get(steps.size()-1).dest,getChessPlayer(steps.get(steps.size()-1).dest))){
+                getChessAt(steps.get(steps.size()-1).dest).setRank(getChessAt(steps.get(steps.size()-1).dest).getFinalRank());
+                setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
+                removeChess(steps.get(steps.size()-1).dest);
+            }
+            else{
+                setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
+                removeChess(steps.get(steps.size()-1).dest);
+            }
+        }
+        else{
+            removeChess(steps.get(steps.size()-1).dest);
+            Chess attacker=steps.get(steps.size()-1).eater;
+            Chess defender=steps.get(steps.size()-1).eated;
+            setChess(steps.get(steps.size()-1).src,attacker);
+            setChess(steps.get(steps.size()-1).dest,defender);
+        }
     }
 
 }

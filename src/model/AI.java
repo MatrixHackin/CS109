@@ -12,7 +12,6 @@ public class AI {
         int chooseChess=random.nextInt(1,8);
         int chooseStep= random.nextInt(0,3);
         while(board.getAIChess(chooseChess)==null||board.getCanmovepoints(board.getChessPoint(board.getAIChess(chooseChess))).size()<=chooseStep){
-            System.out.println(233);
             chooseChess=random.nextInt(1,8);
             chooseStep=random.nextInt(0,3);
         }

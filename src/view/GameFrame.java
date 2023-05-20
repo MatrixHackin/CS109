@@ -75,7 +75,7 @@ public class GameFrame extends MyFrame {
         this.resetButton=new GameButton("resource/icon/reset.png");
         resetButton.setLocation(930,420);
         resetButton.addActionListener((e)->{
-
+            boardView.controller.reset();
         });
         add(resetButton);
     }
@@ -90,6 +90,9 @@ public class GameFrame extends MyFrame {
     private void addRegretButton(){
         this.regretButton=new GameButton("resource/icon/round-line-left-arrow-icon.png");
         regretButton.setLocation(930,560);
+        regretButton.addActionListener((e)->{
+            boardView.controller.regretOneStep();
+        });
         add(regretButton);
     }
     private void addHomeButton(){

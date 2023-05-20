@@ -43,7 +43,6 @@ public class BoardView extends JPanel {
         Cell[][] grid = board.getGrid();
         for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
-
                 if (grid[i][j].getChess() != null) {
                     Chess chess = grid[i][j].getChess();
                     //System.out.println(chess.getOwner());
