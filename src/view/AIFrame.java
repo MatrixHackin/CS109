@@ -11,17 +11,23 @@ public class AIFrame extends MyFrame{
     JButton beginButton;
     JButton backButton;
     GameFrame gameFrame;
+    JComboBox comboBox;
 
     public AIFrame(){
         super(498,280);
 
         addBeginButton();
         addBackButton();
+        addDifficultyChooser();
 
         this.setBackground("resource/registerframe.gif");
     }
     private void addDifficultyChooser(){
-
+        this.comboBox=new JComboBox();
+        comboBox.addItem("--please choose one--");
+        comboBox.addItem("easy");
+        comboBox.addItem("difficult");
+        add(comboBox);
     }
     private void addWelcomeLabel(){
         this.welcomeLabel=new JLabel();

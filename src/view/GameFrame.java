@@ -1,9 +1,5 @@
 package view;
 
-import model.BGM;
-import model.Board;
-import model.Player;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,6 +15,7 @@ public class GameFrame extends MyFrame {
     JButton resetButton;
     JButton saveButton;
     AIFrame aiFrame=new AIFrame();
+    JFrame loadFrame;
     TurnLabel turnLabel=new TurnLabel();
     JLabel timeLabel;
     JLabel dayBG;
@@ -84,7 +81,7 @@ public class GameFrame extends MyFrame {
         this.saveButton=new GameButton("resource/icon/save-44.png");
         saveButton.setLocation(930,280);
         saveButton.addActionListener((e)->{
-
+            this.loadFrame.setVisible(true);
         });
         add(saveButton);
     }

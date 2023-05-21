@@ -11,6 +11,7 @@ public class BeginFrame extends MyFrame{
     GameFrame gameFrame;
     LoginFrame loginFrame;
     SettingFrame settingFrame;
+    LoadFrame loadFrame;
     InstructionFrame instructionFrame;
     ScoreBoardFrame scoreBoardFrame;
     JLabel titleLabel1 = new JLabel("JUNGLE  CHESS");
@@ -19,14 +20,20 @@ public class BeginFrame extends MyFrame{
     JButton instructionButton;
     JButton loginButton;
     JButton boardButton;
+    JButton loadButton;
 
     public BeginFrame() throws FileNotFoundException {
         super(1000,500);
 
         GameFrame gameFrame = new GameFrame();
         Controller controller = new Controller(gameFrame.getBoardView(), new Board());
-        this.gameFrame = gameFrame;
         gameFrame.beginFrame = this;
+        this.gameFrame = gameFrame;
+
+
+        LoadFrame loadFrame=new LoadFrame();
+        this.loadFrame=loadFrame;
+        loadFrame.beginFrame=this;
 
         ScoreBoardFrame scoreBoardFrame =new ScoreBoardFrame();
         this.scoreBoardFrame = scoreBoardFrame;
@@ -50,7 +57,15 @@ public class BeginFrame extends MyFrame{
         addLoginButton();
         addInstructionButton();
         addBoardButton();
+        addLoadButton();
         this.setBackground("resource/background.gif");
+    }
+    private void addLoadButton(){
+        this.loadButton=new HomeButton("Load",700,250);
+        loadButton.addActionListener((e)->{
+            loadFrame.setVisible(true);
+        });
+        add(loadButton);
     }
     private void addBoardButton(){
         this.boardButton=new HomeButton("Board",400,250);

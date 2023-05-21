@@ -165,11 +165,11 @@ public class Controller implements GameListener {
                         boardView.redDeadPanel.add(r2.getLabel());
                     }
                     case 3 -> {
-                        DeadChessView r3 = new DeadChessView("resource/animals/left/grey/4.png");
+                        DeadChessView r3 = new DeadChessView("resource/animals/left/grey/3.png");
                         boardView.redDeadPanel.add(r3.getLabel());
                     }
                     case 4 -> {
-                        DeadChessView r4 = new DeadChessView("resource/animals/left/grey/3.png");
+                        DeadChessView r4 = new DeadChessView("resource/animals/left/grey/4.png");
                         boardView.redDeadPanel.add(r4.getLabel());
                     }
                     case 5 -> {
@@ -203,11 +203,11 @@ public class Controller implements GameListener {
                         boardView.blueDeadPanel.add(r2.getLabel());
                     }
                     case 3 -> {
-                        DeadChessView r3 = new DeadChessView("resource/animals/right/grey/4.png");
+                        DeadChessView r3 = new DeadChessView("resource/animals/right/grey/3.png");
                         boardView.blueDeadPanel.add(r3.getLabel());
                     }
                     case 4 -> {
-                        DeadChessView r4 = new DeadChessView("resource/animals/right/grey/3.png");
+                        DeadChessView r4 = new DeadChessView("resource/animals/right/grey/4.png");
                         boardView.blueDeadPanel.add(r4.getLabel());
                     }
                     case 5 -> {
