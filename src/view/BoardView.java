@@ -8,6 +8,8 @@ import view.chessView.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +27,8 @@ public class BoardView extends JPanel {
     public Controller controller;
     public TurnLabel turnLabel;
     public JLabel timeLabel;
+    public Timer timer;
+    public int count =20;
     public JPanel redDeadPanel;
     public JPanel blueDeadPanel;
     public BoardView(int chessSize,TurnLabel turnLabel, JLabel timeLabel) {
@@ -38,8 +42,34 @@ public class BoardView extends JPanel {
         setLayout(null);
         setSize(width, height);
         initiateGridComponents();
+        addTimer();
 
     }
+    private void addTimer(){
+        this.timer=new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(count==0){
+                    timer.stop();
+                    count=20;
+                    timeLabel.setText(Integer.toString(count));
+                    timer.start();
+                    if(controller.currentPlayer==Player.BLUE){
+                        timeLabel.setLocation(30,25);
+                    }
+                    else {
+                        timeLabel.setLocation(920,25);
+                    }
+                    controller.changePlayer();
+                }
+                else {
+                    count--;
+                    timeLabel.setText(Integer.toString(count));
+                }
+            }
+        });
+    }
+
 
     public void initiateChessComponent(Board board) {
         Cell[][] grid = board.getGrid();

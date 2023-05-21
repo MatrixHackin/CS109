@@ -27,7 +27,6 @@ public class Controller implements GameListener {
     public ArrayList<Board> steps;
     public GameFrame gameFrame;
 
-    //   public JLabel timeLabel;
     public static Timer timer;
 
     public Controller(BoardView boardView, Board board) {
@@ -35,7 +34,6 @@ public class Controller implements GameListener {
         this.board = board;
         this.currentPlayer = Player.BLUE;
         this.winner = null;
-        //   timeLabel = boardView.timeLabel;
         isPlayback = false;
         skip = false;
         this.steps = new ArrayList<>();
@@ -80,8 +78,20 @@ public class Controller implements GameListener {
                 steps.add(board);
                 checkWin(point);
                 if (winner != null) {
+                    winView();
+                    reset();
                 } else {
-                    changePlayer();
+                    boardView.timer.stop();
+                    boardView.count=20;
+                    boardView.timeLabel.setText(Integer.toString(boardView.count));
+                    boardView.timer.start();
+                    if(boardView.controller.currentPlayer==Player.BLUE){
+                        boardView.timeLabel.setLocation(30,25);
+                    }
+                    else {
+                        boardView.timeLabel.setLocation(920,25);
+                    }
+                    boardView.controller.changePlayer();
                 }
                 if (AI) {
                     changePlayer();
@@ -99,10 +109,6 @@ public class Controller implements GameListener {
                 component.revalidate();
             }
             checkWin(point);
-            if (winner != null) {
-                winView();
-                reset();
-            }
         }
     }
 
@@ -139,6 +145,18 @@ public class Controller implements GameListener {
             if (winner != null) {
             } else {
                 changePlayer();
+                boardView.timer.stop();
+                boardView.count=20;
+                changePlayer();
+                boardView.timeLabel.setText(Integer.toString(boardView.count));
+                boardView.timer.start();
+                if(boardView.controller.currentPlayer==Player.BLUE){
+                    boardView.timeLabel.setLocation(30,25);
+                }
+                else {
+                    boardView.timeLabel.setLocation(920,25);
+                }
+                boardView.controller.changePlayer();
             }
             if (AI) {
                 changePlayer();
@@ -277,7 +295,7 @@ public class Controller implements GameListener {
         board.blueDead = new ArrayList<>();
         boardView.redDeadPanel.repaint();
         boardView.blueDeadPanel.repaint();
-        //timer.time = 45;
+
     }
 
     public void regretOneStep() {

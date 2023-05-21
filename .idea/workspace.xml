@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="尝试加多个存档但失败了，后续再看">
+    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="添加了倒计时功能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CellView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CellView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -180,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684640864562</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="添加了倒计时功能">
+      <created>1684646658263</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1684646658263</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,6 +214,7 @@
     <MESSAGE value="Version9&#10;修改了新bug&#10;实现了悔棋功能&#10;但是发现棋子如果在最下面一行的话悔棋过程的view就无法显示，其他地方的悔棋view都很正常，应该是前端的问题，你有时间看看吧" />
     <MESSAGE value="增加了展示死亡棋子的功能" />
     <MESSAGE value="尝试加多个存档但失败了，后续再看" />
-    <option name="LAST_COMMIT_MESSAGE" value="尝试加多个存档但失败了，后续再看" />
+    <MESSAGE value="添加了倒计时功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加了倒计时功能" />
   </component>
 </project>

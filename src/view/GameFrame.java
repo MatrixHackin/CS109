@@ -22,12 +22,11 @@ public class GameFrame extends MyFrame {
     AIFrame aiFrame=new AIFrame();
     JFrame loadFrame;
     TurnLabel turnLabel=new TurnLabel();
-    JLabel timeLabel;
+    public JLabel timeLabel=new JLabel();
     JLabel dayBG;
     JLabel nightBG;
     JPanel redDeadPanel;
     JPanel blueDeadPanel;
-    Timer timer;
     public boolean isDay;
     public boolean musicOn;
     public GameFrame() {
@@ -39,6 +38,7 @@ public class GameFrame extends MyFrame {
 
 
         addChessboard();
+        addTimeLabel();
         addTurnLable();
         addHomeButton();
         addRegretButton();
@@ -46,7 +46,6 @@ public class GameFrame extends MyFrame {
         addResetButton();
         addChangeThemeButton();
         addSaveButton();
-        addTimeLabel();
         addRedDeadPanel();
         addBlueDeadPanel();
 
@@ -75,33 +74,7 @@ public class GameFrame extends MyFrame {
     }
 
     private void addTimeLabel(){
-        int countDown=20;
-        this.timer=new Timer(1000, new ActionListener() {
-            int count =countDown;
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(count==0){
-                    timer.stop();
-                    count=countDown;
-                    timeLabel.setText(Integer.toString(count));
-                    timer.start();
-                    if(boardView.controller.currentPlayer==Player.BLUE){
-                        timeLabel.setLocation(30,25);
-                    }
-                    else {
-                        timeLabel.setLocation(920,25);
-                    }
-                    boardView.controller.changePlayer();
-
-                }
-                else {
-                    count--;
-                    timeLabel.setText(Integer.toString(count));
-                }
-            }
-        });
-        timer.start();
-        this.timeLabel=new TimeLabel();
+        boardView.timer.start();
         timeLabel.setSize(100,50);
         timeLabel.setLocation(920,25);
         timeLabel.setFont(new Font("Arial",Font.BOLD,50));
