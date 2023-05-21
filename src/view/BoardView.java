@@ -31,6 +31,7 @@ public class BoardView extends JPanel {
     public int count =20;
     public JPanel redDeadPanel;
     public JPanel blueDeadPanel;
+    User user;
     public BoardView(int chessSize,TurnLabel turnLabel, JLabel timeLabel) {
         this.timeLabel = timeLabel;
         this.turnLabel=turnLabel;
@@ -77,7 +78,6 @@ public class BoardView extends JPanel {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
                 if (grid[i][j].getChess() != null) {
                     Chess chess = grid[i][j].getChess();
-                    //System.out.println(chess.getOwner());
                     if (chess.getRank() == 8) {
                         gridViews[i][j].add(new ElephantView(chess.getPlayer(), CHESS_SIZE));
                     }

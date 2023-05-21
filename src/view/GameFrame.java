@@ -55,10 +55,6 @@ public class GameFrame extends MyFrame {
         addRedDeadPanel();
         addBlueDeadPanel();
 
-
-
-
-
         boardView.redDeadPanel=this.redDeadPanel;
         boardView.blueDeadPanel=this.blueDeadPanel;
 

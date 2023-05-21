@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class LoginFrame extends MyFrame {
     boolean isLogin;
-    public static User user;
+    User user=new User("Visitor","1",0);
     BeginFrame beginFrame;
     AIFrame aiFrame;
     JButton backButton;
@@ -153,6 +153,8 @@ public class LoginFrame extends MyFrame {
                 setVisible(false);
                 this.isLogin  = true;
                 user = nameAndUser.get(inputName);
+                aiFrame.setUser(user);
+                aiFrame.addWelcomeLabel();
                 this.setVisible(false);
             } else {  // 密码错误
                 JOptionPane.showMessageDialog(null, "Wrong password !", "Error", JOptionPane.ERROR_MESSAGE);

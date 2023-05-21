@@ -5,9 +5,10 @@ import model.Board;
 import model.User;
 
 import javax.swing.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class AIFrame extends MyFrame{
-    //JLabel welcomeLabel;
     LoginFrame loginFrame;
     JButton beginButton;
     JButton backButton;
@@ -16,23 +17,39 @@ public class AIFrame extends MyFrame{
 
     public AIFrame(){
         super(498,280);
-        this.user= LoginFrame.user;
 
         addBeginButton();
         addBackButton();
         addDifficultyChooser();
-        addWelcomeLabel();
 
         this.setBackground("resource/registerframe.gif");
     }
-    private void addWelcomeLabel(){
-        //String userName= LoginFrame.user.getName();
-       // this.welcomeLabel=new JLabel("Welcome "+userName+" !");
+    public void setUser(User user){
+        this.user=user;
+    }
+    public void addWelcomeLabel(){
+        String userName= user.getName();
+        JLabel welcomeLabel=new JLabel("Welcome "+userName+" !");
+        welcomeLabel.setLocation(50,50);
+        welcomeLabel.setSize(150,50);
+        this.add(welcomeLabel);
+        this.repaint();
+        this.revalidate();
     }
     private void addDifficultyChooser(){
         JComboBox<String> comboBox = new JComboBox<>(new String[]{"easy", "difficult"});
         comboBox.setLocation(100,120);
         comboBox.setSize(300,30);
+        comboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getItem().equals("easy")) {
+                    // easy AI
+                } else  {
+                    // difficult AI
+                }
+            }
+        });
         this.add(comboBox);
     }
     private void addBeginButton(){
