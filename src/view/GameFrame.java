@@ -1,7 +1,12 @@
 package view;
 
+import model.Player;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
 public class GameFrame extends MyFrame {
     public BeginFrame beginFrame;
@@ -22,6 +27,7 @@ public class GameFrame extends MyFrame {
     JLabel nightBG;
     JPanel redDeadPanel;
     JPanel blueDeadPanel;
+    Timer timer;
     public boolean isDay;
     public boolean musicOn;
     public GameFrame() {
@@ -31,6 +37,7 @@ public class GameFrame extends MyFrame {
         isDay = true;
         musicOn=true;
 
+
         addChessboard();
         addTurnLable();
         addHomeButton();
@@ -39,8 +46,13 @@ public class GameFrame extends MyFrame {
         addResetButton();
         addChangeThemeButton();
         addSaveButton();
+        addTimeLabel();
         addRedDeadPanel();
         addBlueDeadPanel();
+
+
+
+
 
         boardView.redDeadPanel=this.redDeadPanel;
         boardView.blueDeadPanel=this.blueDeadPanel;
@@ -60,6 +72,40 @@ public class GameFrame extends MyFrame {
         this.nightBG.setLocation(0,0);
 
         add(dayBG);
+    }
+
+    private void addTimeLabel(){
+        int countDown=20;
+        this.timer=new Timer(1000, new ActionListener() {
+            int count =countDown;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(count==0){
+                    timer.stop();
+                    count=countDown;
+                    timeLabel.setText(Integer.toString(count));
+                    timer.start();
+                    if(boardView.controller.currentPlayer==Player.BLUE){
+                        timeLabel.setLocation(30,25);
+                    }
+                    else {
+                        timeLabel.setLocation(920,25);
+                    }
+                    boardView.controller.changePlayer();
+
+                }
+                else {
+                    count--;
+                    timeLabel.setText(Integer.toString(count));
+                }
+            }
+        });
+        timer.start();
+        this.timeLabel=new TimeLabel();
+        timeLabel.setSize(100,50);
+        timeLabel.setLocation(920,25);
+        timeLabel.setFont(new Font("Arial",Font.BOLD,50));
+        add(timeLabel);
     }
     private void addBlueDeadPanel(){
         this.blueDeadPanel=new JPanel();

@@ -5,8 +5,6 @@ import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
 public class CellView extends JPanel {
-
-    public Color background;
     int size;
     public boolean canStep;
     public boolean mouseAt;
