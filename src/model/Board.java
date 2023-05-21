@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Board {
+public class Board implements Serializable {
     public Cell[][] grid;
     public ArrayList<Step> steps=new ArrayList<>();
     public ArrayList<Chess> blueDead;

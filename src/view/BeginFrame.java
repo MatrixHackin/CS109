@@ -63,7 +63,9 @@ public class BeginFrame extends MyFrame{
     private void addLoadButton(){
         this.loadButton=new HomeButton("Load",700,250);
         loadButton.addActionListener((e)->{
-            loadFrame.setVisible(true);
+            gameFrame.loadGame();
+            this.setVisible(false);
+            gameFrame.setVisible(true);
         });
         add(loadButton);
     }

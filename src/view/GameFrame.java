@@ -1,5 +1,6 @@
 package view;
 
+import model.Board;
 import model.Player;
 import model.User;
 
@@ -7,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 
 public class GameFrame extends MyFrame {
@@ -117,6 +121,12 @@ public class GameFrame extends MyFrame {
 
         add(dayBG);
     }
+    public void loadGame(){
+        boardView.removeAllChess();
+        boardView.initiateChessComponent(boardView.controller.load());
+        boardView.repaint();
+        boardView.revalidate();
+    }
 
     private void addTimeLabel(){
         boardView.timer.start();
@@ -145,7 +155,7 @@ public class GameFrame extends MyFrame {
         this.saveButton=new GameButton("resource/icon/save-44.png");
         saveButton.setLocation(930,280);
         saveButton.addActionListener((e)->{
-            this.loadFrame.setVisible(true);
+            boardView.controller.save();
         });
         add(saveButton);
     }

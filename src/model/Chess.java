@@ -1,7 +1,9 @@
 package model;
 
 
-public class Chess {
+import java.io.Serializable;
+
+public class Chess implements Serializable {
     private Player player;
     public int rank;
     private int FinalRank;

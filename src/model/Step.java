@@ -1,6 +1,8 @@
 package model;
 
-public class Step {
+import java.io.Serializable;
+
+public class Step implements Serializable {
     public BoardPoint src;
     public BoardPoint dest;
     public Boolean ismove;

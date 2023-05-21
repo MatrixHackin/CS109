@@ -1,6 +1,8 @@
 package model;
 
-public class BoardPoint {
+import java.io.Serializable;
+
+public class BoardPoint implements Serializable {
     private final int row;
     private final int col;
 

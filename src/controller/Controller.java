@@ -9,6 +9,7 @@ import view.chessView.AnimalView;
 import view.chessView.DeadChessView;
 
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Controller implements GameListener {
@@ -40,6 +41,31 @@ public class Controller implements GameListener {
         boardView.setController(this);
         boardView.initiateChessComponent(board);
         boardView.repaint();
+    }
+    public Board load(){
+        Board loadedBoard=new Board();
+        try {
+            FileInputStream fileIn = new FileInputStream("board/board.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+             loadedBoard= (Board) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return loadedBoard;
+    }
+    public void save(){
+        Board board=this.steps.get(boardView.controller.steps.size()-1);
+        try {
+            FileOutputStream fileOut = new FileOutputStream("board/board.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(board);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void changePlayer() {
