@@ -25,6 +25,8 @@ public class BoardView extends JPanel {
     public Controller controller;
     public TurnLabel turnLabel;
     public JLabel timeLabel;
+    public JPanel redDeadPanel;
+    public JPanel blueDeadPanel;
     public BoardView(int chessSize,TurnLabel turnLabel, JLabel timeLabel) {
         this.timeLabel = timeLabel;
         this.turnLabel=turnLabel;

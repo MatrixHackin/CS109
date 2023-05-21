@@ -17,11 +17,14 @@ public class GameFrame extends MyFrame {
     JButton regretButton;
     JButton musicButton;
     JButton resetButton;
+    JButton saveButton;
     AIFrame aiFrame=new AIFrame();
     TurnLabel turnLabel=new TurnLabel();
     JLabel timeLabel;
     JLabel dayBG;
     JLabel nightBG;
+    JPanel redDeadPanel;
+    JPanel blueDeadPanel;
     public boolean isDay;
     public boolean musicOn;
     public GameFrame() {
@@ -38,6 +41,12 @@ public class GameFrame extends MyFrame {
         addMusicButton();
         addResetButton();
         addChangeThemeButton();
+        addSaveButton();
+        addRedDeadPanel();
+        addBlueDeadPanel();
+
+        boardView.redDeadPanel=this.redDeadPanel;
+        boardView.blueDeadPanel=this.blueDeadPanel;
 
         Image image = new ImageIcon("resource/map.png").getImage();
         image = image.getScaledInstance(1000, 700, Image.SCALE_DEFAULT);
@@ -54,6 +63,30 @@ public class GameFrame extends MyFrame {
         this.nightBG.setLocation(0,0);
 
         add(dayBG);
+    }
+    private void addBlueDeadPanel(){
+        this.blueDeadPanel=new JPanel();
+        blueDeadPanel.setLayout(new GridLayout(2,4));
+        blueDeadPanel.setLocation(688,30);
+        blueDeadPanel.setSize(200,80);
+        blueDeadPanel.setOpaque(false);
+        add(blueDeadPanel);
+    }
+    private void addRedDeadPanel(){
+        this.redDeadPanel=new JPanel();
+        redDeadPanel.setLayout(new GridLayout(2,4));
+        redDeadPanel.setLocation(113,30);
+        redDeadPanel.setSize(200,80);
+        redDeadPanel.setOpaque(false);
+        add(redDeadPanel);
+    }
+    private void addSaveButton(){
+        this.saveButton=new GameButton("resource/icon/save-44.png");
+        saveButton.setLocation(930,280);
+        saveButton.addActionListener((e)->{
+
+        });
+        add(saveButton);
     }
     private void addChangeThemeButton(){
         this.changeThemeButton=new GameButton("resource/icon/changeTheme.png");
@@ -78,14 +111,7 @@ public class GameFrame extends MyFrame {
         this.resetButton=new GameButton("resource/icon/reset.png");
         resetButton.setLocation(930,420);
         resetButton.addActionListener((e)->{
-            boardView.controller.board.initPieces();
-            boardView.controller.currentPlayer= Player.BLUE;
-            turnLabel.setBounds(930,120,100,100);
-            boardView.removeAllChess();
-            this.turnLabel.revalidate();
-            boardView.initiateChessComponent(boardView.controller.board);
-            boardView.repaint();
-            boardView.revalidate();
+            boardView.controller.reset();
         });
         add(resetButton);
     }

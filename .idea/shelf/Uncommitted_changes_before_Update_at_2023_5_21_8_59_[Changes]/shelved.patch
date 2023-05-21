@@ -1,0 +1,208 @@
+Index: src/view/GameFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport model.BGM;\r\nimport model.Board;\r\nimport model.Player;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\n\r\npublic class GameFrame extends MyFrame {\r\n    public BeginFrame beginFrame;\r\n    private final int ONE_CHESS_SIZE;\r\n\r\n    private BoardView boardView;\r\n    JButton homeButton;\r\n    JButton changeThemeButton;\r\n    JButton regretButton;\r\n    JButton musicButton;\r\n    JButton resetButton;\r\n    AIFrame aiFrame=new AIFrame();\r\n    TurnLabel turnLabel=new TurnLabel();\r\n    JLabel timeLabel;\r\n    JLabel dayBG;\r\n    JLabel nightBG;\r\n    public boolean isDay;\r\n    public boolean musicOn;\r\n    public GameFrame() {\r\n        super(1000,700);\r\n\r\n        this.ONE_CHESS_SIZE = 80;\r\n        isDay = true;\r\n        musicOn=true;\r\n\r\n        addChessboard();\r\n        addTurnLable();\r\n        addHomeButton();\r\n        addRegretButton();\r\n        addMusicButton();\r\n        addResetButton();\r\n        addChangeThemeButton();\r\n\r\n        Image image = new ImageIcon(\"resource/map.png\").getImage();\r\n        image = image.getScaledInstance(1000, 700, Image.SCALE_DEFAULT);\r\n        ImageIcon icon = new ImageIcon(image);\r\n        this.dayBG = new JLabel(icon);\r\n        this.dayBG.setSize(1000,700);\r\n        this.dayBG.setLocation(0,0);\r\n\r\n        Image image1 = new ImageIcon(\"resource/night.png\").getImage();\r\n        image1 = image1.getScaledInstance(1000, 700, Image.SCALE_DEFAULT);\r\n        ImageIcon icon1 = new ImageIcon(image1);\r\n        this.nightBG = new JLabel(icon1);\r\n        this.nightBG.setSize(1000,700);\r\n        this.nightBG.setLocation(0,0);\r\n\r\n        add(dayBG);\r\n    }\r\n    private void addChangeThemeButton(){\r\n        this.changeThemeButton=new GameButton(\"resource/icon/changeTheme.png\");\r\n        changeThemeButton.setLocation(930,350);\r\n        changeThemeButton.addActionListener((e)->{\r\n            if(isDay){\r\n                this.remove(dayBG);\r\n                this.isDay=false;\r\n                add(nightBG);\r\n            }\r\n            else {\r\n                this.remove(nightBG);\r\n                this.isDay=true;\r\n                add(dayBG);\r\n            }\r\n            repaint();\r\n            revalidate();\r\n        });\r\n        add(changeThemeButton);\r\n    }\r\n    private void addResetButton(){\r\n        this.resetButton=new GameButton(\"resource/icon/reset.png\");\r\n        resetButton.setLocation(930,420);\r\n        resetButton.addActionListener((e)->{\r\n            boardView.controller.board.initPieces();\r\n            boardView.controller.currentPlayer= Player.BLUE;\r\n            turnLabel.setBounds(930,120,100,100);\r\n            boardView.removeAllChess();\r\n            this.turnLabel.revalidate();\r\n            boardView.initiateChessComponent(boardView.controller.board);\r\n            boardView.repaint();\r\n            boardView.revalidate();\r\n        });\r\n        add(resetButton);\r\n    }\r\n    private void addMusicButton(){\r\n        this.musicButton=new GameButton(\"resource/icon/sound-full-icon.png\");\r\n        musicButton.setLocation(930,490);\r\n        musicButton.addActionListener((e)->{\r\n            Image image = new ImageIcon(\"resource/icon/sound-off-icon.png\").getImage();\r\n            image = image.getScaledInstance( 40,40, Image.SCALE_DEFAULT);\r\n            ImageIcon icon = new ImageIcon(image);\r\n            Image image1 = new ImageIcon(\"resource/icon/sound-full-icon.png\").getImage();\r\n            image1 = image1.getScaledInstance( 40,40, Image.SCALE_DEFAULT);\r\n            ImageIcon icon1 = new ImageIcon(image1);\r\n            if(musicOn){\r\n                musicButton.setIcon(icon);\r\n                musicOn=false;\r\n            }\r\n            else {\r\n                musicButton.setIcon(icon1);\r\n                musicOn=true;\r\n            }\r\n\r\n\r\n        });\r\n        add(musicButton);\r\n    }\r\n    private void addRegretButton(){\r\n        this.regretButton=new GameButton(\"resource/icon/round-line-left-arrow-icon.png\");\r\n        regretButton.setLocation(930,560);\r\n        add(regretButton);\r\n    }\r\n    private void addHomeButton(){\r\n        this.homeButton=new GameButton(\"resource/icon/home-button-icon.png\");\r\n        homeButton.setLocation(930,630);\r\n        homeButton.addActionListener((e)->{\r\n            this.setVisible(false);\r\n            beginFrame.setVisible(true);\r\n        });\r\n        add(homeButton);\r\n    }\r\n    private void addTurnLable(){\r\n        turnLabel.setBounds(930,120,100,100);\r\n        turnLabel.setForeground(new Color(255,215,0));\r\n        add(turnLabel);\r\n    }\r\n\r\n    public BoardView getBoardView() {\r\n        return boardView;\r\n    }\r\n\r\n    public void setBoardView(BoardView boardView) {\r\n        this.boardView = boardView;\r\n    }\r\n\r\n    private void addChessboard() {\r\n        boardView = new BoardView(ONE_CHESS_SIZE, turnLabel,timeLabel);\r\n        boardView.setLocation(140, 120);\r\n        add(boardView);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/GameFrame.java b/src/view/GameFrame.java
+--- a/src/view/GameFrame.java	(revision 863797d6549e569f7f66c8063154189ac5f47af8)
++++ b/src/view/GameFrame.java	(date 1684566096948)
+@@ -6,12 +6,16 @@
+ 
+ import javax.swing.*;
+ import java.awt.*;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
+ 
+ public class GameFrame extends MyFrame {
+     public BeginFrame beginFrame;
+     private final int ONE_CHESS_SIZE;
+ 
+     private BoardView boardView;
++    JLabel countdownLabel;
++    private int countdownSeconds=16;
+     JButton homeButton;
+     JButton changeThemeButton;
+     JButton regretButton;
+@@ -19,11 +23,11 @@
+     JButton resetButton;
+     AIFrame aiFrame=new AIFrame();
+     TurnLabel turnLabel=new TurnLabel();
+-    JLabel timeLabel;
+     JLabel dayBG;
+     JLabel nightBG;
+     public boolean isDay;
+     public boolean musicOn;
++    JLabel timeLabel;
+     public GameFrame() {
+         super(1000,700);
+ 
+@@ -55,6 +59,14 @@
+ 
+         add(dayBG);
+     }
++
++    private void addTimeLabel(){
++        this.timeLabel=new TimeLabel();
++        timeLabel.setSize(60,60);
++        timeLabel.setFont(new Font("Arial",Font.BOLD,50));
++        timeLabel.setLocation(50,50);
++        add(timeLabel);
++    }
+     private void addChangeThemeButton(){
+         this.changeThemeButton=new GameButton("resource/icon/changeTheme.png");
+         changeThemeButton.setLocation(930,350);
+@@ -78,14 +90,7 @@
+         this.resetButton=new GameButton("resource/icon/reset.png");
+         resetButton.setLocation(930,420);
+         resetButton.addActionListener((e)->{
+-            boardView.controller.board.initPieces();
+-            boardView.controller.currentPlayer= Player.BLUE;
+-            turnLabel.setBounds(930,120,100,100);
+-            boardView.removeAllChess();
+-            this.turnLabel.revalidate();
+-            boardView.initiateChessComponent(boardView.controller.board);
+-            boardView.repaint();
+-            boardView.revalidate();
++            boardView.controller.reset();
+         });
+         add(resetButton);
+     }
+@@ -141,8 +146,10 @@
+     }
+ 
+     private void addChessboard() {
++
+         boardView = new BoardView(ONE_CHESS_SIZE, turnLabel,timeLabel);
+         boardView.setLocation(140, 120);
+         add(boardView);
+     }
++
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"e93436ec-d404-4df7-bde5-cda3dcb5f90d\" name=\"Changes\" comment=\"完成了注册登录和分数展示的功能\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/controller/Controller.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/controller/Controller.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/listener/GameListener.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/listener/GameListener.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/view/BoardView.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/view/BoardView.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/view/GameFrame.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/view/GameFrame.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"RESET_MODE\" value=\"HARD\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2PSQB1ZCcKNuSJPZJAp7o95qQHb\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"last_opened_file_path\": \"D:/0JAVACOMMUNITY/0Javawork/Jungle\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\0JAVACOMMUNITY\\0Javawork\\CS109\\resource\" />\r\n      <recent name=\"D:\\0JAVACOMMUNITY\\0Javawork\\CS109\\src\\view\" />\r\n      <recent name=\"D:\\0JAVACOMMUNITY\\0Javawork\\CS109\\src\\view\\chessView\" />\r\n      <recent name=\"D:\\0JAVACOMMUNITY\\0Javawork\\CS109\" />\r\n      <recent name=\"D:\\0JAVACOMMUNITY\\0Javawork\\Project1\\src\\view\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"model\" />\r\n      <recent name=\"view\" />\r\n      <recent name=\"\" />\r\n      <recent name=\"view.chessView\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"Project1\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"e93436ec-d404-4df7-bde5-cda3dcb5f90d\" name=\"Changes\" comment=\"\" />\r\n      <created>1683447865168</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1683447865168</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Test1\">\r\n      <created>1683949135727</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683949135727</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"第一个没有放棋子的稳定版本\">\r\n      <created>1684031348336</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684031348336</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"稳定1.0\">\r\n      <created>1684031402888</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684031402888</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Test0.1\">\r\n      <created>1684040423405</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684040423405</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Test0.1\">\r\n      <created>1684152861499</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684152861499</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Test0.1\">\r\n      <created>1684152982621</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684152982621</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"2.0\">\r\n      <created>1684153759325</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684153759325</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"优化了frame和登录界面\">\r\n      <created>1684281396475</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684281396475</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"优化了游戏界面，新增了更换主题功能\">\r\n      <created>1684370714273</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684370714273</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"10\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Test1\" />\r\n    <MESSAGE value=\"第一个没有放棋子的稳定版本\" />\r\n    <MESSAGE value=\"稳定1.0\" />\r\n    <MESSAGE value=\"Test0.1\" />\r\n    <MESSAGE value=\"2.0\" />\r\n    <MESSAGE value=\"优化了frame和登录界面\" />\r\n    <MESSAGE value=\"优化了游戏界面，新增了更换主题功能\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"优化了游戏界面，新增了更换主题功能\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 863797d6549e569f7f66c8063154189ac5f47af8)
++++ b/.idea/workspace.xml	(date 1684547767542)
+@@ -4,11 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="完成了注册登录和分数展示的功能">
++    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="完成了放下棋子的功能，reset棋局功能">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/listener/GameListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/listener/GameListener.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -36,14 +34,14 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "last_opened_file_path": "D:/0JAVACOMMUNITY/0Javawork/Jungle"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;D:/0JAVACOMMUNITY/0Javawork/Jungle&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="D:\0JAVACOMMUNITY\0Javawork\CS109\resource" />
+@@ -145,7 +143,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1684370714273</updated>
+     </task>
+-    <option name="localTasksCounter" value="10" />
++    <task id="LOCAL-00010" summary="完成了放下棋子的功能，reset棋局功能">
++      <created>1684501535148</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1684501535148</updated>
++    </task>
++    <option name="localTasksCounter" value="11" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -167,6 +172,7 @@
+     <MESSAGE value="2.0" />
+     <MESSAGE value="优化了frame和登录界面" />
+     <MESSAGE value="优化了游戏界面，新增了更换主题功能" />
+-    <option name="LAST_COMMIT_MESSAGE" value="优化了游戏界面，新增了更换主题功能" />
++    <MESSAGE value="完成了放下棋子的功能，reset棋局功能" />
++    <option name="LAST_COMMIT_MESSAGE" value="完成了放下棋子的功能，reset棋局功能" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/controller/Controller.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport model.*;\r\nimport listener.GameListener;\r\nimport view.BoardView;\r\nimport view.CellView;\r\nimport view.chessView.AnimalView;\r\n\r\nimport javax.swing.*;\r\nimport java.util.ArrayList;\r\n\r\npublic class Controller implements GameListener {\r\n\r\n    public Board board;\r\n    public BoardView boardView;\r\n    public ArrayList<BoardPoint> canStepPoints;//把可以走的点返回来给我高亮\r\n    public Player currentPlayer;\r\n    public Player winner;\r\n    public BoardPoint selectedPoint;//选中的点高亮\r\n    public boolean isPlayback;\r\n    public boolean skip;\r\n    public boolean AI=false;\r\n    public AI AIplayer=new AI();\r\n\r\n //   public JLabel timeLabel;\r\n    public static Timer timer;\r\n\r\n    public Controller(BoardView boardView, Board board) {\r\n        this.boardView = boardView;\r\n        this.board = board;\r\n        this.currentPlayer = Player.BLUE;\r\n        this.winner = null;\r\n     //   timeLabel = boardView.timeLabel;\r\n        isPlayback = false;\r\n        skip = false;\r\n\r\n        boardView.setController(this);\r\n        boardView.initiateChessComponent(board);\r\n        boardView.repaint();\r\n    }\r\n\r\n   public void changePlayer() {\r\n        currentPlayer = currentPlayer == Player.BLUE ? Player.RED : Player.BLUE;\r\n        if (currentPlayer == Player.BLUE)\r\n            boardView.turnLabel.setBounds(930,120,100,100);\r\n        else\r\n            boardView.turnLabel.setBounds(35,120,100,100);\r\n    }\r\n\r\n    public void checkWin(BoardPoint point) {\r\n        if(board.blueDead.size()==8){\r\n            winner=Player.RED;\r\n        }\r\n        else if(board.redDead.size()==8){\r\n            winner=Player.BLUE;\r\n        }\r\n        else if(board.isOpponentDens(point,currentPlayer)){\r\n            winner=currentPlayer;\r\n        }\r\n        //判断棋子全吃完了，或者到老巢了//\r\n    }\r\n\r\n    public void winView() {\r\n        JOptionPane.showMessageDialog(boardView, (winner == Player.BLUE ? \"BLUE\" : \"RED\") + \" Win !\");\r\n    }\r\n\r\n    @Override\r\n    public void clickCell(BoardPoint point, CellView component) {\r\n        if (selectedPoint != null) {\r\n            if(board.canMove(selectedPoint,point)){\r\n                board.move(selectedPoint, point);\r\n                setAllCellsCanStepFalse();\r\n                canStepPoints = null;\r\n                boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));\r\n                selectedPoint=null;\r\n                checkWin(point);\r\n                if(winner!=null){}\r\n                else{\r\n                    changePlayer();\r\n                }\r\n                if(AI){\r\n                    changePlayer();\r\n                    AIplayer.EasyAI(board);\r\n                    if(!AIplayer.LastAction){\r\n                        boardView.setChessViewAtCell(AIplayer.dest,boardView.removeChessViewAtGrid(AIplayer.src));\r\n                    }\r\n                    else{\r\n                        boardView.removeChessViewAtGrid(AIplayer.dest);\r\n                        boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));\r\n                    }\r\n                }\r\n                boardView.repaint();\r\n                component.revalidate();\r\n            }\r\n            checkWin(point);\r\n            if (winner != null) {\r\n                winView();\r\n                reset();\r\n            }\r\n        }\r\n    }\r\n    @Override\r\n    public void clickChess(BoardPoint point, AnimalView component) {\r\n        if (selectedPoint == null) {\r\n            if (board.getChessPlayer(point).equals(currentPlayer)) {\r\n                canStepPoints = getCanStepPoints(point);\r\n                selectedPoint = point;\r\n                component.setSelected(true);\r\n                component.revalidate();\r\n                component.repaint();\r\n                boardView.repaint();\r\n                boardView.revalidate();\r\n            }\r\n        } else if (selectedPoint.getCol()== point.getCol()&&selectedPoint.getRow()== point.getRow()) {\r\n            selectedPoint = null;\r\n            canStepPoints = null;\r\n            setAllCellsCanStepFalse();\r\n            component.setSelected(false);\r\n            boardView.repaint();\r\n            boardView.revalidate();\r\n            component.repaint();\r\n            component.revalidate();\r\n            //放下棋子\r\n        } else if (board.canEat(selectedPoint, point)) {\r\n            board.eat(selectedPoint, point);\r\n            boardView.removeChessViewAtGrid(point);\r\n            boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));\r\n            selectedPoint = null;\r\n            setAllCellsCanStepFalse();\r\n            checkWin(point);\r\n            if(winner!=null){}\r\n            else{\r\n                changePlayer();\r\n            }\r\n            if(AI){\r\n                changePlayer();\r\n                AIplayer.EasyAI(board);\r\n                if(!AIplayer.LastAction){\r\n                    boardView.setChessViewAtCell(AIplayer.dest,boardView.removeChessViewAtGrid(AIplayer.src));\r\n                }\r\n                else{\r\n                    boardView.removeChessViewAtGrid(AIplayer.dest);\r\n                    boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));\r\n                }\r\n            }\r\n            boardView.repaint();\r\n            boardView.revalidate();\r\n            component.revalidate();\r\n            if (winner != null) {\r\n                winView();\r\n                reset();\r\n            }\r\n        }\r\n    }\r\n    public void setAllCellsCanStepFalse() {\r\n        for (int i = 0; i < 7; i++) {\r\n            for (int j = 0; j < 9; j++) {\r\n                boardView.gridViews[i][j].canStep = false;\r\n            }\r\n        }\r\n    }\r\n    public ArrayList<BoardPoint> getCanStepPoints(BoardPoint src){\r\n        ArrayList<BoardPoint> list = new ArrayList<>();\r\n        for(int i = 0; i<board.getCanmovepoints(src).size(); i++){\r\n            boardView.gridViews[board.getCanmovepoints(src).get(i).getRow()][board.getCanmovepoints(src).get(i).getCol()].canStep = true;\r\n            list.add(board.getCanmovepoints(src).get(i));\r\n        }\r\n        return list;\r\n    }\r\n    public void reset() {\r\n        canStepPoints = null;\r\n        board.initGrid();\r\n        board.initPieces();\r\n        boardView.removeAllChess();\r\n        boardView.initiateChessComponent(board);\r\n        currentPlayer = Player.BLUE;\r\n        boardView.turnLabel.setBounds(930,120,100,100);\r\n        selectedPoint = null;\r\n        setAllCellsCanStepFalse();\r\n      //  boardView.statusLabel.setText(\"Turn 1: BLUE\");\r\n        board.steps = new ArrayList<>();\r\n        boardView.repaint();\r\n        boardView.revalidate();\r\n        winner = null;\r\n\r\n        board.redDead = new ArrayList<>();\r\n        board.blueDead = new ArrayList<>();\r\n        //timer.time = 45;\r\n    }\r\n\r\n    public void regretOneStep() {\r\n        board.steps.remove(board.steps.size() - 1);\r\n        ArrayList<Step> list = board.steps;\r\n        reset();\r\n        for (int i = 0; i < list.size(); i++) {\r\n            Step step = list.get(i);\r\n            BoardPoint src = step.src;\r\n            BoardPoint dest = step.dest;\r\n            boolean isCapture = step.captured != null;\r\n            if (!isCapture) {\r\n                board.move(src, dest);\r\n                boardView.setChessViewAtCell(dest, boardView.removeChessViewAtGrid(src));\r\n                selectedPoint = null;\r\n                changePlayer();\r\n                boardView.repaint();\r\n            } else {\r\n                board.eat(src, dest);\r\n                boardView.removeChessViewAtGrid(dest);\r\n                boardView.setChessViewAtCell(dest, boardView.removeChessViewAtGrid(src));\r\n                changePlayer();\r\n                boardView.repaint();\r\n                boardView.revalidate();\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/controller/Controller.java b/src/controller/Controller.java
+--- a/src/controller/Controller.java	(revision 863797d6549e569f7f66c8063154189ac5f47af8)
++++ b/src/controller/Controller.java	(date 1684565225244)
+@@ -4,6 +4,7 @@
+ import listener.GameListener;
+ import view.BoardView;
+ import view.CellView;
++import view.TimeLabel;
+ import view.chessView.AnimalView;
+ 
+ import javax.swing.*;
+@@ -22,7 +23,7 @@
+     public boolean AI=false;
+     public AI AIplayer=new AI();
+ 
+- //   public JLabel timeLabel;
++    TimeLabel timeLabel=new TimeLabel();
+     public static Timer timer;
+ 
+     public Controller(BoardView boardView, Board board) {
+@@ -30,14 +31,18 @@
+         this.board = board;
+         this.currentPlayer = Player.BLUE;
+         this.winner = null;
+-     //   timeLabel = boardView.timeLabel;
+         isPlayback = false;
+         skip = false;
+ 
++        timeLabel.setController(this);
++
+         boardView.setController(this);
+         boardView.initiateChessComponent(board);
+         boardView.repaint();
+     }
++    public void countdown(){
++
++    }
+ 
+    public void changePlayer() {
+         currentPlayer = currentPlayer == Player.BLUE ? Player.RED : Player.BLUE;
+@@ -177,7 +182,6 @@
+         boardView.turnLabel.setBounds(930,120,100,100);
+         selectedPoint = null;
+         setAllCellsCanStepFalse();
+-      //  boardView.statusLabel.setText("Turn 1: BLUE");
+         board.steps = new ArrayList<>();
+         boardView.repaint();
+         boardView.revalidate();

@@ -29,9 +29,9 @@ public class WolfView extends AnimalView {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        ImageIcon pic = new ImageIcon("resource\\animals\\left\\4.png");
+        ImageIcon pic = new ImageIcon("resource\\animals\\left\\3.png");
         if (owner == Player.BLUE){
-            pic = new ImageIcon("resource\\animals\\right\\4.png");
+            pic = new ImageIcon("resource\\animals\\right\\3.png");
         }
         Image image = pic.getImage();
         pic = new ImageIcon(image.getScaledInstance(size,size,Image.SCALE_SMOOTH));
