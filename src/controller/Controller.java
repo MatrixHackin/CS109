@@ -25,7 +25,6 @@ public class Controller implements GameListener {
     public AI AIplayer = new AI();
     public AnimalView eaten;
     public ArrayList<Board> steps;
-    public GameFrame gameFrame;
 
     public static Timer timer;
 
@@ -286,6 +285,12 @@ public class Controller implements GameListener {
         selectedPoint = null;
         setAllCellsCanStepFalse();
         steps.clear();
+        //
+        boardView.timer.stop();
+        boardView.count=20;
+        boardView.timeLabel.setText(Integer.toString(boardView.count));
+        boardView.timer.start();
+        boardView.timeLabel.setLocation(920,25);
         boardView.repaint();
         boardView.revalidate();
         winner = null;
@@ -295,6 +300,7 @@ public class Controller implements GameListener {
         board.blueDead = new ArrayList<>();
         boardView.redDeadPanel.repaint();
         boardView.blueDeadPanel.repaint();
+
 
     }
 
