@@ -163,8 +163,6 @@ public class GameFrame extends MyFrame {
                 musicButton.setIcon(icon1);
                 musicOn=true;
             }
-
-
         });
         add(musicButton);
     }

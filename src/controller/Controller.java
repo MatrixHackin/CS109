@@ -22,9 +22,10 @@ public class Controller implements GameListener {
     public boolean isPlayback;
     public boolean skip;
     public boolean AI = false;
+    public boolean isEasyAI;
     public AI AIplayer = new AI();
-    public AnimalView eaten;
-    public ArrayList<Board> boards;
+    public ArrayList<AnimalView> eaten=new ArrayList<>();
+    public ArrayList<Board> stepsnum;
 
     public static Timer timer;
 
@@ -35,7 +36,7 @@ public class Controller implements GameListener {
         this.winner = null;
         isPlayback = false;
         skip = false;
-        this.boards = new ArrayList<>();
+        this.stepsnum = new ArrayList<>();
         boardView.setController(this);
         boardView.initiateChessComponent(board);
         boardView.repaint();
@@ -55,7 +56,7 @@ public class Controller implements GameListener {
         return loadedBoard;
     }
     public void save(){
-        Board board=this.boards.get(boardView.controller.boards.size()-1);
+        Board board=this.stepsnum.get(boardView.controller.stepsnum.size()-1);
         try {
             FileOutputStream fileOut = new FileOutputStream("board/board.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -106,7 +107,7 @@ public class Controller implements GameListener {
                 canStepPoints = null;
                 boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
                 selectedPoint = null;
-                boards.add(board);
+                stepsnum.add(board);
                 checkWin(point);
                 if (winner != null) {
                     winView();
@@ -125,16 +126,23 @@ public class Controller implements GameListener {
                     boardView.controller.changePlayer();
                 }
                 if (AI) {
-                    changePlayer();
-                    AIplayer.EasyAI(board);
-                    if (!AIplayer.LastAction) {
+                    if(isEasyAI){
+                        AIplayer.EasyAI(board);
+                        System.out.println(1);
+                    }
+                    else{
+                        AIplayer.DiffAI(board);
+                    }
+                    if (!AIplayer.LastActioniseat) {
                         boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));
-                        boards.add(board);
+                        stepsnum.add(board);
                     } else {
                         boardView.removeChessViewAtGrid(AIplayer.dest);
                         boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));
-                        boards.add(board);
+                        stepsnum.add(board);
+                        addDeadView();
                     }
+                    currentPlayer=Player.BLUE;
                 }
                 boardView.repaint();
                 component.revalidate();
@@ -167,11 +175,11 @@ public class Controller implements GameListener {
             //放下棋子
         } else if (board.canEat(selectedPoint, point)) {
             board.eat(selectedPoint, point);
-            eaten = boardView.removeChessViewAtGrid(point);
+            eaten.add(boardView.removeChessViewAtGrid(point));
             boardView.setChessViewAtCell(point, boardView.removeChessViewAtGrid(selectedPoint));
             selectedPoint = null;
             setAllCellsCanStepFalse();
-            boards.add(board);
+            stepsnum.add(board);
             checkWin(point);
             if (winner != null) {
             } else {
@@ -190,95 +198,19 @@ public class Controller implements GameListener {
                 boardView.controller.changePlayer();
             }
             if (AI) {
-                changePlayer();
                 AIplayer.EasyAI(board);
-                if (!AIplayer.LastAction) {
+                if (!AIplayer.LastActioniseat) {
                     boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));
-                    boards.add(board);
+                    stepsnum.add(board);
                 } else {
                     boardView.removeChessViewAtGrid(AIplayer.dest);
                     boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));
-                    boards.add(board);
+                    stepsnum.add(board);
+                    addDeadView();
                 }
+                changePlayer();
             }
-
-
-            if (currentPlayer == Player.RED) {
-                switch (board.redDead.get(board.redDead.size() - 1).getRank()) {
-                    case 1 -> {
-                        DeadChessView r1 = new DeadChessView("resource/animals/left/grey/1.png");
-                        boardView.redDeadPanel.add(r1.getLabel());
-                    }
-                    case 2 -> {
-                        DeadChessView r2 = new DeadChessView("resource/animals/left/grey/2.png");
-                        boardView.redDeadPanel.add(r2.getLabel());
-                    }
-                    case 3 -> {
-                        DeadChessView r3 = new DeadChessView("resource/animals/left/grey/3.png");
-                        boardView.redDeadPanel.add(r3.getLabel());
-                    }
-                    case 4 -> {
-                        DeadChessView r4 = new DeadChessView("resource/animals/left/grey/4.png");
-                        boardView.redDeadPanel.add(r4.getLabel());
-                    }
-                    case 5 -> {
-                        DeadChessView r5 = new DeadChessView("resource/animals/left/grey/5.png");
-                        boardView.redDeadPanel.add(r5.getLabel());
-                    }
-                    case 6 -> {
-                        DeadChessView r6 = new DeadChessView("resource/animals/left/grey/6.png");
-                        boardView.redDeadPanel.add(r6.getLabel());
-                    }
-                    case 7 -> {
-                        DeadChessView r7 = new DeadChessView("resource/animals/left/grey/7.png");
-                        boardView.redDeadPanel.add(r7.getLabel());
-                    }
-                    case 8 -> {
-                        DeadChessView r8 = new DeadChessView("resource/animals/left/grey/8.png");
-                        boardView.redDeadPanel.add(r8.getLabel());
-                    }
-                }
-            }
-
-
-            if (currentPlayer == Player.BLUE) {
-                switch (board.blueDead.get(board.blueDead.size() - 1).getRank()) {
-                    case 1 -> {
-                        DeadChessView r1 = new DeadChessView("resource/animals/right/grey/1.png");
-                        boardView.blueDeadPanel.add(r1.getLabel());
-                    }
-                    case 2 -> {
-                        DeadChessView r2 = new DeadChessView("resource/animals/right/grey/2.png");
-                        boardView.blueDeadPanel.add(r2.getLabel());
-                    }
-                    case 3 -> {
-                        DeadChessView r3 = new DeadChessView("resource/animals/right/grey/3.png");
-                        boardView.blueDeadPanel.add(r3.getLabel());
-                    }
-                    case 4 -> {
-                        DeadChessView r4 = new DeadChessView("resource/animals/right/grey/4.png");
-                        boardView.blueDeadPanel.add(r4.getLabel());
-                    }
-                    case 5 -> {
-                        DeadChessView r5 = new DeadChessView("resource/animals/right/grey/5.png");
-                        boardView.blueDeadPanel.add(r5.getLabel());
-                    }
-                    case 6 -> {
-                        DeadChessView r6 = new DeadChessView("resource/animals/right/grey/6.png");
-                        boardView.blueDeadPanel.add(r6.getLabel());
-                    }
-                    case 7 -> {
-                        DeadChessView r7 = new DeadChessView("resource/animals/right/grey/7.png");
-                        boardView.blueDeadPanel.add(r7.getLabel());
-                    }
-                    case 8 -> {
-                        DeadChessView r8 = new DeadChessView("resource/animals/right/grey/8.png");
-                        boardView.blueDeadPanel.add(r8.getLabel());
-                    }
-                }
-            }
-
-
+            addDeadView();
             boardView.repaint();
             boardView.revalidate();
             component.revalidate();
@@ -316,7 +248,7 @@ public class Controller implements GameListener {
         boardView.turnLabel.setBounds(930, 120, 100, 100);
         selectedPoint = null;
         setAllCellsCanStepFalse();
-        boards.clear();
+        stepsnum.clear();
         //
         boardView.timer.stop();
         boardView.count=20;
@@ -332,40 +264,221 @@ public class Controller implements GameListener {
         board.blueDead = new ArrayList<>();
         boardView.redDeadPanel.repaint();
         boardView.blueDeadPanel.repaint();
-
-
     }
 
     public void regretOneStep() {
+        //AI模式关闭
         if (!AI) {
-            if (boards.size() == 1) {
+            if (stepsnum.size() == 1) {
                 reset();
             } else {
                 board.regret();
-                changePlayer();
-                if (board.steps.get(boards.size() - 1).ismove) {
+                if (board.steps.get(stepsnum.size() - 1).ismove) {
                     boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 1).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size() - 1).dest));
-                } else {
-                    boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 1).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size() - 1).dest));
-                    boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 1).dest, eaten);
+                    stepsnum.remove(board.steps.size()-1);
                 }
+                else {
+                    boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 1).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size() - 1).dest));
+                    boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 1).dest, eaten.get(eaten.size()-1));
+                    eaten.remove(eaten.size()-1);
+                    stepsnum.remove(board.steps.size()-1);
+                    if(currentPlayer==Player.BLUE){
+                        boardView.redDeadPanel.remove(board.blueDead.size());
+                        boardView.redDeadPanel.repaint();
+                    }
+                    else{
+                        boardView.blueDeadPanel.remove(board.redDead.size());
+                        boardView.blueDeadPanel.repaint();
+                    }
+                }
+                board.steps.remove(board.steps.size()-1);
+                changePlayer();
             }
-        } else {
+        }
+        //AI模式开启
+        else {
             board.regret();
             changePlayer();
-            if (board.steps.get(boards.size() - 1).ismove) {
+            if (board.steps.get(stepsnum.size() - 1).ismove) {
                 boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 1).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size() - 1).dest));
-            } else {
+            }
+            else {
                 boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 1).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size() - 1).dest));
-                boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 1).dest, eaten);
+                boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 1).dest, eaten.get(eaten.size()-1));
+                eaten.remove(eaten.size()-1);
+                boardView.redDeadPanel.remove(board.blueDead.size());
+                boardView.redDeadPanel.repaint();
             }
             board.regret(AI);
             changePlayer();
-            if (board.steps.get(boards.size() - 2).ismove) {
+            if (board.steps.get(stepsnum.size() - 2).ismove) {
                 boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 2).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size() - 2).dest));
             } else {
                 boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 2).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size() - 2).dest));
-                boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 2).dest, eaten);
+                boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 2).dest, eaten.get(eaten.size()-1));
+                eaten.remove(eaten.size()-1);
+                boardView.blueDeadPanel.remove(board.redDead.size()-1);
+                boardView.blueDeadPanel.repaint();
+            }
+        }
+    }
+
+    public void addDeadView(){
+        if(!AI){
+            if (currentPlayer == Player.RED) {
+                switch (board.redDead.get(board.redDead.size() - 1).getRank()) {
+                    case 1 -> {
+                        DeadChessView r1 = new DeadChessView("resource/animals/right/grey/1.png");
+                        boardView.blueDeadPanel.add(r1.getLabel());
+                    }
+                    case 2 -> {
+                        DeadChessView r2 = new DeadChessView("resource/animals/right/grey/2.png");
+                        boardView.blueDeadPanel.add(r2.getLabel());
+                    }
+                    case 3 -> {
+                        DeadChessView r3 = new DeadChessView("resource/animals/right/grey/3.png");
+                        boardView.blueDeadPanel.add(r3.getLabel());
+                    }
+                    case 4 -> {
+                        DeadChessView r4 = new DeadChessView("resource/animals/right/grey/4.png");
+                        boardView.blueDeadPanel.add(r4.getLabel());
+                    }
+                    case 5 -> {
+                        DeadChessView r5 = new DeadChessView("resource/animals/right/grey/5.png");
+                        boardView.blueDeadPanel.add(r5.getLabel());
+                    }
+                    case 6 -> {
+                        DeadChessView r6 = new DeadChessView("resource/animals/right/grey/6.png");
+                        boardView.blueDeadPanel.add(r6.getLabel());
+                    }
+                    case 7 -> {
+                        DeadChessView r7 = new DeadChessView("resource/animals/right/grey/7.png");
+                        boardView.blueDeadPanel.add(r7.getLabel());
+                    }
+                    case 8 -> {
+                        DeadChessView r8 = new DeadChessView("resource/animals/right/grey/8.png");
+                        boardView.blueDeadPanel.add(r8.getLabel());
+                    }
+                }
+            }
+            if (currentPlayer == Player.BLUE) {
+                switch (board.blueDead.get(board.blueDead.size() - 1).getRank()) {
+                    case 1 -> {
+                        DeadChessView r1 = new DeadChessView("resource/animals/left/grey/1.png");
+                        boardView.redDeadPanel.add(r1.getLabel());
+                    }
+                    case 2 -> {
+                        DeadChessView r2 = new DeadChessView("resource/animals/left/grey/2.png");
+                        boardView.redDeadPanel.add(r2.getLabel());
+                    }
+                    case 3 -> {
+                        DeadChessView r3 = new DeadChessView("resource/animals/left/grey/3.png");
+                        boardView.redDeadPanel.add(r3.getLabel());
+                    }
+                    case 4 -> {
+                        DeadChessView r4 = new DeadChessView("resource/animals/left/grey/4.png");
+                        boardView.redDeadPanel.add(r4.getLabel());
+                    }
+                    case 5 -> {
+                        DeadChessView r5 = new DeadChessView("resource/animals/left/grey/5.png");
+                        boardView.redDeadPanel.add(r5.getLabel());
+                    }
+                    case 6 -> {
+                        DeadChessView r6 = new DeadChessView("resource/animals/left/grey/6.png");
+                        boardView.redDeadPanel.add(r6.getLabel());
+                    }
+                    case 7 -> {
+                        DeadChessView r7 = new DeadChessView("resource/animals/left/grey/7.png");
+                        boardView.redDeadPanel.add(r7.getLabel());
+                    }
+                    case 8 -> {
+                        DeadChessView r8 = new DeadChessView("resource/animals/left/grey/8.png");
+                        boardView.redDeadPanel.add(r8.getLabel());
+                    }
+                }
+            }
+        }
+        else{
+            if (currentPlayer == Player.RED) {
+                switch (board.blueDead.get(board.blueDead.size() - 1).getRank()) {
+                    case 1 -> {
+                        DeadChessView r1 = new DeadChessView("resource/animals/left/grey/1.png");
+                        boardView.redDeadPanel.add(r1.getLabel());
+                    }
+                    case 2 -> {
+                        DeadChessView r2 = new DeadChessView("resource/animals/left/grey/2.png");
+                        boardView.redDeadPanel.add(r2.getLabel());
+                    }
+                    case 3 -> {
+                        DeadChessView r3 = new DeadChessView("resource/animals/left/grey/3.png");
+                        boardView.redDeadPanel.add(r3.getLabel());
+                    }
+                    case 4 -> {
+                        DeadChessView r4 = new DeadChessView("resource/animals/left/grey/4.png");
+                        boardView.redDeadPanel.add(r4.getLabel());
+                    }
+                    case 5 -> {
+                        DeadChessView r5 = new DeadChessView("resource/animals/left/grey/5.png");
+                        boardView.redDeadPanel.add(r5.getLabel());
+                    }
+                    case 6 -> {
+                        DeadChessView r6 = new DeadChessView("resource/animals/left/grey/6.png");
+                        boardView.redDeadPanel.add(r6.getLabel());
+                    }
+                    case 7 -> {
+                        DeadChessView r7 = new DeadChessView("resource/animals/left/grey/7.png");
+                        boardView.redDeadPanel.add(r7.getLabel());
+                    }
+                    case 8 -> {
+                        DeadChessView r8 = new DeadChessView("resource/animals/left/grey/8.png");
+                        boardView.redDeadPanel.add(r8.getLabel());
+                    }
+                }
+            }
+            if (currentPlayer == Player.BLUE) {
+                switch (board.redDead.get(board.redDead.size() - 1).getRank()) {
+                    case 1 -> {
+                        DeadChessView r1 = new DeadChessView("resource/animals/right/grey/1.png");
+                        boardView.blueDeadPanel.add(r1.getLabel());
+                    }
+                    case 2 -> {
+                        DeadChessView r2 = new DeadChessView("resource/animals/right/grey/2.png");
+                        boardView.blueDeadPanel.add(r2.getLabel());
+                    }
+                    case 3 -> {
+                        DeadChessView r3 = new DeadChessView("resource/animals/right/grey/3.png");
+                        boardView.blueDeadPanel.add(r3.getLabel());
+                    }
+                    case 4 -> {
+                        DeadChessView r4 = new DeadChessView("resource/animals/right/grey/4.png");
+                        boardView.blueDeadPanel.add(r4.getLabel());
+                    }
+                    case 5 -> {
+                        DeadChessView r5 = new DeadChessView("resource/animals/right/grey/5.png");
+                        boardView.blueDeadPanel.add(r5.getLabel());
+                    }
+                    case 6 -> {
+                        DeadChessView r6 = new DeadChessView("resource/animals/right/grey/6.png");
+                        boardView.blueDeadPanel.add(r6.getLabel());
+                    }
+                    case 7 -> {
+                        DeadChessView r7 = new DeadChessView("resource/animals/right/grey/7.png");
+                        boardView.blueDeadPanel.add(r7.getLabel());
+                    }
+                    case 8 -> {
+                        DeadChessView r8 = new DeadChessView("resource/animals/right/grey/8.png");
+                        boardView.blueDeadPanel.add(r8.getLabel());
+                    }
+                }
+            }
+        }
+    }
+    public void run() {
+        for(int i=0;i<1;i++){
+            try {
+                Thread.sleep(1000L);  //间隔1秒执行一次！
+            } catch (Exception e) {
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
         }
     }

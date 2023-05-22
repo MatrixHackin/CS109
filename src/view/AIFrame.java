@@ -46,9 +46,12 @@ public class AIFrame extends MyFrame{
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getItem().equals("easy")) {
+                    gameFrame.getBoardView().controller.AI=true;
+                    gameFrame.getBoardView().controller.isEasyAI=true;
                     // easy AI
                 } else  {
-                    // difficult AI
+                    gameFrame.getBoardView().controller.AI=true;
+                    gameFrame.getBoardView().controller.isEasyAI=false;// difficult AI
                 }
             }
         });
