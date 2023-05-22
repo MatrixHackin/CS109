@@ -23,6 +23,7 @@ public class BoardView extends JPanel {
     private Set<BoardPoint> riverCell = new HashSet<>();
     private Set<BoardPoint> trapCell = new HashSet<>();
     private Set<BoardPoint> denCell = new HashSet<>();
+    User user;
 
     public Controller controller;
     public TurnLabel turnLabel;
@@ -31,7 +32,6 @@ public class BoardView extends JPanel {
     public int count =20;
     public JPanel redDeadPanel;
     public JPanel blueDeadPanel;
-    User user;
     public BoardView(int chessSize,TurnLabel turnLabel, JLabel timeLabel) {
         this.timeLabel = timeLabel;
         this.turnLabel=turnLabel;
@@ -46,6 +46,14 @@ public class BoardView extends JPanel {
         addTimer();
 
     }
+    public void setUser(User user){
+        this.user=user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     private void addTimer(){
         this.timer=new Timer(1000, new ActionListener() {
             @Override

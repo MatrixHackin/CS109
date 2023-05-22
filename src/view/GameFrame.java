@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import model.Board;
 import model.Player;
 import model.User;
@@ -200,6 +201,7 @@ public class GameFrame extends MyFrame {
 
     private void addChessboard() {
         boardView = new BoardView(ONE_CHESS_SIZE, turnLabel,timeLabel);
+        boardView.setUser(user);
         boardView.setLocation(140, 120);
         add(boardView);
     }

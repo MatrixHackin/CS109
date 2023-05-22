@@ -36,7 +36,6 @@ public class Controller implements GameListener {
         isPlayback = false;
         skip = false;
         this.boards = new ArrayList<>();
-
         boardView.setController(this);
         boardView.initiateChessComponent(board);
         boardView.repaint();
@@ -79,11 +78,18 @@ public class Controller implements GameListener {
     public void checkWin(BoardPoint point) {
         if (board.blueDead.size() == 8) {
             winner = Player.RED;
+            if(boardView.getUser()!=null){
+                boardView.getUser().setScore(boardView.getUser().getScore()-10);
+            }
         } else if (board.redDead.size() == 8) {
             winner = Player.BLUE;
+            if(boardView.getUser()!=null){
+                boardView.getUser().setScore(boardView.getUser().getScore()+10);
+            }
         } else if (board.isOpponentDens(point, currentPlayer)) {
             winner = currentPlayer;
         }
+
         //判断棋子全吃完了，或者到老巢了//
     }
 

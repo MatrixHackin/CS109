@@ -1,9 +1,12 @@
 package model;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Board implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     public Cell[][] grid;
     public ArrayList<Step> steps=new ArrayList<>();
     public ArrayList<Chess> blueDead;

@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="5.0">
+    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="修复了存档读档功能和登录功能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AIFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AIFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/BoardPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/BoardPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Chess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684680330900</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="修复了存档读档功能和登录功能">
+      <created>1684714913568</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1684714913568</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -249,6 +259,7 @@
     <MESSAGE value="添加了选择AI难度的框框" />
     <MESSAGE value="序列化存档读档完成" />
     <MESSAGE value="5.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="5.0" />
+    <MESSAGE value="修复了存档读档功能和登录功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复了存档读档功能和登录功能" />
   </component>
 </project>

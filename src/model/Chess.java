@@ -1,9 +1,12 @@
 package model;
 
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Chess implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private Player player;
     public int rank;
     private int FinalRank;
