@@ -86,12 +86,12 @@ public class GameFrame extends MyFrame {
         this.replayButton=new GameButton("resource/icon/replay.png");
         replayButton.setLocation(930,210);
         replayButton.addActionListener((e)->{
-            for(Board board:boardView.controller.loadBoards()){
+            /*for(Board board:boardView.controller.loadBoards()){
                 boardView.removeAllChess();
                 boardView.initiateChessComponent(board);
                 boardView.repaint();
                 boardView.revalidate();
-            }
+            }*/
         });
         add(replayButton);
     }

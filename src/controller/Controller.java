@@ -22,6 +22,7 @@ public class Controller implements GameListener {
     public boolean isPlayback;
     public boolean skip;
     public boolean AI = false;
+    public boolean isEasyAI;
     public AI AIplayer = new AI();
     public ArrayList<AnimalView> eaten=new ArrayList<>();
     public ArrayList<Board> boards;
@@ -261,9 +262,6 @@ public class Controller implements GameListener {
     public void regretOneStep() {
         //AI模式关闭
         if (!AI) {
-            if (boards.size() == 1) {
-                reset();
-            } else {
                 board.regret();
                 if (board.steps.get(boards.size() - 1).ismove) {
                     boardView.setChessViewAtCell(board.steps.get(board.steps.size() - 1).src, boardView.removeChessViewAtGrid(board.steps.get(board.steps.size() - 1).dest));
@@ -286,7 +284,6 @@ public class Controller implements GameListener {
                     board.steps.remove(board.steps.size()-1);
                 }
                 changePlayer();
-            }
         }
         //AI模式开启
         else {

@@ -127,7 +127,6 @@ public class BoardView extends JPanel {
                     gridViews[i][j].remove(0);
             }
         }
-
     }
 
 
