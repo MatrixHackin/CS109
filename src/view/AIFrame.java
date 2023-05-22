@@ -42,7 +42,7 @@ public class AIFrame extends MyFrame{
         JComboBox<String> comboBox = new JComboBox<>(new String[]{"easy", "difficult"});
         comboBox.setLocation(100,100);
         comboBox.setSize(300,30);
-        /*comboBox.addItemListener(new ItemListener() {
+        comboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getItem().equals("easy")) {
@@ -55,7 +55,7 @@ public class AIFrame extends MyFrame{
                 }
             }
         });
-        this.add(comboBox);*/
+        this.add(comboBox);
     }
     private void addBeginButton(){
         this.beginButton=new HomeButton("Begin",50,200);

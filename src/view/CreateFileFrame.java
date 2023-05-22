@@ -41,6 +41,9 @@ public class CreateFileFrame extends MyFrame {
         fileNameTF.setBounds(45, 120, 400, 30);
         add(fileNameTF);
     }
+    private void addReplayButton(){
+
+    }
 
     private void addCreateButton() {
         createFileBtn = new HomeButton("Create", 150, 200);

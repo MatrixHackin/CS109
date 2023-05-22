@@ -124,10 +124,7 @@ public class BoardView extends JPanel {
     public void removeAllChess() {
         for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
-                try {
                     gridViews[i][j].remove(0);
-                } catch (Exception e) {
-                }
             }
         }
 
@@ -226,26 +223,6 @@ public class BoardView extends JPanel {
                 controller.clickCell(getBoardPoint(e.getPoint()), (CellView) clickedComponent);
             } else {
                 controller.clickChess(getBoardPoint(e.getPoint()), (AnimalView) clickedComponent.getComponents()[0]);
-            }
-        }
-    }
-    @Override
-    public void processMouseMotionEvent(MouseEvent e) {
-        if (e.getID() == MouseEvent.MOUSE_PRESSED) {
-            CellView component = (CellView) getComponentAt(e.getX(), e.getY());
-            setMouseAtFalse();
-            component.mouseAt = true;
-            component.repaint();
-            component.revalidate();
-            repaint();
-            revalidate();
-        }
-    }
-
-    private void setMouseAtFalse() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 7; j++) {
-                gridViews[i][j].mouseAt = false;
             }
         }
     }
