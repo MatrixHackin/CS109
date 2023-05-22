@@ -123,7 +123,7 @@ public class Controller implements GameListener {
                     }
                     boardView.controller.changePlayer();
                 }
-                if (AI) {
+                /*if (AI) {
                     changePlayer();
                     AIplayer.EasyAI(board);
                     if (!AIplayer.LastAction) {
@@ -134,7 +134,7 @@ public class Controller implements GameListener {
                         boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));
                         boards.add(board);
                     }
-                }
+                }*/
                 boardView.repaint();
                 component.revalidate();
             }
@@ -188,7 +188,7 @@ public class Controller implements GameListener {
                 }
                 boardView.controller.changePlayer();
             }
-            if (AI) {
+            /*if (AI) {
                 changePlayer();
                 AIplayer.EasyAI(board);
                 if (!AIplayer.LastAction) {
@@ -199,7 +199,7 @@ public class Controller implements GameListener {
                     boardView.setChessViewAtCell(AIplayer.dest, boardView.removeChessViewAtGrid(AIplayer.src));
                     boards.add(board);
                 }
-            }
+            }*/
 
 
             if (currentPlayer == Player.RED) {

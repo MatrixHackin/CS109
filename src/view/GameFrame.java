@@ -116,8 +116,9 @@ public class GameFrame extends MyFrame {
         saveButton.setLocation(930,280);
         saveButton.addActionListener((e)->{
             view.CreateFileFrame createFileFrame=new CreateFileFrame();
+            createFileFrame.gameFrame=this;
             createFileFrame.setVisible(true);
-            boardView.controller.save(createFileFrame.getPath());
+
         });
         add(saveButton);
     }

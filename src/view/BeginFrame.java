@@ -71,15 +71,16 @@ public class BeginFrame extends MyFrame{
                 File selectedFile = fileChooser.getSelectedFile();
                 try {
                     in = new ObjectInputStream(new FileInputStream(selectedFile));
+                    gameFrame.getBoardView().setIn(in);
+                    gameFrame.loadGame();
                     in.close();
-                    gameFrame.setIn(in);
+                    this.setVisible(false);
+                    gameFrame.setVisible(true);
                 } catch (IOException ae) {
                     ae.printStackTrace();
                 }
             }
-            gameFrame.loadGame();
-            this.setVisible(false);
-            gameFrame.setVisible(true);
+
         });
         add(loadButton);
     }

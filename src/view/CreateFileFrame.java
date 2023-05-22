@@ -56,6 +56,7 @@ public class CreateFileFrame extends MyFrame {
                     if (file.createNewFile()) {
                         JOptionPane.showMessageDialog(CreateFileFrame.this, "File created successfully");
                         path=String.format("board/"+fileName);
+                        gameFrame.getBoardView().controller.save(getPath());
                         setVisible(false);
                     } else {
                         JOptionPane.showMessageDialog(CreateFileFrame.this, "File already exists");

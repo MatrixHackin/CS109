@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="新增了加分功能">
+    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="一次傻逼的尝试别乱update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Chess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AIFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AIFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/BeginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BeginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CreateFileFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CreateFileFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -234,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684715925134</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="一次傻逼的尝试别乱update">
+      <created>1684724127777</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1684724127777</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -267,6 +273,7 @@
     <MESSAGE value="5.0" />
     <MESSAGE value="修复了存档读档功能和登录功能" />
     <MESSAGE value="新增了加分功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增了加分功能" />
+    <MESSAGE value="一次傻逼的尝试别乱update" />
+    <option name="LAST_COMMIT_MESSAGE" value="一次傻逼的尝试别乱update" />
   </component>
 </project>
