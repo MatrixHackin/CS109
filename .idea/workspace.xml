@@ -7,10 +7,7 @@
     <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="一次傻逼的尝试别乱update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AIFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AIFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BeginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BeginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CreateFileFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CreateFileFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Board.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

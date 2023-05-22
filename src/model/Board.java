@@ -513,20 +513,20 @@ public class Board implements Serializable {
         return AIChess;
     }
     public void regret(){
-            if(isOpponentTrap(steps.get(steps.size()-1).src,getChessPlayer(steps.get(steps.size()-1).dest))){
-                setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
-                removeChess(steps.get(steps.size()-1).dest);
-                getChessAt(steps.get(steps.size()-1).src).setRank(0);
-            }
-            else if(isOpponentTrap(steps.get(steps.size()-1).dest,getChessPlayer(steps.get(steps.size()-1).dest))){
-                setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
-                getChessAt(steps.get(steps.size()-1).dest).setRank(getChessAt(steps.get(steps.size()-1).src).getFinalRank());
-                removeChess(steps.get(steps.size()-1).dest);
-            }
-            else{
-                setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
-                removeChess(steps.get(steps.size()-1).dest);
-            }
+        if(isOpponentTrap(steps.get(steps.size()-1).src,getChessPlayer(steps.get(steps.size()-1).dest))){
+            setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
+            removeChess(steps.get(steps.size()-1).dest);
+            getChessAt(steps.get(steps.size()-1).src).setRank(0);
+        }
+        else if(isOpponentTrap(steps.get(steps.size()-1).dest,getChessPlayer(steps.get(steps.size()-1).dest))){
+            setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
+            getChessAt(steps.get(steps.size()-1).dest).setRank(getChessAt(steps.get(steps.size()-1).src).getFinalRank());
+            removeChess(steps.get(steps.size()-1).dest);
+        }
+        else{
+            setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
+            removeChess(steps.get(steps.size()-1).dest);
+        }
         if(!steps.get(steps.size()-1).ismove){
             removeChess(steps.get(steps.size()-1).dest);
             Chess attacker= steps.get(steps.size()-1).eater;
