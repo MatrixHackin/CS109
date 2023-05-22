@@ -8,7 +8,7 @@ public class Board implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     public Cell[][] grid;
-    public ArrayList<Step> steps=new ArrayList<>();
+    public ArrayList<Step> steps =new ArrayList<>();
     public ArrayList<Chess> blueDead;
     public ArrayList<Chess> redDead;
     Chess  BlueRat=new Chess(Player.BLUE,1);
@@ -513,26 +513,24 @@ public class Board implements Serializable {
         return AIChess;
     }
     public void regret(){
-        if(steps.get(steps.size()-1).ismove){
             if(isOpponentTrap(steps.get(steps.size()-1).src,getChessPlayer(steps.get(steps.size()-1).dest))){
                 setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
                 removeChess(steps.get(steps.size()-1).dest);
                 getChessAt(steps.get(steps.size()-1).src).setRank(0);
             }
             else if(isOpponentTrap(steps.get(steps.size()-1).dest,getChessPlayer(steps.get(steps.size()-1).dest))){
-                getChessAt(steps.get(steps.size()-1).dest).setRank(getChessAt(steps.get(steps.size()-1).dest).getFinalRank());
                 setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
+                getChessAt(steps.get(steps.size()-1).dest).setRank(getChessAt(steps.get(steps.size()-1).src).getFinalRank());
                 removeChess(steps.get(steps.size()-1).dest);
             }
             else{
                 setChess(steps.get(steps.size()-1).src, getChessAt(steps.get(steps.size()-1).dest));
                 removeChess(steps.get(steps.size()-1).dest);
             }
-        }
-        else{
+        if(!steps.get(steps.size()-1).ismove){
             removeChess(steps.get(steps.size()-1).dest);
-            Chess attacker=steps.get(steps.size()-1).eater;
-            Chess defender=steps.get(steps.size()-1).eated;
+            Chess attacker= steps.get(steps.size()-1).eater;
+            Chess defender= steps.get(steps.size()-1).eated;
             setChess(steps.get(steps.size()-1).src,attacker);
             setChess(steps.get(steps.size()-1).dest,defender);
             if(steps.get(steps.size()-1).eated.getPlayer()==Player.BLUE){
@@ -551,8 +549,8 @@ public class Board implements Serializable {
                 getChessAt(steps.get(steps.size()-2).src).setRank(0);
             }
             else if(isOpponentTrap(steps.get(steps.size()-2).dest,getChessPlayer(steps.get(steps.size()-2).dest))){
-                getChessAt(steps.get(steps.size()-2).dest).setRank(getChessAt(steps.get(steps.size()-2).dest).getFinalRank());
                 setChess(steps.get(steps.size()-2).src, getChessAt(steps.get(steps.size()-2).dest));
+                getChessAt(steps.get(steps.size()-2).dest).setRank(getChessAt(steps.get(steps.size()-2).src).getFinalRank());
                 removeChess(steps.get(steps.size()-2).dest);
             }
             else{
@@ -562,11 +560,10 @@ public class Board implements Serializable {
         }
         else{
             removeChess(steps.get(steps.size()-2).dest);
-            Chess attacker=steps.get(steps.size()-2).eater;
-            Chess defender=steps.get(steps.size()-2).eated;
+            Chess attacker= steps.get(steps.size()-2).eater;
+            Chess defender= steps.get(steps.size()-2).eated;
             setChess(steps.get(steps.size()-2).src,attacker);
             setChess(steps.get(steps.size()-2).dest,defender);
         }
     }
-
 }
