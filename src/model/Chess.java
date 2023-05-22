@@ -14,8 +14,9 @@ public class Chess implements Serializable {
     public Chess(Player player, int rank) {
         this.player = player;
         this.rank = rank;
-        this.FinalRank=rank;
+        this.FinalRank = rank;
     }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -31,6 +32,9 @@ public class Chess implements Serializable {
     public Player getPlayer() {
         return player;
     }
-    public int getFinalRank(){return FinalRank;}
+
+    public int getFinalRank() {
+        return FinalRank;
+    }
 
 }

@@ -5,7 +5,7 @@ import model.Board;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
+import java.io.*;
 
 public class BeginFrame extends MyFrame{
     GameFrame gameFrame;
@@ -21,15 +21,10 @@ public class BeginFrame extends MyFrame{
     JButton loginButton;
     JButton boardButton;
     JButton loadButton;
+    ObjectInputStream in;
 
     public BeginFrame() throws FileNotFoundException {
         super(1000,500);
-
-        GameFrame gameFrame = new GameFrame();
-        Controller controller = new Controller(gameFrame.getBoardView(), new Board());
-        gameFrame.beginFrame = this;
-        this.gameFrame = gameFrame;
-
 
         LoadFrame loadFrame=new LoadFrame();
         this.loadFrame=loadFrame;
@@ -39,9 +34,7 @@ public class BeginFrame extends MyFrame{
         this.scoreBoardFrame = scoreBoardFrame;
         scoreBoardFrame.beginFrame=this;
 
-        SettingFrame settingFrame=new SettingFrame();
-        this.settingFrame=settingFrame;
-        settingFrame.beginFrame=this;
+
 
         InstructionFrame instructionFrame=new InstructionFrame();
         this.instructionFrame=instructionFrame;
@@ -63,6 +56,27 @@ public class BeginFrame extends MyFrame{
     private void addLoadButton(){
         this.loadButton=new HomeButton("Load",700,250);
         loadButton.addActionListener((e)->{
+            JFileChooser fileChooser = new JFileChooser("board");
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+                public boolean accept(File f) {
+                    return f.getName().endsWith(".ser") || f.isDirectory();
+                }
+                public String getDescription() {
+                    return "Serialized Files (*.ser)";
+                }
+            });
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                try {
+                    in = new ObjectInputStream(new FileInputStream(selectedFile));
+                    in.close();
+                    gameFrame.setIn(in);
+                } catch (IOException ae) {
+                    ae.printStackTrace();
+                }
+            }
             gameFrame.loadGame();
             this.setVisible(false);
             gameFrame.setVisible(true);
@@ -95,19 +109,11 @@ public class BeginFrame extends MyFrame{
     }
 
     private void addBeginButton() {
+        GameFrame gameFrame = new GameFrame();
+        Controller controller = new Controller(gameFrame.getBoardView(), new Board());
+        gameFrame.beginFrame = this;
+        this.gameFrame = gameFrame;
         this.button= new HomeButton("Begin",100,150);
-           /* Timer.time = 45;
-            if (Controller.timer == null){
-                Controller.timer = new Timer(gameFrame.getBoardView().controller);
-                Controller.timer.start();
-            }*/
-
-            // gameFrame.statusLabel.setLocation(770, 81);
-            // gameFrame.repaint();
-            //gameFrame.timeLabel.setVisible(true);
-            //   gameFrame.getBoardView().controller.reset();
-            //  gameFrame.getBoardView().controller.AIPlaying = false;
-            //   gameFrame.getBoardView().controller.AIDiff = Difficulty.NONE;
         button.addActionListener((e) -> {
             this.setVisible(false);
             gameFrame.setVisible(true);
@@ -116,6 +122,9 @@ public class BeginFrame extends MyFrame{
 
     }
     private void addSettingButton() {
+        SettingFrame settingFrame=new SettingFrame();
+        this.settingFrame=settingFrame;
+        settingFrame.beginFrame=this;
         this.settingButton = new HomeButton("Settings", 400, 150);
         settingButton.addActionListener((e) -> {
             this.setVisible(false);

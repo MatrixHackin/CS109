@@ -25,8 +25,8 @@ public class Controller implements GameListener {
     public AI AIplayer = new AI();
     public AnimalView eaten;
     public ArrayList<Board> boards;
+    ObjectInputStream in;
 
-    public static Timer timer;
 
     public Controller(BoardView boardView, Board board) {
         this.boardView = boardView;
@@ -43,21 +43,20 @@ public class Controller implements GameListener {
     public Board load(){
         Board loadedBoard=new Board();
         try {
-            FileInputStream fileIn = new FileInputStream("board/board.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
+            ObjectInputStream in = boardView.in;
              loadedBoard= (Board) in.readObject();
             in.close();
-            fileIn.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         this.board=loadedBoard;
         return loadedBoard;
     }
-    public void save(){
+
+    public void save(String path){
         Board board=this.boards.get(boardView.controller.boards.size()-1);
         try {
-            FileOutputStream fileOut = new FileOutputStream("board/board.ser");
+            FileOutputStream fileOut = new FileOutputStream(path);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(board);
             out.close();

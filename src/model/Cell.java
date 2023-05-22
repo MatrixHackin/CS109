@@ -5,9 +5,8 @@ import java.io.Serializable;
 
 //serializable是便于将他化为字节流存储
 public class Cell implements Serializable {
-    @Serial
+   @Serial
     private static final long serialVersionUID = 1L;
-    // the position for chess
     public Chess chess;
     public Chess getChess() {return chess;}
 

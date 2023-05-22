@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.io.ObjectInputStream;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +25,7 @@ public class BoardView extends JPanel {
     private Set<BoardPoint> trapCell = new HashSet<>();
     private Set<BoardPoint> denCell = new HashSet<>();
     User user;
+    public ObjectInputStream in;
 
     public Controller controller;
     public TurnLabel turnLabel;
@@ -45,6 +47,9 @@ public class BoardView extends JPanel {
         initiateGridComponents();
         addTimer();
 
+    }
+    public void setIn(ObjectInputStream in){
+        this.in=in;
     }
     public void setUser(User user){
         this.user=user;

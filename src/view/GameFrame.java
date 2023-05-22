@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 
@@ -27,7 +28,6 @@ public class GameFrame extends MyFrame {
     JButton resetButton;
     JButton saveButton;
     AIFrame aiFrame=new AIFrame();
-    JFrame loadFrame;
     TurnLabel turnLabel=new TurnLabel();
     public JLabel timeLabel=new JLabel();
     JLabel dayBG;
@@ -36,6 +36,7 @@ public class GameFrame extends MyFrame {
     JPanel blueDeadPanel;
     public boolean isDay;
     public boolean musicOn;
+    ObjectInputStream in;
     public GameFrame() {
         super(1000,700);
 
@@ -114,7 +115,9 @@ public class GameFrame extends MyFrame {
         this.saveButton=new GameButton("resource/icon/save-44.png");
         saveButton.setLocation(930,280);
         saveButton.addActionListener((e)->{
-            boardView.controller.save();
+            view.CreateFileFrame createFileFrame=new CreateFileFrame();
+            createFileFrame.setVisible(true);
+            boardView.controller.save(createFileFrame.getPath());
         });
         add(saveButton);
     }
@@ -202,7 +205,12 @@ public class GameFrame extends MyFrame {
     private void addChessboard() {
         boardView = new BoardView(ONE_CHESS_SIZE, turnLabel,timeLabel);
         boardView.setUser(user);
+        boardView.setIn(in);
         boardView.setLocation(140, 120);
         add(boardView);
+    }
+
+    public void setIn(ObjectInputStream in) {
+        this.in = in;
     }
 }
