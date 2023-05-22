@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="一次傻逼的尝试别乱update">
+    <list default="true" id="e93436ec-d404-4df7-bde5-cda3dcb5f90d" name="Changes" comment="完成了存档读档的功能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AIFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AIFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BeginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BeginFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CellView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CellView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CreateFileFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CreateFileFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GameFrame.java" afterDir="false" />
     </list>
@@ -39,15 +39,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/0JAVACOMMUNITY/0Javawork/CS109&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "D:/0JAVACOMMUNITY/0Javawork/Jungle"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\0JAVACOMMUNITY\0Javawork\CS109\resource" />
@@ -240,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684724127777</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="完成了存档读档的功能">
+      <created>1684726982232</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1684726982232</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -274,6 +281,7 @@
     <MESSAGE value="修复了存档读档功能和登录功能" />
     <MESSAGE value="新增了加分功能" />
     <MESSAGE value="一次傻逼的尝试别乱update" />
-    <option name="LAST_COMMIT_MESSAGE" value="一次傻逼的尝试别乱update" />
+    <MESSAGE value="完成了存档读档的功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成了存档读档的功能" />
   </component>
 </project>

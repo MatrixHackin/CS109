@@ -41,6 +41,9 @@ public class Controller implements GameListener {
         boardView.initiateChessComponent(board);
         boardView.repaint();
     }
+    public ArrayList<Board> loadBoards(){
+        return stepsnum;
+    }
     public Board load(){
         Board loadedBoard=new Board();
         try {

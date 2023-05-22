@@ -27,6 +27,7 @@ public class GameFrame extends MyFrame {
     JButton musicButton;
     JButton resetButton;
     JButton saveButton;
+    JButton replayButton;
     AIFrame aiFrame=new AIFrame();
     TurnLabel turnLabel=new TurnLabel();
     public JLabel timeLabel=new JLabel();
@@ -56,6 +57,7 @@ public class GameFrame extends MyFrame {
         addSaveButton();
         addRedDeadPanel();
         addBlueDeadPanel();
+        addReplayButton();
 
         boardView.redDeadPanel=this.redDeadPanel;
         boardView.blueDeadPanel=this.blueDeadPanel;
@@ -79,6 +81,19 @@ public class GameFrame extends MyFrame {
 
     public void setUser(User user) {
         this.user = user;
+    }
+    private void addReplayButton(){
+        this.replayButton=new GameButton("resource/icon/replay.png");
+        replayButton.setLocation(930,210);
+        replayButton.addActionListener((e)->{
+            for(Board board:boardView.controller.loadBoards()){
+                boardView.removeAllChess();
+                boardView.initiateChessComponent(board);
+                boardView.repaint();
+                boardView.revalidate();
+            }
+        });
+        add(replayButton);
     }
 
     public void loadGame(){
