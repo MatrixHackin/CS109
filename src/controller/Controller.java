@@ -95,7 +95,6 @@ public class Controller implements GameListener {
     public void winView() {
         JOptionPane.showMessageDialog(boardView, (winner == Player.BLUE ? "BLUE" : "RED") + " Win !");
     }
-
     @Override
     public void clickCell(BoardPoint point, CellView component) {
         if (selectedPoint != null) {
