@@ -52,16 +52,15 @@ public class LoginFrame extends MyFrame {
         addVisitorButton();
         addRegisterButton();
 
-        RegisterFrame registerFrame=new RegisterFrame();
-        this.registerFrame=registerFrame;
+        this.registerFrame=new RegisterFrame();
         registerFrame.loginFrame=this;
 
-        AIFrame aiFrame=new AIFrame();
-        this.aiFrame=aiFrame;
+        this.aiFrame=new AIFrame();
         aiFrame.loginFrame=this;
 
         this.setBackground("resource/8E4.gif");
     }
+
     private void addBackButton(){
         this.backButton=new HomeButton("Back",150,550);
         backButton.addActionListener((e) -> {

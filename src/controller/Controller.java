@@ -52,6 +52,7 @@ public class Controller implements GameListener {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        this.board=loadedBoard;
         return loadedBoard;
     }
     public void save(){

@@ -74,49 +74,11 @@ public class GameFrame extends MyFrame {
 
         add(dayBG);
     }
-    public GameFrame(User user) {
-        super(1000,700);
 
-        this.ONE_CHESS_SIZE = 80;
-        isDay = true;
-        musicOn=true;
-
-
-        addChessboard();
-        addTimeLabel();
-        addTurnLable();
-        addHomeButton();
-        addRegretButton();
-        addMusicButton();
-        addResetButton();
-        addChangeThemeButton();
-        addSaveButton();
-        addRedDeadPanel();
-        addBlueDeadPanel();
-
-
-
-
-
-        boardView.redDeadPanel=this.redDeadPanel;
-        boardView.blueDeadPanel=this.blueDeadPanel;
-
-        Image image = new ImageIcon("resource/map.png").getImage();
-        image = image.getScaledInstance(1000, 700, Image.SCALE_DEFAULT);
-        ImageIcon icon = new ImageIcon(image);
-        this.dayBG = new JLabel(icon);
-        this.dayBG.setSize(1000,700);
-        this.dayBG.setLocation(0,0);
-
-        Image image1 = new ImageIcon("resource/night.png").getImage();
-        image1 = image1.getScaledInstance(1000, 700, Image.SCALE_DEFAULT);
-        ImageIcon icon1 = new ImageIcon(image1);
-        this.nightBG = new JLabel(icon1);
-        this.nightBG.setSize(1000,700);
-        this.nightBG.setLocation(0,0);
-
-        add(dayBG);
+    public void setUser(User user) {
+        this.user = user;
     }
+
     public void loadGame(){
         boardView.removeAllChess();
         boardView.initiateChessComponent(boardView.controller.load());
